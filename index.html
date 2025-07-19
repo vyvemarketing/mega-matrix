@@ -27,6 +27,7 @@
             --yellow-warning: #ffcc00;
             --blue-info: #00ccff;
             --purple-accent: #b026ff;
+            --gold-omega: #ffd700;
         }
         
         body {
@@ -237,6 +238,8 @@
             border-radius: 8px;
             padding: 20px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
         }
         
         .pattern-card:hover {
@@ -244,11 +247,30 @@
             transform: translateY(-2px);
         }
         
+        .pattern-card.omega {
+            border: 2px solid var(--gold-omega);
+            background: linear-gradient(135deg, var(--bg-card), rgba(255, 215, 0, 0.05));
+        }
+        
+        .pattern-card.omega::after {
+            content: '⚠️ USAR APENAS 1X/ANO';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.7em;
+            color: var(--gold-omega);
+        }
+        
         .pattern-name {
             color: var(--green-mega);
             font-weight: bold;
             margin-bottom: 10px;
             text-transform: uppercase;
+        }
+        
+        .pattern-card.omega .pattern-name {
+            color: var(--gold-omega);
+            text-shadow: 0 0 10px var(--gold-omega);
         }
         
         .pattern-numbers {
@@ -263,6 +285,91 @@
             color: var(--text-secondary);
             font-size: 0.85em;
             margin-top: 10px;
+        }
+        
+        /* Modal de Seleção */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            margin: 5% auto;
+            padding: 30px;
+            border: 2px solid var(--green-mega);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(32, 152, 105, 0.5);
+        }
+        
+        .close {
+            color: var(--text-secondary);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: var(--red-alert);
+        }
+        
+        .modal h2 {
+            color: var(--green-mega);
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .sequence-options {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .sequence-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .sequence-option:hover {
+            border-color: var(--green-mega);
+            background: rgba(32, 152, 105, 0.1);
+        }
+        
+        .sequence-option.selected {
+            border-color: var(--green-neon);
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .sequence-option.omega {
+            border-color: var(--gold-omega);
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .ai-suggestion {
+            background: linear-gradient(135deg, var(--purple-accent), var(--blue-info));
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
         }
         
         /* Table Styles */
@@ -385,9 +492,10 @@
             gap: 20px;
             justify-content: center;
             margin: 30px 0;
+            flex-wrap: wrap;
         }
         
-        .add-button, .sync-button {
+        .add-button, .sync-button, .confirm-button {
             background: linear-gradient(45deg, var(--green-dark), var(--green-mega));
             color: white;
             border: none;
@@ -407,7 +515,7 @@
             background: linear-gradient(45deg, var(--purple-accent), var(--blue-info));
         }
         
-        .add-button:hover, .sync-button:hover {
+        .add-button:hover, .sync-button:hover, .confirm-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(32, 152, 105, 0.5);
         }
@@ -502,30 +610,35 @@
         <!-- Strategy Section -->
         <div class="strategy-header">
             <h2>🧠 ESTRATÉGIA MATRIX MILHONÁRIA</h2>
-            <p>R$ 60/semana • R$ 20 por sorteio • Terças, Quintas e Sábados</p>
+            <p>R$ 72/semana • R$ 24 por sorteio • Terças, Quintas e Sábados</p>
         </div>
         
         <!-- Number Patterns -->
         <div class="patterns-grid">
-            <div class="pattern-card">
+            <div class="pattern-card" data-sequence="ALPHA">
                 <div class="pattern-name">⚡ SEQUÊNCIA ALPHA</div>
                 <div class="pattern-numbers">05 • 10 • 23 • 33 • 42 • 53</div>
                 <div class="pattern-info">Números de alta frequência histórica</div>
             </div>
-            <div class="pattern-card">
+            <div class="pattern-card" data-sequence="BETA">
                 <div class="pattern-name">🔮 SEQUÊNCIA BETA</div>
                 <div class="pattern-numbers">04 • 17 • 27 • 38 • 41 • 54</div>
                 <div class="pattern-info">Combinação equilibrada par/ímpar</div>
             </div>
-            <div class="pattern-card">
+            <div class="pattern-card" data-sequence="GAMMA">
                 <div class="pattern-name">💎 SEQUÊNCIA GAMMA</div>
                 <div class="pattern-numbers">08 • 15 • 29 • 36 • 44 • 51</div>
                 <div class="pattern-info">Padrão emergente 2025</div>
             </div>
-            <div class="pattern-card">
+            <div class="pattern-card" data-sequence="DELTA">
                 <div class="pattern-name">🌟 SEQUÊNCIA DELTA</div>
                 <div class="pattern-numbers">07 • 14 • 21 • 35 • 42 • 49</div>
                 <div class="pattern-info">Múltiplos de 7 + complementos</div>
+            </div>
+            <div class="pattern-card omega" data-sequence="OMEGA">
+                <div class="pattern-name">🏆 SEQUÊNCIA OMEGA</div>
+                <div class="pattern-numbers">04 • 05 • 07 • 08 • 49 • 51 • 53 • 54</div>
+                <div class="pattern-info">Fusão suprema - Usar apenas 1x/ano em prêmios acima de R$ 150M</div>
             </div>
         </div>
         
@@ -537,6 +650,7 @@
                         <th>Data</th>
                         <th>Dia</th>
                         <th>Concurso</th>
+                        <th>Sequência</th>
                         <th>Números Jogados</th>
                         <th>Investimento</th>
                         <th>Status</th>
@@ -553,7 +667,7 @@
         </div>
         
         <div class="button-group">
-            <button class="add-button" onclick="addNewRow()">+ ADICIONAR NOVO JOGO</button>
+            <button class="add-button" onclick="openModal()">+ ADICIONAR NOVO JOGO</button>
             <button class="sync-button" onclick="syncData()">🔄 SINCRONIZAR DADOS</button>
             <button class="sync-button" style="background: linear-gradient(45deg, #ff0066, #ff3366);" onclick="clearAllData()">🗑️ LIMPAR TUDO</button>
         </div>
@@ -569,23 +683,39 @@
         </div>
     </div>
     
+    <!-- Modal de Seleção -->
+    <div id="sequenceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>🎯 Escolha sua Sequência</h2>
+            
+            <div class="ai-suggestion" id="aiSuggestion">
+                <!-- Sugestão da IA será inserida aqui -->
+            </div>
+            
+            <div class="sequence-options" id="sequenceOptions">
+                <!-- Opções serão inseridas dinamicamente -->
+            </div>
+            
+            <button class="confirm-button" onclick="confirmSelection()">CONFIRMAR SELEÇÃO</button>
+        </div>
+    </div>
+    
     <script>
         // Sistema de Persistência de Dados
         const STORAGE_KEY = 'mega_matrix_data';
+        const OMEGA_USED_KEY = 'mega_matrix_omega_used';
         
         // Configurações dos jogos
-        const gameSchedule = {
-            'TER': { sequences: ['ALPHA', 'BETA'], cost: 10 },
-            'QUI': { sequences: ['GAMMA', 'DELTA'], cost: 10 },
-            'SAB': { sequences: ['ALPHA', 'GAMMA'], cost: 10 }
+        const sequences = {
+            'ALPHA': { numbers: '05-10-23-33-42-53', description: 'Alta frequência' },
+            'BETA': { numbers: '04-17-27-38-41-54', description: 'Equilíbrio par/ímpar' },
+            'GAMMA': { numbers: '08-15-29-36-44-51', description: 'Padrão 2025' },
+            'DELTA': { numbers: '07-14-21-35-42-49', description: 'Múltiplos de 7' },
+            'OMEGA': { numbers: '04-05-07-08-49-51-53-54', description: 'Fusão suprema', special: true }
         };
         
-        const sequences = {
-            'ALPHA': '05-10-23-33-42-53',
-            'BETA': '04-17-27-38-41-54',
-            'GAMMA': '08-15-29-36-44-51',
-            'DELTA': '07-14-21-35-42-49'
-        };
+        let selectedSequence = null;
         
         // Salvar dados no localStorage
         function saveData() {
@@ -598,9 +728,10 @@
                         date: row.querySelector('input[type="date"]')?.value || '',
                         day: row.cells[1]?.textContent || '',
                         contest: row.querySelector('input[name="contest"]')?.value || '',
-                        numbers: row.cells[3]?.textContent || '',
+                        sequence: row.cells[3]?.textContent || '',
+                        numbers: row.cells[4]?.textContent || '',
                         investment: row.querySelector('input[name="investment"]')?.value || '',
-                        status: row.cells[5]?.querySelector('span')?.textContent || '',
+                        status: row.cells[6]?.querySelector('span')?.textContent || '',
                         result: row.querySelector('input[name="result"]')?.value || '',
                         prize: row.querySelector('input[name="prize"]')?.value || '',
                         hits: row.querySelector('select[name="hits"]')?.value || '',
@@ -623,7 +754,6 @@
                     const tbody = document.getElementById('tableBody');
                     tbody.innerHTML = '';
                     
-                    // Se houver dados salvos, carregá-los
                     if (rows && rows.length > 0) {
                         rows.forEach(rowData => {
                             const newRow = createRow(rowData);
@@ -633,13 +763,11 @@
                     
                     updateStats();
                 } catch (e) {
-                    // Se houver erro, limpar e começar do zero
                     console.log('Iniciando sistema limpo');
                     localStorage.removeItem(STORAGE_KEY);
                     loadInitialData();
                 }
             } else {
-                // Sem dados salvos - começar limpo
                 loadInitialData();
             }
         }
@@ -655,6 +783,7 @@
                 <td><input type="date" name="date" value="${data.date}" onchange="saveData()"></td>
                 <td>${data.day}</td>
                 <td><input type="text" name="contest" placeholder="2890" value="${data.contest}" onchange="saveData()"></td>
+                <td>${data.sequence}</td>
                 <td class="numbers">${data.numbers}</td>
                 <td><input type="number" name="investment" step="0.01" value="${data.investment}" onchange="saveData()"></td>
                 <td><span class="${statusClass}">${data.status}</span></td>
@@ -682,18 +811,191 @@
         function loadInitialData() {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
-            
-            // Tabela começa vazia - você ainda não jogou nada!
             updateStats();
+        }
+        
+        // Abrir modal
+        function openModal() {
+            const modal = document.getElementById('sequenceModal');
+            modal.style.display = 'block';
+            
+            // Gerar sugestão da IA
+            generateAISuggestion();
+            
+            // Mostrar opções de sequências
+            displaySequenceOptions();
+        }
+        
+        // Fechar modal
+        function closeModal() {
+            const modal = document.getElementById('sequenceModal');
+            modal.style.display = 'none';
+            selectedSequence = null;
+        }
+        
+        // Gerar sugestão da IA
+        function generateAISuggestion() {
+            const aiDiv = document.getElementById('aiSuggestion');
+            const dayNames = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+            const today = new Date();
+            const dayName = dayNames[today.getDay()];
+            const currentJackpot = parseInt(document.getElementById('currentJackpot').textContent.replace(/\D/g, ''));
+            
+            let suggestion = '';
+            let recommendedSequence = '';
+            
+            // Análise baseada no dia
+            if (dayName === 'SÁB') {
+                recommendedSequence = 'ALPHA';
+                suggestion = '🤖 IA RECOMENDA: ALPHA - Sábados historicamente favorecem números de alta frequência.';
+            } else if (dayName === 'TER') {
+                recommendedSequence = 'BETA';
+                suggestion = '🤖 IA RECOMENDA: BETA - Terças têm melhor desempenho com equilíbrio par/ímpar.';
+            } else if (dayName === 'QUI') {
+                recommendedSequence = 'GAMMA';
+                suggestion = '🤖 IA RECOMENDA: GAMMA - Quintas respondem bem aos padrões emergentes.';
+            } else {
+                recommendedSequence = 'DELTA';
+                suggestion = '🤖 IA RECOMENDA: DELTA - Dias alternativos favorecem múltiplos de 7.';
+            }
+            
+            // Verificar se é hora do OMEGA
+            if (currentJackpot >= 150000000) {
+                const omegaUsed = localStorage.getItem(OMEGA_USED_KEY);
+                const lastUsed = omegaUsed ? new Date(omegaUsed) : null;
+                const oneYearAgo = new Date();
+                oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+                
+                if (!lastUsed || lastUsed < oneYearAgo) {
+                    suggestion = '🚨 ALERTA OMEGA! Prêmio acima de R$ 150M detectado! Considere usar a sequência OMEGA!';
+                }
+            }
+            
+            aiDiv.innerHTML = suggestion;
+        }
+        
+        // Mostrar opções de sequências
+        function displaySequenceOptions() {
+            const optionsDiv = document.getElementById('sequenceOptions');
+            optionsDiv.innerHTML = '';
+            
+            Object.entries(sequences).forEach(([key, data]) => {
+                const option = document.createElement('div');
+                option.className = 'sequence-option';
+                if (data.special) option.className += ' omega';
+                
+                // Verificar se OMEGA pode ser usado
+                let disabled = false;
+                if (key === 'OMEGA') {
+                    const omegaUsed = localStorage.getItem(OMEGA_USED_KEY);
+                    if (omegaUsed) {
+                        const lastUsed = new Date(omegaUsed);
+                        const oneYearAgo = new Date();
+                        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+                        
+                        if (lastUsed > oneYearAgo) {
+                            disabled = true;
+                            const nextAvailable = new Date(lastUsed);
+                            nextAvailable.setFullYear(nextAvailable.getFullYear() + 1);
+                            option.style.opacity = '0.5';
+                            option.style.cursor = 'not-allowed';
+                        }
+                    }
+                }
+                
+                option.innerHTML = `
+                    <strong>${key}</strong> - ${data.description}<br>
+                    <span class="numbers">${data.numbers}</span>
+                    ${disabled ? '<br><small style="color: red;">Disponível em ' + new Date(localStorage.getItem(OMEGA_USED_KEY)).toLocaleDateString('pt-BR') + '</small>' : ''}
+                `;
+                
+                if (!disabled) {
+                    option.onclick = () => selectSequence(key);
+                }
+                
+                optionsDiv.appendChild(option);
+            });
+        }
+        
+        // Selecionar sequência
+        function selectSequence(key) {
+            selectedSequence = key;
+            
+            // Remover seleção anterior
+            document.querySelectorAll('.sequence-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Adicionar seleção atual
+            event.target.closest('.sequence-option').classList.add('selected');
+        }
+        
+        // Confirmar seleção
+        function confirmSelection() {
+            if (!selectedSequence) {
+                alert('Por favor, selecione uma sequência!');
+                return;
+            }
+            
+            // Se for OMEGA, marcar como usado
+            if (selectedSequence === 'OMEGA') {
+                localStorage.setItem(OMEGA_USED_KEY, new Date().toISOString());
+            }
+            
+            // Adicionar novo jogo
+            addNewGame(selectedSequence);
+            
+            // Fechar modal
+            closeModal();
+        }
+        
+        // Adicionar novo jogo
+        function addNewGame(sequenceKey) {
+            const tbody = document.getElementById('tableBody');
+            
+            // Se for a primeira linha, adicionar separador de semana
+            if (tbody.children.length === 0) {
+                const weekSeparator = document.createElement('tr');
+                weekSeparator.className = 'week-separator';
+                weekSeparator.innerHTML = `<td colspan="11">⚡ SEMANA 1 • INICIANDO JORNADA MILHONÁRIA</td>`;
+                tbody.appendChild(weekSeparator);
+            }
+            
+            const today = new Date();
+            const dateStr = today.toISOString().split('T')[0];
+            const dayNames = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
+            const dayName = dayNames[today.getDay()];
+            
+            const sequenceData = sequences[sequenceKey];
+            
+            const newRow = createRow({
+                date: dateStr,
+                day: dayName,
+                contest: '',
+                sequence: sequenceKey,
+                numbers: sequenceData.numbers,
+                investment: '6.00',
+                status: 'AGUARDANDO',
+                result: '',
+                prize: '',
+                hits: '',
+                notes: sequenceData.description
+            });
+            
+            tbody.appendChild(newRow);
+            saveData();
+            
+            // Efeito visual
+            newRow.style.animation = 'glow-in 0.5s ease';
         }
         
         // Verificar resultado
         function checkResult(input) {
             const row = input.closest('tr');
-            const numbers = row.cells[3].textContent.split('-');
+            const numbers = row.cells[4].textContent.split('-');
             const result = input.value.split('-');
             
-            if (result.length === 6 && result[0] !== 'XX') {
+            if (result.length >= 6 && result[0] !== 'XX') {
                 let hits = 0;
                 numbers.forEach(num => {
                     if (result.includes(num.trim())) hits++;
@@ -702,7 +1004,7 @@
                 const hitsSelect = row.querySelector('select[name="hits"]');
                 hitsSelect.value = hits.toString();
                 
-                const statusSpan = row.cells[5].querySelector('span');
+                const statusSpan = row.cells[6].querySelector('span');
                 if (hits >= 4) {
                     statusSpan.className = 'status-win';
                     statusSpan.textContent = 'GANHO';
@@ -774,55 +1076,11 @@
             roiElement.parentElement.classList.toggle('negative', roi < 0);
         }
         
-        // Add New Row
-        function addNewRow() {
-            const tbody = document.getElementById('tableBody');
-            
-            // Se for a primeira linha, adicionar separador de semana
-            if (tbody.children.length === 0) {
-                const weekSeparator = document.createElement('tr');
-                weekSeparator.className = 'week-separator';
-                weekSeparator.innerHTML = `<td colspan="10">⚡ SEMANA 1 • INICIANDO JORNADA MILHONÁRIA</td>`;
-                tbody.appendChild(weekSeparator);
-            }
-            
-            const today = new Date();
-            const dateStr = today.toISOString().split('T')[0];
-            const dayNames = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
-            const dayName = dayNames[today.getDay()];
-            
-            // Sugerir sequência baseada no dia
-            let suggestedNumbers = sequences.ALPHA;
-            if (dayName === 'TER') suggestedNumbers = sequences.ALPHA;
-            else if (dayName === 'QUI') suggestedNumbers = sequences.GAMMA;
-            else if (dayName === 'SÁB') suggestedNumbers = sequences.ALPHA;
-            
-            const newRow = createRow({
-                date: dateStr,
-                day: dayName,
-                contest: '',
-                numbers: suggestedNumbers,
-                investment: '5.00',
-                status: 'AGUARDANDO',
-                result: '',
-                prize: '',
-                hits: '',
-                notes: ''
-            });
-            
-            tbody.appendChild(newRow);
-            saveData();
-            
-            // Efeito visual
-            newRow.style.animation = 'glow-in 0.5s ease';
-        }
-        
         // Sincronizar dados
         function syncData() {
             const btn = event.target;
             btn.textContent = '⏳ SINCRONIZANDO...';
             
-            // Simular sincronização
             setTimeout(() => {
                 saveData();
                 btn.textContent = '✅ SINCRONIZADO!';
@@ -830,6 +1088,17 @@
                     btn.textContent = '🔄 SINCRONIZAR DADOS';
                 }, 2000);
             }, 1000);
+        }
+        
+        // Limpar todos os dados
+        function clearAllData() {
+            if (confirm('⚠️ Tem certeza que deseja limpar TODOS os dados?\n\nIsso não pode ser desfeito!')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(OMEGA_USED_KEY);
+                document.getElementById('tableBody').innerHTML = '';
+                updateStats();
+                alert('✅ Dados limpos com sucesso! Sistema zerado.');
+            }
         }
         
         // Initialize
@@ -845,6 +1114,18 @@
             
             // Atualizar jackpot estimado
             updateJackpotDisplay();
+            
+            // Adicionar click nos cards de sequência
+            document.querySelectorAll('.pattern-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const sequence = this.dataset.sequence;
+                    if (sequence) {
+                        selectedSequence = sequence;
+                        openModal();
+                        selectSequence(sequence);
+                    }
+                });
+            });
         });
         
         // Atualizar display do jackpot
@@ -856,41 +1137,11 @@
                 `R$ ${currentJackpot.toLocaleString('pt-BR')}`;
         }
         
-        // Obter próxima data de sorteio
-        function getNextDrawDate() {
-            const now = new Date();
-            const day = now.getDay();
-            const hour = now.getHours();
-            
-            // Sorteios: Terça (2), Quinta (4), Sábado (6)
-            const drawDays = [2, 4, 6];
-            let daysUntilNext = 0;
-            
-            for (let drawDay of drawDays) {
-                if (drawDay > day || (drawDay === day && hour < 20)) {
-                    daysUntilNext = drawDay - day;
-                    break;
-                }
-            }
-            
-            if (daysUntilNext === 0) {
-                daysUntilNext = drawDays[0] + 7 - day;
-            }
-            
-            const nextDraw = new Date(now);
-            nextDraw.setDate(now.getDate() + daysUntilNext);
-            nextDraw.setHours(20, 0, 0, 0);
-            
-            return nextDraw;
-        }
-        
-        // Limpar todos os dados
-        function clearAllData() {
-            if (confirm('⚠️ Tem certeza que deseja limpar TODOS os dados?\n\nIsso não pode ser desfeito!')) {
-                localStorage.removeItem(STORAGE_KEY);
-                document.getElementById('tableBody').innerHTML = '';
-                updateStats();
-                alert('✅ Dados limpos com sucesso! Sistema zerado.');
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modal = document.getElementById('sequenceModal');
+            if (event.target == modal) {
+                closeModal();
             }
         }
         
