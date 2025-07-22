@@ -199,6 +199,13 @@
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .jackpot-value:hover {
+            opacity: 0.8;
+            transform: scale(1.02);
         }
         
         .jackpot-card.mega .jackpot-value {
@@ -755,8 +762,11 @@
             <!-- Jackpot -->
             <div class="jackpot-card mega">
                 <div class="jackpot-label">Prêmio Estimado</div>
-                <div class="jackpot-value" id="mega-jackpot">R$ 25.000.000</div>
+                <div class="jackpot-value" id="mega-jackpot" onclick="editJackpot('mega')">R$ 25.000.000</div>
                 <div class="jackpot-info">Concurso 2890 • Sábado, 19 de julho • 20:00h</div>
+                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
+                    🖊️ Clique no valor para editar
+                </div>
             </div>
             
             <!-- Stats -->
@@ -900,8 +910,11 @@
             <!-- Jackpot -->
             <div class="jackpot-card loto">
                 <div class="jackpot-label">Prêmio Estimado</div>
-                <div class="jackpot-value" id="loto-jackpot">R$ 1.700.000</div>
+                <div class="jackpot-value" id="loto-jackpot" onclick="editJackpot('loto')">R$ 1.700.000</div>
                 <div class="jackpot-info">Sorteios de Segunda a Sábado • 20:00h</div>
+                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
+                    🖊️ Clique no valor para editar
+                </div>
             </div>
             
             <!-- Stats -->
