@@ -728,6 +728,40 @@
                 font-size: 0.85rem;
             }
         }
+        
+        .week-separator {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .result-input {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .result-input input {
+            width: 40px;
+            padding: 6px;
+            text-align: center;
+        }
+        
+        .result-input button {
+            background: var(--accent-success);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .result-input button:hover {
+            opacity: 0.9;
+        }
     </style>
 </head>
 <body>
@@ -808,40 +842,40 @@
                     <span>Sequências Estratégicas</span>
                 </h2>
                 <div class="sequences-grid">
-                    <div class="sequence-card mega" data-game="mega" data-sequence="ALPHA">
+                    <div class="sequence-card mega" data-game="mega" data-sequence="ALPHA" onclick="selectSequence('mega', 'ALPHA')">
                         <div class="sequence-header">
                             <span class="sequence-name">⚡ ALPHA</span>
                         </div>
                         <div class="sequence-numbers">05 10 23 33 42 53</div>
                         <div class="sequence-description">Números de alta frequência histórica</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="BETA">
+                    <div class="sequence-card mega" data-game="mega" data-sequence="BETA" onclick="selectSequence('mega', 'BETA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🔮 BETA</span>
                         </div>
                         <div class="sequence-numbers">04 17 27 38 41 54</div>
                         <div class="sequence-description">Combinação equilibrada par/ímpar</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="GAMMA">
+                    <div class="sequence-card mega" data-game="mega" data-sequence="GAMMA" onclick="selectSequence('mega', 'GAMMA')">
                         <div class="sequence-header">
                             <span class="sequence-name">💎 GAMMA</span>
                         </div>
                         <div class="sequence-numbers">08 15 29 36 44 51</div>
                         <div class="sequence-description">Padrão emergente 2025</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="DELTA">
+                    <div class="sequence-card mega" data-game="mega" data-sequence="DELTA" onclick="selectSequence('mega', 'DELTA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🌟 DELTA</span>
                         </div>
                         <div class="sequence-numbers">07 14 21 35 42 49</div>
                         <div class="sequence-description">Múltiplos de 7 + complementos</div>
                     </div>
-                    <div class="sequence-card mega special" data-game="mega" data-sequence="OMEGA">
+                    <div class="sequence-card mega special" data-game="mega" data-sequence="OMEGA" onclick="selectSequence('mega', 'OMEGA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🏆 OMEGA</span>
                             <span class="sequence-badge">ESPECIAL</span>
                         </div>
-                        <div class="sequence-numbers">04 05 07 08 49 51 53 54</div>
+                        <div class="sequence-numbers">04 05 07 08 49 51</div>
                         <div class="sequence-description">Usar apenas 1x/ano em prêmios acima de R$ 150M</div>
                     </div>
                 </div>
@@ -861,7 +895,7 @@
                             <th>Números</th>
                             <th>Valor</th>
                             <th>Status</th>
-                            <th>Acertos</th>
+                            <th>Resultado</th>
                             <th>Prêmio</th>
                         </tr>
                     </thead>
@@ -924,3 +958,607 @@
                         <span>💸</span>
                         <span>Total Investido</span>
                     </div>
+                    <div class="stat-value" id="loto-invested">R$ 0,00</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>🏆</span>
+                        <span>Total Ganho</span>
+                    </div>
+                    <div class="stat-value" id="loto-won">R$ 0,00</div>
+                </div>
+                <div class="stat-card" id="loto-roi-card">
+                    <div class="stat-label">
+                        <span>📈</span>
+                        <span>Retorno (ROI)</span>
+                    </div>
+                    <div class="stat-value" id="loto-roi">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>🎲</span>
+                        <span>Jogos Realizados</span>
+                    </div>
+                    <div class="stat-value" id="loto-games">0</div>
+                </div>
+            </div>
+            
+            <!-- Sequences -->
+            <div class="sequences-section">
+                <h2 class="section-title">
+                    <span>🎯</span>
+                    <span>Sequências Estratégicas</span>
+                </h2>
+                <div class="sequences-grid">
+                    <div class="sequence-card loto" data-game="loto" data-sequence="FIBONACCI" onclick="selectSequence('loto', 'FIBONACCI')">
+                        <div class="sequence-header">
+                            <span class="sequence-name">🔢 FIBONACCI</span>
+                        </div>
+                        <div class="sequence-numbers">01 02 03 05 08 11 13 14 15 17 19 20 21 23 25</div>
+                        <div class="sequence-description">Sequência matemática natural</div>
+                    </div>
+                    <div class="sequence-card loto" data-game="loto" data-sequence="PRIMOS" onclick="selectSequence('loto', 'PRIMOS')">
+                        <div class="sequence-header">
+                            <span class="sequence-name">🎯 PRIMOS</span>
+                        </div>
+                        <div class="sequence-numbers">02 03 05 07 11 13 17 19 23 06 09 12 15 18 21</div>
+                        <div class="sequence-description">Números primos + múltiplos de 3</div>
+                    </div>
+                    <div class="sequence-card loto" data-game="loto" data-sequence="ESTRELA" onclick="selectSequence('loto', 'ESTRELA')">
+                        <div class="sequence-header">
+                            <span class="sequence-name">⭐ ESTRELA</span>
+                        </div>
+                        <div class="sequence-numbers">01 04 07 10 13 16 19 22 25 03 08 12 17 21 24</div>
+                        <div class="sequence-description">Padrão diagonal no volante</div>
+                    </div>
+                    <div class="sequence-card loto" data-game="loto" data-sequence="MATRIZ" onclick="selectSequence('loto', 'MATRIZ')">
+                        <div class="sequence-header">
+                            <span class="sequence-name">💎 MATRIZ</span>
+                        </div>
+                        <div class="sequence-numbers">01 02 03 04 05 06 10 11 12 13 14 15 17 18 20</div>
+                        <div class="sequence-description">Top 15 números mais sorteados</div>
+                    </div>
+                    <div class="sequence-card loto special" data-game="loto" data-sequence="SUPREME" onclick="selectSequence('loto', 'SUPREME')">
+                        <div class="sequence-header">
+                            <span class="sequence-name">👑 SUPREME</span>
+                            <span class="sequence-badge">ESPECIAL</span>
+                        </div>
+                        <div class="sequence-numbers">01 02 03 05 07 10 11 13 15 17 19 20 21 23 25</div>
+                        <div class="sequence-description">Usar apenas em prêmios acima de R$ 5M</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title">📊 Histórico de Jogos</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Concurso</th>
+                            <th>Sequência</th>
+                            <th>Números</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Resultado</th>
+                            <th>Prêmio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loto-tbody">
+                        <tr>
+                            <td colspan="8">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📋</div>
+                                    <div class="empty-state-title">Nenhum jogo registrado</div>
+                                    <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="button loto" onclick="openModal('loto')">
+                    <span>➕</span>
+                    <span>Adicionar Jogo</span>
+                </button>
+                <button class="button" onclick="exportData('loto')">
+                    <span>📥</span>
+                    <span>Exportar Dados</span>
+                </button>
+                <button class="button danger" onclick="clearData('loto')">
+                    <span>🗑️</span>
+                    <span>Limpar Dados</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-title">MATRIX PROTOCOL</div>
+            <div class="footer-text">
+                &gt; milhoes.manifestar(true)<br>
+                &gt; sincronicidade.ativar(432Hz)<br>
+                &gt; abundancia.receber()<br>
+                &gt; // Os números já escolheram você
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Adicionar Novo Jogo</h2>
+                <p class="modal-subtitle" id="modal-subtitle">Escolha sua sequência para manifestar</p>
+            </div>
+            
+            <div class="ai-suggestion" id="ai-suggestion">
+                <div class="ai-suggestion-title">
+                    <span>🤖</span>
+                    <span>Sugestão da IA</span>
+                </div>
+                <div class="ai-suggestion-text" id="ai-text">
+                    Analisando padrões...
+                </div>
+            </div>
+            
+            <div class="sequence-options" id="sequence-options">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <button class="button" id="confirm-button" onclick="confirmGame()">
+                <span>✅</span>
+                <span>Confirmar Jogo</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data structures
+        const sequences = {
+            mega: {
+                ALPHA: { numbers: [5, 10, 23, 33, 42, 53], name: '⚡ ALPHA', desc: 'Alta frequência histórica' },
+                BETA: { numbers: [4, 17, 27, 38, 41, 54], name: '🔮 BETA', desc: 'Equilíbrio par/ímpar' },
+                GAMMA: { numbers: [8, 15, 29, 36, 44, 51], name: '💎 GAMMA', desc: 'Padrão emergente 2025' },
+                DELTA: { numbers: [7, 14, 21, 35, 42, 49], name: '🌟 DELTA', desc: 'Múltiplos de 7' },
+                OMEGA: { numbers: [4, 5, 7, 8, 49, 51], name: '🏆 OMEGA', desc: 'Especial para +R$150M', special: true }
+            },
+            loto: {
+                FIBONACCI: { numbers: [1, 2, 3, 5, 8, 11, 13, 14, 15, 17, 19, 20, 21, 23, 25], name: '🔢 FIBONACCI', desc: 'Sequência matemática' },
+                PRIMOS: { numbers: [2, 3, 5, 7, 11, 13, 17, 19, 23, 6, 9, 12, 15, 18, 21], name: '🎯 PRIMOS', desc: 'Números primos' },
+                ESTRELA: { numbers: [1, 4, 7, 10, 13, 16, 19, 22, 25, 3, 8, 12, 17, 21, 24], name: '⭐ ESTRELA', desc: 'Padrão diagonal' },
+                MATRIZ: { numbers: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 17, 18, 20], name: '💎 MATRIZ', desc: 'Mais sorteados' },
+                SUPREME: { numbers: [1, 2, 3, 5, 7, 10, 11, 13, 15, 17, 19, 20, 21, 23, 25], name: '👑 SUPREME', desc: 'Especial +R$5M', special: true }
+            }
+        };
+
+        // Load data from localStorage
+        let gameData = {
+            mega: JSON.parse(localStorage.getItem('megaGames') || '[]'),
+            loto: JSON.parse(localStorage.getItem('lotoGames') || '[]'),
+            megaJackpot: localStorage.getItem('megaJackpot') || 25000000,
+            lotoJackpot: localStorage.getItem('lotoJackpot') || 1700000
+        };
+
+        let currentGame = 'mega';
+        let selectedSequence = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateJackpots();
+            updateStats('mega');
+            updateStats('loto');
+            renderTable('mega');
+            renderTable('loto');
+        });
+
+        // Switch tabs
+        function switchTab(game) {
+            currentGame = game;
+            
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${game}-content`).classList.add('active');
+        }
+
+        // Update jackpots display
+        function updateJackpots() {
+            document.getElementById('mega-jackpot').textContent = formatCurrency(gameData.megaJackpot);
+            document.getElementById('loto-jackpot').textContent = formatCurrency(gameData.lotoJackpot);
+        }
+
+        // Edit jackpot
+        function editJackpot(game) {
+            const value = prompt(`Digite o novo valor do prêmio (apenas números):`);
+            if (value && !isNaN(value)) {
+                if (game === 'mega') {
+                    gameData.megaJackpot = parseInt(value);
+                    localStorage.setItem('megaJackpot', gameData.megaJackpot);
+                } else {
+                    gameData.lotoJackpot = parseInt(value);
+                    localStorage.setItem('lotoJackpot', gameData.lotoJackpot);
+                }
+                updateJackpots();
+            }
+        }
+
+        // Update statistics
+        function updateStats(game) {
+            const games = gameData[game];
+            const invested = games.reduce((sum, g) => sum + g.value, 0);
+            const won = games.reduce((sum, g) => sum + (g.prize || 0), 0);
+            const roi = invested > 0 ? ((won - invested) / invested * 100) : 0;
+            
+            document.getElementById(`${game}-invested`).textContent = formatCurrency(invested);
+            document.getElementById(`${game}-won`).textContent = formatCurrency(won);
+            document.getElementById(`${game}-roi`).textContent = roi.toFixed(1) + '%';
+            document.getElementById(`${game}-games`).textContent = games.length;
+            
+            // Update ROI card color
+            const roiCard = document.getElementById(`${game}-roi-card`);
+            roiCard.classList.remove('positive', 'negative');
+            if (roi > 0) roiCard.classList.add('positive');
+            else if (roi < 0) roiCard.classList.add('negative');
+        }
+
+        // Render table
+        function renderTable(game) {
+            const tbody = document.getElementById(`${game}-tbody`);
+            const games = gameData[game];
+            
+            if (games.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">📋</div>
+                                <div class="empty-state-title">Nenhum jogo registrado</div>
+                                <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tbody.innerHTML = '';
+            let currentWeek = null;
+            
+            games.forEach((gameItem, index) => {
+                const week = getWeekNumber(new Date(gameItem.date));
+                
+                if (week !== currentWeek) {
+                    currentWeek = week;
+                    const weekRow = tbody.insertRow();
+                    weekRow.className = 'week-separator';
+                    const weekCell = weekRow.insertCell();
+                    weekCell.colSpan = 8;
+                    weekCell.textContent = `Semana ${week} - ${getWeekDateRange(gameItem.date)}`;
+                }
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${formatDate(gameItem.date)}</td>
+                    <td>${gameItem.contest}</td>
+                    <td>${gameItem.sequence}</td>
+                    <td class="table-numbers">${gameItem.numbers.join(' ')}</td>
+                    <td>${formatCurrency(gameItem.value)}</td>
+                    <td><span class="status-badge status-${gameItem.status}">${getStatusText(gameItem.status)}</span></td>
+                    <td>
+                        <div class="result-input">
+                            <input type="number" id="hits-${game}-${index}" min="0" max="${game === 'mega' ? 6 : 15}" value="${gameItem.hits || 0}" onchange="updateHits('${game}', ${index})">
+                            <span>acertos</span>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="number" id="prize-${game}-${index}" value="${gameItem.prize || 0}" onchange="updatePrize('${game}', ${index})" style="width: 100px;">
+                    </td>
+                `;
+            });
+        }
+
+        // Update hits
+        function updateHits(game, index) {
+            const hits = parseInt(document.getElementById(`hits-${game}-${index}`).value) || 0;
+            gameData[game][index].hits = hits;
+            
+            // Update status based on hits
+            if (game === 'mega') {
+                gameData[game][index].status = hits >= 4 ? 'win' : 'loss';
+                // Suggest prize based on hits
+                if (hits === 4) gameData[game][index].prize = 1000;
+                else if (hits === 5) gameData[game][index].prize = 50000;
+                else if (hits === 6) gameData[game][index].prize = gameData.megaJackpot;
+                else gameData[game][index].prize = 0;
+            } else {
+                gameData[game][index].status = hits >= 11 ? 'win' : 'loss';
+                // Suggest prize based on hits
+                if (hits === 11) gameData[game][index].prize = 6;
+                else if (hits === 12) gameData[game][index].prize = 12;
+                else if (hits === 13) gameData[game][index].prize = 30;
+                else if (hits === 14) gameData[game][index].prize = 1500;
+                else if (hits === 15) gameData[game][index].prize = gameData.lotoJackpot;
+                else gameData[game][index].prize = 0;
+            }
+            
+            document.getElementById(`prize-${game}-${index}`).value = gameData[game][index].prize;
+            
+            saveData(game);
+            updateStats(game);
+            renderTable(game);
+        }
+
+        // Update prize
+        function updatePrize(game, index) {
+            const prize = parseFloat(document.getElementById(`prize-${game}-${index}`).value) || 0;
+            gameData[game][index].prize = prize;
+            saveData(game);
+            updateStats(game);
+        }
+
+        // Open modal
+        function openModal(game) {
+            currentGame = game;
+            selectedSequence = null;
+            
+            const modal = document.getElementById('modal');
+            const title = document.getElementById('modal-title');
+            const subtitle = document.getElementById('modal-subtitle');
+            const aiText = document.getElementById('ai-text');
+            const button = document.getElementById('confirm-button');
+            
+            title.textContent = `Adicionar ${game === 'mega' ? 'Mega-Sena' : 'Lotofácil'}`;
+            subtitle.textContent = `Escolha sua sequência para manifestar`;
+            button.className = `button ${game}`;
+            
+            // AI suggestion
+            const suggestion = getAISuggestion(game);
+            aiText.innerHTML = suggestion;
+            
+            // Render sequence options
+            renderSequenceOptions(game);
+            
+            modal.classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Get AI suggestion
+        function getAISuggestion(game) {
+            const day = new Date().getDay();
+            const jackpot = game === 'mega' ? gameData.megaJackpot : gameData.lotoJackpot;
+            
+            if (game === 'mega') {
+                if (jackpot < 30000000) {
+                    return '⚠️ <strong>Atenção:</strong> Prêmio abaixo de R$ 30M. Considere aguardar acumular.';
+                } else if (jackpot > 150000000) {
+                    return '🏆 <strong>MOMENTO OMEGA!</strong> Prêmio acima de R$ 150M. Hora de usar a sequência especial!';
+                } else {
+                    const suggestions = {
+                        0: 'DELTA', // Sunday
+                        1: 'BETA',  // Monday
+                        2: 'BETA',  // Tuesday
+                        3: 'GAMMA', // Wednesday
+                        4: 'GAMMA', // Thursday
+                        5: 'ALPHA', // Friday
+                        6: 'ALPHA'  // Saturday
+                    };
+                    return `📊 Baseado no dia e padrões, recomendo: <strong>${suggestions[day]}</strong>`;
+                }
+            } else {
+                if (jackpot > 5000000) {
+                    return '👑 <strong>SUPREME TIME!</strong> Prêmio acima de R$ 5M. Use a sequência especial!';
+                } else {
+                    const suggestions = {
+                        0: 'MATRIZ',    // Sunday
+                        1: 'FIBONACCI', // Monday
+                        2: 'PRIMOS',    // Tuesday
+                        3: 'FIBONACCI', // Wednesday
+                        4: 'PRIMOS',    // Thursday
+                        5: 'FIBONACCI', // Friday
+                        6: 'MATRIZ'     // Saturday
+                    };
+                    return `📊 Para hoje, a IA sugere: <strong>${suggestions[day]}</strong>`;
+                }
+            }
+        }
+
+        // Render sequence options
+        function renderSequenceOptions(game) {
+            const container = document.getElementById('sequence-options');
+            container.innerHTML = '';
+            
+            Object.entries(sequences[game]).forEach(([key, seq]) => {
+                const isBlocked = seq.special && !canUseSpecial(game, key);
+                
+                const option = document.createElement('div');
+                option.className = 'sequence-option';
+                option.onclick = () => !isBlocked && selectSequenceOption(key);
+                
+                if (isBlocked) {
+                    option.style.opacity = '0.5';
+                    option.style.cursor = 'not-allowed';
+                }
+                
+                option.innerHTML = `
+                    <div class="sequence-option-header">${seq.name} ${isBlocked ? '🔒' : ''}</div>
+                    <div class="sequence-option-numbers">${seq.numbers.join(' ')}</div>
+                    <div class="sequence-option-description">${seq.desc}</div>
+                    ${isBlocked ? '<div style="color: var(--accent-danger); font-size: 0.85rem; margin-top: 8px;">Já usada este ano</div>' : ''}
+                `;
+                
+                container.appendChild(option);
+            });
+        }
+
+        // Check if can use special sequence
+        function canUseSpecial(game, sequence) {
+            const lastUse = gameData[game].find(g => g.sequence === sequence);
+            if (!lastUse) return true;
+            
+            const lastDate = new Date(lastUse.date);
+            const now = new Date();
+            const daysSince = (now - lastDate) / (1000 * 60 * 60 * 24);
+            
+            return daysSince > 365;
+        }
+
+        // Select sequence from card
+        function selectSequence(game, sequence) {
+            currentGame = game;
+            selectedSequence = sequence;
+            openModal(game);
+            selectSequenceOption(sequence);
+        }
+
+        // Select sequence option in modal
+        function selectSequenceOption(sequence) {
+            selectedSequence = sequence;
+            
+            document.querySelectorAll('.sequence-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            event.currentTarget.classList.add('selected');
+        }
+
+        // Confirm game
+        function confirmGame() {
+            if (!selectedSequence) {
+                alert('Selecione uma sequência!');
+                return;
+            }
+            
+            const now = new Date();
+            const game = {
+                date: now.toISOString(),
+                contest: prompt('Número do concurso:') || getNextContest(currentGame),
+                sequence: selectedSequence,
+                numbers: sequences[currentGame][selectedSequence].numbers,
+                value: currentGame === 'mega' ? 6 : 3,
+                status: 'pending',
+                hits: 0,
+                prize: 0
+            };
+            
+            gameData[currentGame].push(game);
+            saveData(currentGame);
+            updateStats(currentGame);
+            renderTable(currentGame);
+            closeModal();
+        }
+
+        // Export data
+        function exportData(game) {
+            const data = gameData[game];
+            const csv = [
+                ['Data', 'Concurso', 'Sequência', 'Números', 'Valor', 'Status', 'Acertos', 'Prêmio'],
+                ...data.map(g => [
+                    formatDate(g.date),
+                    g.contest,
+                    g.sequence,
+                    g.numbers.join(' '),
+                    g.value,
+                    getStatusText(g.status),
+                    g.hits || 0,
+                    g.prize || 0
+                ])
+            ].map(row => row.join(',')).join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${game}-${formatDate(new Date().toISOString())}.csv`;
+            a.click();
+        }
+
+        // Clear data
+        function clearData(game) {
+            if (confirm(`Tem certeza que deseja limpar todos os dados da ${game === 'mega' ? 'Mega-Sena' : 'Lotofácil'}?`)) {
+                gameData[game] = [];
+                saveData(game);
+                updateStats(game);
+                renderTable(game);
+            }
+        }
+
+        // Save data
+        function saveData(game) {
+            localStorage.setItem(`${game}Games`, JSON.stringify(gameData[game]));
+        }
+
+        // Utility functions
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('pt-BR');
+        }
+
+        function getWeekNumber(date) {
+            const firstDay = new Date(date.getFullYear(), 0, 1);
+            const days = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000));
+            return Math.ceil((days + firstDay.getDay() + 1) / 7);
+        }
+
+        function getWeekDateRange(dateStr) {
+            const date = new Date(dateStr);
+            const start = new Date(date);
+            start.setDate(date.getDate() - date.getDay());
+            const end = new Date(start);
+            end.setDate(start.getDate() + 6);
+            
+            return `${start.getDate()}/${start.getMonth() + 1} - ${end.getDate()}/${end.getMonth() + 1}`;
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                pending: 'AGUARDANDO',
+                win: 'GANHOU',
+                loss: 'PERDEU'
+            };
+            return texts[status] || status;
+        }
+
+        function getNextContest(game) {
+            if (game === 'mega') {
+                return '2890'; // Update this based on current contest
+            } else {
+                return '3200'; // Update this based on current contest
+            }
+        }
+
+        // Handle clicks outside modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
