@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEGA MATRIX - Sistema de Manifestação Milhonária</title>
+    <title>MATRIX LOTERIAS - Sistema de Manifestação Milhonária</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
         * {
             margin: 0;
@@ -15,136 +15,203 @@
         
         :root {
             --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-card: #0f0f0f;
+            --bg-secondary: #141414;
+            --bg-card: #1a1a1a;
             --border-color: #2a2a2a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #888;
-            --green-mega: #209869;
-            --green-neon: #00ff41;
-            --green-dark: #00cc33;
-            --red-alert: #ff0066;
-            --yellow-warning: #ffcc00;
-            --blue-info: #00ccff;
-            --purple-accent: #b026ff;
-            --gold-omega: #ffd700;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --green-mega: #00b894;
+            --purple-loto: #a29bfe;
+            --accent-success: #00d68f;
+            --accent-danger: #ff3838;
+            --accent-warning: #ffaa00;
+            --accent-info: #0095ff;
+            --gold: #ffd700;
         }
         
         body {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            line-height: 1.6;
         }
         
-        /* Matrix Rain Effect */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.03;
-            z-index: 1;
-        }
-        
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            font-size: 20px;
-            color: var(--green-neon);
-            animation: matrix-fall linear infinite;
-        }
-        
-        @keyframes matrix-fall {
-            to {
-                top: 100%;
-            }
-        }
-        
+        /* Container */
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            position: relative;
-            z-index: 2;
         }
         
         /* Header */
         .header {
             text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
             margin-bottom: 40px;
-            position: relative;
         }
         
         .header h1 {
-            font-size: 3em;
+            font-size: 2.5rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
             margin-bottom: 10px;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, var(--green-mega), var(--green-neon));
+            background: linear-gradient(135deg, var(--green-mega) 0%, var(--purple-loto) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--green-mega);
         }
         
-        .header .subtitle {
+        .header p {
             color: var(--text-secondary);
-            font-size: 0.9em;
-            letter-spacing: 0.2em;
+            font-size: 1.1rem;
+        }
+        
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            background: var(--bg-card);
+            padding: 8px;
+            border-radius: 12px;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-tab.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .nav-tab.mega.active {
+            background: rgba(0, 184, 148, 0.1);
+            color: var(--green-mega);
+            border: 1px solid rgba(0, 184, 148, 0.3);
+        }
+        
+        .nav-tab.loto.active {
+            background: rgba(162, 155, 254, 0.1);
+            color: var(--purple-loto);
+            border: 1px solid rgba(162, 155, 254, 0.3);
+        }
+        
+        /* Content Sections */
+        .content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Alert Box */
+        .alert {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .alert-icon {
+            font-size: 2rem;
+        }
+        
+        .alert-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        
+        .alert-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .alert.mega {
+            border-color: rgba(0, 184, 148, 0.3);
+            background: rgba(0, 184, 148, 0.05);
+        }
+        
+        .alert.loto {
+            border-color: rgba(162, 155, 254, 0.3);
+            background: rgba(162, 155, 254, 0.05);
         }
         
         /* Jackpot Display */
-        .jackpot-display {
-            background: linear-gradient(135deg, var(--green-dark), var(--green-mega));
-            border-radius: 15px;
-            padding: 30px;
+        .jackpot-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
             margin-bottom: 30px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(32, 152, 105, 0.3);
             position: relative;
             overflow: hidden;
         }
         
-        .jackpot-display::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
+        .jackpot-card.mega {
+            border-color: rgba(0, 184, 148, 0.3);
+            background: linear-gradient(135deg, var(--bg-card), rgba(0, 184, 148, 0.05));
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .jackpot-card.loto {
+            border-color: rgba(162, 155, 254, 0.3);
+            background: linear-gradient(135deg, var(--bg-card), rgba(162, 155, 254, 0.05));
         }
         
         .jackpot-label {
-            color: rgba(255,255,255,0.8);
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
         }
         
         .jackpot-value {
-            font-size: 4em;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.5);
-            margin-bottom: 10px;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
         
-        .next-draw {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.1em;
+        .jackpot-card.mega .jackpot-value {
+            color: var(--green-mega);
+        }
+        
+        .jackpot-card.loto .jackpot-value {
+            color: var(--purple-loto);
+        }
+        
+        .jackpot-info {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         
         /* Stats Grid */
@@ -158,228 +225,143 @@
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
+            border-radius: 12px;
+            padding: 24px;
             transition: all 0.3s ease;
         }
         
         .stat-card:hover {
-            border-color: var(--green-mega);
-            box-shadow: 0 0 20px rgba(32, 152, 105, 0.3);
             transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.1);
         }
         
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--green-mega);
-        }
-        
-        .stat-card h3 {
-            font-size: 0.9em;
+        .stat-label {
             color: var(--text-secondary);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .stat-card .value {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: var(--green-neon);
-            text-shadow: 0 0 10px var(--green-dark);
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
         }
         
-        .stat-card.negative .value {
-            color: var(--red-alert);
-            text-shadow: 0 0 10px var(--red-alert);
+        .stat-card.positive .stat-value {
+            color: var(--accent-success);
         }
         
-        /* Strategy Section */
-        .strategy-header {
-            background: var(--bg-secondary);
-            border: 1px solid var(--green-mega);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: center;
+        .stat-card.negative .stat-value {
+            color: var(--accent-danger);
         }
         
-        .strategy-header h2 {
-            color: var(--green-mega);
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+        /* Sequences Section */
+        .sequences-section {
+            margin-bottom: 40px;
         }
         
-        .strategy-header p {
-            color: var(--text-secondary);
-            font-size: 0.9em;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
-        /* Number Patterns */
-        .patterns-grid {
+        .sequences-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
         }
         
-        .pattern-card {
+        .sequence-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             padding: 20px;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.3s ease;
             position: relative;
         }
         
-        .pattern-card:hover {
-            border-color: var(--green-mega);
+        .sequence-card:hover {
             transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
-        .pattern-card.omega {
-            border: 2px solid var(--gold-omega);
+        .sequence-card.mega:hover {
+            border-color: var(--green-mega);
+            box-shadow: 0 4px 20px rgba(0, 184, 148, 0.2);
+        }
+        
+        .sequence-card.loto:hover {
+            border-color: var(--purple-loto);
+            box-shadow: 0 4px 20px rgba(162, 155, 254, 0.2);
+        }
+        
+        .sequence-card.special {
+            border-color: var(--gold);
             background: linear-gradient(135deg, var(--bg-card), rgba(255, 215, 0, 0.05));
         }
         
-        .pattern-card.omega::after {
-            content: '⚠️ USAR APENAS 1X/ANO';
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            font-size: 0.7em;
-            color: var(--gold-omega);
+        .sequence-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
         }
         
-        .pattern-name {
-            color: var(--green-mega);
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
+        .sequence-name {
+            font-weight: 600;
+            font-size: 1.1rem;
         }
         
-        .pattern-card.omega .pattern-name {
-            color: var(--gold-omega);
-            text-shadow: 0 0 10px var(--gold-omega);
+        .sequence-badge {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--gold);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
         
-        .pattern-numbers {
-            font-size: 1.3em;
-            color: var(--green-neon);
-            font-weight: bold;
-            text-shadow: 0 0 5px var(--green-dark);
-            letter-spacing: 0.1em;
+        .sequence-numbers {
+            font-family: 'Courier New', monospace;
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            word-spacing: 0.5rem;
         }
         
-        .pattern-info {
+        .sequence-description {
             color: var(--text-secondary);
-            font-size: 0.85em;
-            margin-top: 10px;
+            font-size: 0.9rem;
         }
         
-        /* Modal de Seleção */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-        }
-        
-        .modal-content {
-            background: var(--bg-secondary);
-            margin: 5% auto;
-            padding: 30px;
-            border: 2px solid var(--green-mega);
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            position: relative;
-            box-shadow: 0 0 50px rgba(32, 152, 105, 0.5);
-        }
-        
-        .close {
-            color: var(--text-secondary);
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .close:hover {
-            color: var(--red-alert);
-        }
-        
-        .modal h2 {
-            color: var(--green-mega);
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        
-        .sequence-options {
-            display: grid;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .sequence-option {
+        /* Table */
+        .table-container {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .sequence-option:hover {
-            border-color: var(--green-mega);
-            background: rgba(32, 152, 105, 0.1);
-        }
-        
-        .sequence-option.selected {
-            border-color: var(--green-neon);
-            background: rgba(0, 255, 65, 0.1);
-        }
-        
-        .sequence-option.omega {
-            border-color: var(--gold-omega);
-            background: rgba(255, 215, 0, 0.05);
-        }
-        
-        .ai-suggestion {
-            background: linear-gradient(135deg, var(--purple-accent), var(--blue-info));
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        /* Table Styles */
-        .table-wrapper {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .table-title {
+            font-size: 1.2rem;
+            font-weight: 600;
         }
         
         table {
@@ -387,784 +369,545 @@
             border-collapse: collapse;
         }
         
-        th {
+        thead {
             background: var(--bg-secondary);
-            color: var(--green-mega);
-            padding: 15px 10px;
+        }
+        
+        th {
+            padding: 16px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.9em;
-            border-bottom: 2px solid var(--green-mega);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            letter-spacing: 0.5px;
         }
         
         td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #1a1a1a;
-            color: var(--text-primary);
+            padding: 16px;
+            border-top: 1px solid var(--border-color);
         }
         
-        tr:hover {
-            background: rgba(32, 152, 105, 0.05);
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
         }
         
-        .week-separator {
-            background: var(--bg-secondary);
-            font-weight: bold;
-            text-align: center;
-            color: var(--green-mega);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
+        .table-numbers {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
         
-        .numbers {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: bold;
-            color: var(--green-neon);
-            font-size: 1.1em;
-            text-shadow: 0 0 5px var(--green-dark);
-            letter-spacing: 0.05em;
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
         
         .status-pending {
-            background: var(--yellow-warning);
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.85em;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+            background: rgba(255, 170, 0, 0.1);
+            color: var(--accent-warning);
         }
         
         .status-win {
-            background: var(--green-neon);
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.85em;
-            text-shadow: 0 0 10px var(--green-neon);
+            background: rgba(0, 214, 143, 0.1);
+            color: var(--accent-success);
         }
         
         .status-loss {
-            background: var(--red-alert);
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.85em;
+            background: rgba(255, 56, 56, 0.1);
+            color: var(--accent-danger);
         }
         
-        /* Inputs */
-        input[type="text"], 
-        input[type="number"], 
-        input[type="date"], 
+        /* Form Inputs */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
         select {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
             color: var(--text-primary);
-            padding: 8px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9em;
+            font-size: 0.95rem;
             width: 100%;
             transition: all 0.3s ease;
         }
         
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             outline: none;
-            border-color: var(--green-mega);
-            box-shadow: 0 0 5px rgba(32, 152, 105, 0.5);
+            border-color: var(--accent-info);
+            box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.1);
         }
         
         /* Buttons */
+        .button {
+            background: var(--accent-info);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 149, 255, 0.3);
+        }
+        
+        .button.mega {
+            background: var(--green-mega);
+        }
+        
+        .button.mega:hover {
+            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+        }
+        
+        .button.loto {
+            background: var(--purple-loto);
+        }
+        
+        .button.loto:hover {
+            box-shadow: 0 4px 12px rgba(162, 155, 254, 0.3);
+        }
+        
+        .button.danger {
+            background: var(--accent-danger);
+        }
+        
+        .button.danger:hover {
+            box-shadow: 0 4px 12px rgba(255, 56, 56, 0.3);
+        }
+        
         .button-group {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 30px 0;
+            gap: 12px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
         
-        .add-button, .sync-button, .confirm-button {
-            background: linear-gradient(45deg, var(--green-dark), var(--green-mega));
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 8px;
-            font-size: 1em;
-            font-weight: bold;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            transition: all 0.3s ease;
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 600px;
+            width: 100%;
             position: relative;
-            overflow: hidden;
+            animation: modalSlideIn 0.3s ease;
         }
         
-        .sync-button {
-            background: linear-gradient(45deg, var(--purple-accent), var(--blue-info));
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .add-button:hover, .sync-button:hover, .confirm-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(32, 152, 105, 0.5);
+        .modal-header {
+            margin-bottom: 24px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .ai-suggestion {
+            background: linear-gradient(135deg, rgba(0, 149, 255, 0.1), rgba(162, 155, 254, 0.1));
+            border: 1px solid rgba(0, 149, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .ai-suggestion-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .ai-suggestion-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .sequence-options {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .sequence-option {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sequence-option:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .sequence-option.selected {
+            border-color: var(--accent-info);
+            background: rgba(0, 149, 255, 0.05);
+        }
+        
+        .sequence-option-header {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .sequence-option-numbers {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .sequence-option-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .empty-state-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .empty-state-text {
+            font-size: 0.95rem;
+            margin-bottom: 24px;
         }
         
         /* Footer */
-        .matrix-footer {
+        .footer {
             text-align: center;
-            margin-top: 50px;
-            padding: 20px;
+            padding: 40px 20px;
+            margin-top: 80px;
             border-top: 1px solid var(--border-color);
-        }
-        
-        .matrix-footer p {
             color: var(--text-secondary);
-            font-size: 0.9em;
-            margin-bottom: 10px;
         }
         
-        .matrix-code {
-            color: var(--green-neon);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8em;
-            opacity: 0.6;
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            font-family: 'Courier New', monospace;
         }
         
         /* Responsive */
         @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
             .header h1 {
-                font-size: 2em;
+                font-size: 2rem;
             }
             
             .jackpot-value {
-                font-size: 2.5em;
+                font-size: 2.5rem;
             }
             
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
             
-            table {
-                font-size: 0.85em;
-            }
-            
-            th, td {
-                padding: 8px 5px;
+            .sequences-grid {
+                grid-template-columns: 1fr;
             }
             
             .button-group {
                 flex-direction: column;
             }
+            
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            table {
+                font-size: 0.85rem;
+            }
+            
+            th, td {
+                padding: 12px 8px;
+            }
+            
+            .table-numbers {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Matrix Rain Background -->
-    <div class="matrix-bg" id="matrixBg"></div>
-    
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>💰 MEGA MATRIX</h1>
-            <p class="subtitle">SISTEMA DE MANIFESTAÇÃO MILHONÁRIA • MEGA-SENA</p>
+            <h1>MATRIX LOTERIAS</h1>
+            <p>Sistema Inteligente de Manifestação Milhonária</p>
         </div>
         
-        <!-- Jackpot Display -->
-        <div class="jackpot-display">
-            <div class="jackpot-label">🎯 Próximo Prêmio Estimado</div>
-            <div class="jackpot-value" id="currentJackpot">R$ 25.000.000</div>
-            <div class="next-draw">Concurso 2890 • Sábado, 19 de Julho • 20:00h</div>
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab mega active" onclick="switchTab('mega')">
+                💰 MEGA-SENA
+            </button>
+            <button class="nav-tab loto" onclick="switchTab('loto')">
+                💎 LOTOFÁCIL
+            </button>
         </div>
         
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>💸 Total Investido</h3>
-                <div class="value" id="totalInvested">R$ 0,00</div>
+        <!-- MEGA-SENA Content -->
+        <div id="mega-content" class="content active">
+            <!-- Alert -->
+            <div class="alert mega">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <h3>Estratégia Inteligente</h3>
+                    <p>Recomendamos jogar na Mega-Sena apenas quando o prêmio estiver acima de R$ 30 milhões para maximizar o ROI.</p>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>🏆 Total Ganho</h3>
-                <div class="value" id="totalWon">R$ 0,00</div>
+            
+            <!-- Jackpot -->
+            <div class="jackpot-card mega">
+                <div class="jackpot-label">Prêmio Estimado</div>
+                <div class="jackpot-value" id="mega-jackpot">R$ 25.000.000</div>
+                <div class="jackpot-info">Concurso 2890 • Sábado, 19 de julho • 20:00h</div>
             </div>
-            <div class="stat-card">
-                <h3>📈 ROI</h3>
-                <div class="value" id="roi">0%</div>
+            
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💸</span>
+                        <span>Total Investido</span>
+                    </div>
+                    <div class="stat-value" id="mega-invested">R$ 0,00</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>🏆</span>
+                        <span>Total Ganho</span>
+                    </div>
+                    <div class="stat-value" id="mega-won">R$ 0,00</div>
+                </div>
+                <div class="stat-card" id="mega-roi-card">
+                    <div class="stat-label">
+                        <span>📈</span>
+                        <span>Retorno (ROI)</span>
+                    </div>
+                    <div class="stat-value" id="mega-roi">0%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>🎲</span>
+                        <span>Jogos Realizados</span>
+                    </div>
+                    <div class="stat-value" id="mega-games">0</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>🎲 Jogos Realizados</h3>
-                <div class="value" id="totalGames">0</div>
+            
+            <!-- Sequences -->
+            <div class="sequences-section">
+                <h2 class="section-title">
+                    <span>🎯</span>
+                    <span>Sequências Estratégicas</span>
+                </h2>
+                <div class="sequences-grid">
+                    <div class="sequence-card mega" data-game="mega" data-sequence="ALPHA">
+                        <div class="sequence-header">
+                            <span class="sequence-name">⚡ ALPHA</span>
+                        </div>
+                        <div class="sequence-numbers">05 10 23 33 42 53</div>
+                        <div class="sequence-description">Números de alta frequência histórica</div>
+                    </div>
+                    <div class="sequence-card mega" data-game="mega" data-sequence="BETA">
+                        <div class="sequence-header">
+                            <span class="sequence-name">🔮 BETA</span>
+                        </div>
+                        <div class="sequence-numbers">04 17 27 38 41 54</div>
+                        <div class="sequence-description">Combinação equilibrada par/ímpar</div>
+                    </div>
+                    <div class="sequence-card mega" data-game="mega" data-sequence="GAMMA">
+                        <div class="sequence-header">
+                            <span class="sequence-name">💎 GAMMA</span>
+                        </div>
+                        <div class="sequence-numbers">08 15 29 36 44 51</div>
+                        <div class="sequence-description">Padrão emergente 2025</div>
+                    </div>
+                    <div class="sequence-card mega" data-game="mega" data-sequence="DELTA">
+                        <div class="sequence-header">
+                            <span class="sequence-name">🌟 DELTA</span>
+                        </div>
+                        <div class="sequence-numbers">07 14 21 35 42 49</div>
+                        <div class="sequence-description">Múltiplos de 7 + complementos</div>
+                    </div>
+                    <div class="sequence-card mega special" data-game="mega" data-sequence="OMEGA">
+                        <div class="sequence-header">
+                            <span class="sequence-name">🏆 OMEGA</span>
+                            <span class="sequence-badge">ESPECIAL</span>
+                        </div>
+                        <div class="sequence-numbers">04 05 07 08 49 51 53 54</div>
+                        <div class="sequence-description">Usar apenas 1x/ano em prêmios acima de R$ 150M</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3 class="table-title">📊 Histórico de Jogos</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Concurso</th>
+                            <th>Sequência</th>
+                            <th>Números</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Acertos</th>
+                            <th>Prêmio</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mega-tbody">
+                        <tr>
+                            <td colspan="8">
+                                <div class="empty-state">
+                                    <div class="empty-state-icon">📋</div>
+                                    <div class="empty-state-title">Nenhum jogo registrado</div>
+                                    <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="button mega" onclick="openModal('mega')">
+                    <span>➕</span>
+                    <span>Adicionar Jogo</span>
+                </button>
+                <button class="button" onclick="exportData('mega')">
+                    <span>📥</span>
+                    <span>Exportar Dados</span>
+                </button>
+                <button class="button danger" onclick="clearData('mega')">
+                    <span>🗑️</span>
+                    <span>Limpar Dados</span>
+                </button>
             </div>
         </div>
         
-        <!-- Strategy Section -->
-        <div class="strategy-header">
-            <h2>🧠 ESTRATÉGIA MATRIX MILHONÁRIA</h2>
-            <p>R$ 72/semana • R$ 24 por sorteio • Terças, Quintas e Sábados</p>
-        </div>
-        
-        <!-- Number Patterns -->
-        <div class="patterns-grid">
-            <div class="pattern-card" data-sequence="ALPHA">
-                <div class="pattern-name">⚡ SEQUÊNCIA ALPHA</div>
-                <div class="pattern-numbers">05 • 10 • 23 • 33 • 42 • 53</div>
-                <div class="pattern-info">Números de alta frequência histórica</div>
-            </div>
-            <div class="pattern-card" data-sequence="BETA">
-                <div class="pattern-name">🔮 SEQUÊNCIA BETA</div>
-                <div class="pattern-numbers">04 • 17 • 27 • 38 • 41 • 54</div>
-                <div class="pattern-info">Combinação equilibrada par/ímpar</div>
-            </div>
-            <div class="pattern-card" data-sequence="GAMMA">
-                <div class="pattern-name">💎 SEQUÊNCIA GAMMA</div>
-                <div class="pattern-numbers">08 • 15 • 29 • 36 • 44 • 51</div>
-                <div class="pattern-info">Padrão emergente 2025</div>
-            </div>
-            <div class="pattern-card" data-sequence="DELTA">
-                <div class="pattern-name">🌟 SEQUÊNCIA DELTA</div>
-                <div class="pattern-numbers">07 • 14 • 21 • 35 • 42 • 49</div>
-                <div class="pattern-info">Múltiplos de 7 + complementos</div>
-            </div>
-            <div class="pattern-card omega" data-sequence="OMEGA">
-                <div class="pattern-name">🏆 SEQUÊNCIA OMEGA</div>
-                <div class="pattern-numbers">04 • 05 • 07 • 08 • 49 • 51 • 53 • 54</div>
-                <div class="pattern-info">Fusão suprema - Usar apenas 1x/ano em prêmios acima de R$ 150M</div>
-            </div>
-        </div>
-        
-        <!-- Table -->
-        <div class="table-wrapper">
-            <table id="trackingTable">
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Dia</th>
-                        <th>Concurso</th>
-                        <th>Sequência</th>
-                        <th>Números Jogados</th>
-                        <th>Investimento</th>
-                        <th>Status</th>
-                        <th>Resultado</th>
-                        <th>Prêmio</th>
-                        <th>Acertos</th>
-                        <th>Observações</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Dados serão carregados do localStorage -->
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="button-group">
-            <button class="add-button" onclick="openModal()">+ ADICIONAR NOVO JOGO</button>
-            <button class="sync-button" onclick="syncData()">🔄 SINCRONIZAR DADOS</button>
-            <button class="sync-button" style="background: linear-gradient(45deg, #ff0066, #ff3366);" onclick="clearAllData()">🗑️ LIMPAR TUDO</button>
-        </div>
-        
-        <!-- Footer -->
-        <div class="matrix-footer">
-            <p>MEGA MATRIX • SISTEMA DE MANIFESTAÇÃO MILHONÁRIA</p>
-            <div class="matrix-code">
-                &gt; milhoes.manifestar(30000000)<br>
-                &gt; sincronicidade.ativar(432Hz)<br>
-                &gt; abundancia.receber(true)
-            </div>
-        </div>
-    </div>
-    
-    <!-- Modal de Seleção -->
-    <div id="sequenceModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>🎯 Escolha sua Sequência</h2>
-            
-            <div class="ai-suggestion" id="aiSuggestion">
-                <!-- Sugestão da IA será inserida aqui -->
+        <!-- LOTOFÁCIL Content -->
+        <div id="loto-content" class="content">
+            <!-- Alert -->
+            <div class="alert loto">
+                <div class="alert-icon">💡</div>
+                <div class="alert-content">
+                    <h3>Jogue com Frequência</h3>
+                    <p>A Lotofácil tem odds melhores (1:3.268.760) e sorteios diários. Ideal para construir sua banca!</p>
+                </div>
             </div>
             
-            <div class="sequence-options" id="sequenceOptions">
-                <!-- Opções serão inseridas dinamicamente -->
+            <!-- Jackpot -->
+            <div class="jackpot-card loto">
+                <div class="jackpot-label">Prêmio Estimado</div>
+                <div class="jackpot-value" id="loto-jackpot">R$ 1.700.000</div>
+                <div class="jackpot-info">Sorteios de Segunda a Sábado • 20:00h</div>
             </div>
             
-            <button class="confirm-button" onclick="confirmSelection()">CONFIRMAR SELEÇÃO</button>
-        </div>
-    </div>
-    
-    <script>
-        // Sistema de Persistência de Dados
-        const STORAGE_KEY = 'mega_matrix_data';
-        const OMEGA_USED_KEY = 'mega_matrix_omega_used';
-        
-        // Configurações dos jogos
-        const sequences = {
-            'ALPHA': { numbers: '05-10-23-33-42-53', description: 'Alta frequência' },
-            'BETA': { numbers: '04-17-27-38-41-54', description: 'Equilíbrio par/ímpar' },
-            'GAMMA': { numbers: '08-15-29-36-44-51', description: 'Padrão 2025' },
-            'DELTA': { numbers: '07-14-21-35-42-49', description: 'Múltiplos de 7' },
-            'OMEGA': { numbers: '04-05-07-08-49-51-53-54', description: 'Fusão suprema', special: true }
-        };
-        
-        let selectedSequence = null;
-        
-        // Salvar dados no localStorage
-        function saveData() {
-            const rows = [];
-            const tableRows = document.querySelectorAll('#tableBody tr');
-            
-            tableRows.forEach(row => {
-                if (!row.classList.contains('week-separator')) {
-                    const rowData = {
-                        date: row.querySelector('input[type="date"]')?.value || '',
-                        day: row.cells[1]?.textContent || '',
-                        contest: row.querySelector('input[name="contest"]')?.value || '',
-                        sequence: row.cells[3]?.textContent || '',
-                        numbers: row.cells[4]?.textContent || '',
-                        investment: row.querySelector('input[name="investment"]')?.value || '',
-                        status: row.cells[6]?.querySelector('span')?.textContent || '',
-                        result: row.querySelector('input[name="result"]')?.value || '',
-                        prize: row.querySelector('input[name="prize"]')?.value || '',
-                        hits: row.querySelector('select[name="hits"]')?.value || '',
-                        notes: row.querySelector('input[name="notes"]')?.value || ''
-                    };
-                    rows.push(rowData);
-                }
-            });
-            
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
-            updateStats();
-        }
-        
-        // Carregar dados do localStorage
-        function loadData() {
-            const savedData = localStorage.getItem(STORAGE_KEY);
-            if (savedData) {
-                try {
-                    const rows = JSON.parse(savedData);
-                    const tbody = document.getElementById('tableBody');
-                    tbody.innerHTML = '';
-                    
-                    if (rows && rows.length > 0) {
-                        rows.forEach(rowData => {
-                            const newRow = createRow(rowData);
-                            tbody.appendChild(newRow);
-                        });
-                    }
-                    
-                    updateStats();
-                } catch (e) {
-                    console.log('Iniciando sistema limpo');
-                    localStorage.removeItem(STORAGE_KEY);
-                    loadInitialData();
-                }
-            } else {
-                loadInitialData();
-            }
-        }
-        
-        // Criar linha da tabela
-        function createRow(data) {
-            const row = document.createElement('tr');
-            const statusClass = data.status === 'GANHO' ? 'status-win' : 
-                               data.status === 'PERDEU' ? 'status-loss' : 
-                               'status-pending';
-            
-            row.innerHTML = `
-                <td><input type="date" name="date" value="${data.date}" onchange="saveData()"></td>
-                <td>${data.day}</td>
-                <td><input type="text" name="contest" placeholder="2890" value="${data.contest}" onchange="saveData()"></td>
-                <td>${data.sequence}</td>
-                <td class="numbers">${data.numbers}</td>
-                <td><input type="number" name="investment" step="0.01" value="${data.investment}" onchange="saveData()"></td>
-                <td><span class="${statusClass}">${data.status}</span></td>
-                <td><input type="text" name="result" placeholder="XX-XX-XX-XX-XX-XX" value="${data.result}" onchange="checkResult(this); saveData()"></td>
-                <td><input type="number" name="prize" step="0.01" placeholder="0.00" value="${data.prize}" onchange="saveData()"></td>
-                <td>
-                    <select name="hits" onchange="saveData()">
-                        <option value="">-</option>
-                        <option value="0" ${data.hits === '0' ? 'selected' : ''}>0</option>
-                        <option value="1" ${data.hits === '1' ? 'selected' : ''}>1</option>
-                        <option value="2" ${data.hits === '2' ? 'selected' : ''}>2</option>
-                        <option value="3" ${data.hits === '3' ? 'selected' : ''}>3</option>
-                        <option value="4" ${data.hits === '4' ? 'selected' : ''}>4 (Quadra)</option>
-                        <option value="5" ${data.hits === '5' ? 'selected' : ''}>5 (Quina)</option>
-                        <option value="6" ${data.hits === '6' ? 'selected' : ''}>6 (SENA!)</option>
-                    </select>
-                </td>
-                <td><input type="text" name="notes" placeholder="Observações" value="${data.notes}" onchange="saveData()"></td>
-            `;
-            
-            return row;
-        }
-        
-        // Carregar dados iniciais
-        function loadInitialData() {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            updateStats();
-        }
-        
-        // Abrir modal
-        function openModal() {
-            const modal = document.getElementById('sequenceModal');
-            modal.style.display = 'block';
-            
-            // Gerar sugestão da IA
-            generateAISuggestion();
-            
-            // Mostrar opções de sequências
-            displaySequenceOptions();
-        }
-        
-        // Fechar modal
-        function closeModal() {
-            const modal = document.getElementById('sequenceModal');
-            modal.style.display = 'none';
-            selectedSequence = null;
-        }
-        
-        // Gerar sugestão da IA
-        function generateAISuggestion() {
-            const aiDiv = document.getElementById('aiSuggestion');
-            const dayNames = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
-            const today = new Date();
-            const dayName = dayNames[today.getDay()];
-            const currentJackpot = parseInt(document.getElementById('currentJackpot').textContent.replace(/\D/g, ''));
-            
-            let suggestion = '';
-            let recommendedSequence = '';
-            
-            // Análise baseada no dia
-            if (dayName === 'SÁB') {
-                recommendedSequence = 'ALPHA';
-                suggestion = '🤖 IA RECOMENDA: ALPHA - Sábados historicamente favorecem números de alta frequência.';
-            } else if (dayName === 'TER') {
-                recommendedSequence = 'BETA';
-                suggestion = '🤖 IA RECOMENDA: BETA - Terças têm melhor desempenho com equilíbrio par/ímpar.';
-            } else if (dayName === 'QUI') {
-                recommendedSequence = 'GAMMA';
-                suggestion = '🤖 IA RECOMENDA: GAMMA - Quintas respondem bem aos padrões emergentes.';
-            } else {
-                recommendedSequence = 'DELTA';
-                suggestion = '🤖 IA RECOMENDA: DELTA - Dias alternativos favorecem múltiplos de 7.';
-            }
-            
-            // Verificar se é hora do OMEGA
-            if (currentJackpot >= 150000000) {
-                const omegaUsed = localStorage.getItem(OMEGA_USED_KEY);
-                const lastUsed = omegaUsed ? new Date(omegaUsed) : null;
-                const oneYearAgo = new Date();
-                oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-                
-                if (!lastUsed || lastUsed < oneYearAgo) {
-                    suggestion = '🚨 ALERTA OMEGA! Prêmio acima de R$ 150M detectado! Considere usar a sequência OMEGA!';
-                }
-            }
-            
-            aiDiv.innerHTML = suggestion;
-        }
-        
-        // Mostrar opções de sequências
-        function displaySequenceOptions() {
-            const optionsDiv = document.getElementById('sequenceOptions');
-            optionsDiv.innerHTML = '';
-            
-            Object.entries(sequences).forEach(([key, data]) => {
-                const option = document.createElement('div');
-                option.className = 'sequence-option';
-                if (data.special) option.className += ' omega';
-                
-                // Verificar se OMEGA pode ser usado
-                let disabled = false;
-                if (key === 'OMEGA') {
-                    const omegaUsed = localStorage.getItem(OMEGA_USED_KEY);
-                    if (omegaUsed) {
-                        const lastUsed = new Date(omegaUsed);
-                        const oneYearAgo = new Date();
-                        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-                        
-                        if (lastUsed > oneYearAgo) {
-                            disabled = true;
-                            const nextAvailable = new Date(lastUsed);
-                            nextAvailable.setFullYear(nextAvailable.getFullYear() + 1);
-                            option.style.opacity = '0.5';
-                            option.style.cursor = 'not-allowed';
-                        }
-                    }
-                }
-                
-                option.innerHTML = `
-                    <strong>${key}</strong> - ${data.description}<br>
-                    <span class="numbers">${data.numbers}</span>
-                    ${disabled ? '<br><small style="color: red;">Disponível em ' + new Date(localStorage.getItem(OMEGA_USED_KEY)).toLocaleDateString('pt-BR') + '</small>' : ''}
-                `;
-                
-                if (!disabled) {
-                    option.onclick = () => selectSequence(key);
-                }
-                
-                optionsDiv.appendChild(option);
-            });
-        }
-        
-        // Selecionar sequência
-        function selectSequence(key) {
-            selectedSequence = key;
-            
-            // Remover seleção anterior
-            document.querySelectorAll('.sequence-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            // Adicionar seleção atual
-            event.target.closest('.sequence-option').classList.add('selected');
-        }
-        
-        // Confirmar seleção
-        function confirmSelection() {
-            if (!selectedSequence) {
-                alert('Por favor, selecione uma sequência!');
-                return;
-            }
-            
-            // Se for OMEGA, marcar como usado
-            if (selectedSequence === 'OMEGA') {
-                localStorage.setItem(OMEGA_USED_KEY, new Date().toISOString());
-            }
-            
-            // Adicionar novo jogo
-            addNewGame(selectedSequence);
-            
-            // Fechar modal
-            closeModal();
-        }
-        
-        // Adicionar novo jogo
-        function addNewGame(sequenceKey) {
-            const tbody = document.getElementById('tableBody');
-            
-            // Se for a primeira linha, adicionar separador de semana
-            if (tbody.children.length === 0) {
-                const weekSeparator = document.createElement('tr');
-                weekSeparator.className = 'week-separator';
-                weekSeparator.innerHTML = `<td colspan="11">⚡ SEMANA 1 • INICIANDO JORNADA MILHONÁRIA</td>`;
-                tbody.appendChild(weekSeparator);
-            }
-            
-            const today = new Date();
-            const dateStr = today.toISOString().split('T')[0];
-            const dayNames = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
-            const dayName = dayNames[today.getDay()];
-            
-            const sequenceData = sequences[sequenceKey];
-            
-            const newRow = createRow({
-                date: dateStr,
-                day: dayName,
-                contest: '',
-                sequence: sequenceKey,
-                numbers: sequenceData.numbers,
-                investment: '6.00',
-                status: 'AGUARDANDO',
-                result: '',
-                prize: '',
-                hits: '',
-                notes: sequenceData.description
-            });
-            
-            tbody.appendChild(newRow);
-            saveData();
-            
-            // Efeito visual
-            newRow.style.animation = 'glow-in 0.5s ease';
-        }
-        
-        // Verificar resultado
-        function checkResult(input) {
-            const row = input.closest('tr');
-            const numbers = row.cells[4].textContent.split('-');
-            const result = input.value.split('-');
-            
-            if (result.length >= 6 && result[0] !== 'XX') {
-                let hits = 0;
-                numbers.forEach(num => {
-                    if (result.includes(num.trim())) hits++;
-                });
-                
-                const hitsSelect = row.querySelector('select[name="hits"]');
-                hitsSelect.value = hits.toString();
-                
-                const statusSpan = row.cells[6].querySelector('span');
-                if (hits >= 4) {
-                    statusSpan.className = 'status-win';
-                    statusSpan.textContent = 'GANHO';
-                    
-                    // Estimar prêmio
-                    const prizeInput = row.querySelector('input[name="prize"]');
-                    if (hits === 4) prizeInput.value = '1000.00';
-                    else if (hits === 5) prizeInput.value = '50000.00';
-                    else if (hits === 6) prizeInput.value = '30000000.00';
-                } else {
-                    statusSpan.className = 'status-loss';
-                    statusSpan.textContent = 'PERDEU';
-                }
-            }
-        }
-        
-        // Matrix Rain Effect
-        function createMatrixRain() {
-            const matrixBg = document.getElementById('matrixBg');
-            const columns = Math.floor(window.innerWidth / 20);
-            
-            for (let i = 0; i < columns; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = i * 20 + 'px';
-                column.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                column.style.animationDelay = Math.random() * 5 + 's';
-                
-                const chars = '0123456789';
-                let text = '';
-                for (let j = 0; j < 50; j++) {
-                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
-                }
-                column.innerHTML = text;
-                
-                matrixBg.appendChild(column);
-            }
-        }
-        
-        // Update Stats
-        function updateStats() {
-            const rows = document.querySelectorAll('#tableBody tr:not(.week-separator)');
-            let totalInvested = 0;
-            let totalWon = 0;
-            let totalGames = 0;
-            
-            rows.forEach(row => {
-                const investmentInput = row.querySelector('input[name="investment"]');
-                const prizeInput = row.querySelector('input[name="prize"]');
-                
-                if (investmentInput && investmentInput.value) {
-                    totalInvested += parseFloat(investmentInput.value);
-                    totalGames++;
-                }
-                
-                if (prizeInput && prizeInput.value) {
-                    totalWon += parseFloat(prizeInput.value);
-                }
-            });
-            
-            const roi = totalInvested > 0 ? ((totalWon - totalInvested) / totalInvested * 100).toFixed(2) : 0;
-            
-            document.getElementById('totalInvested').textContent = `R$ ${totalInvested.toFixed(2)}`;
-            document.getElementById('totalWon').textContent = `R$ ${totalWon.toFixed(2)}`;
-            document.getElementById('totalGames').textContent = totalGames;
-            
-            const roiElement = document.getElementById('roi');
-            roiElement.textContent = `${roi}%`;
-            roiElement.parentElement.classList.toggle('negative', roi < 0);
-        }
-        
-        // Sincronizar dados
-        function syncData() {
-            const btn = event.target;
-            btn.textContent = '⏳ SINCRONIZANDO...';
-            
-            setTimeout(() => {
-                saveData();
-                btn.textContent = '✅ SINCRONIZADO!';
-                setTimeout(() => {
-                    btn.textContent = '🔄 SINCRONIZAR DADOS';
-                }, 2000);
-            }, 1000);
-        }
-        
-        // Limpar todos os dados
-        function clearAllData() {
-            if (confirm('⚠️ Tem certeza que deseja limpar TODOS os dados?\n\nIsso não pode ser desfeito!')) {
-                localStorage.removeItem(STORAGE_KEY);
-                localStorage.removeItem(OMEGA_USED_KEY);
-                document.getElementById('tableBody').innerHTML = '';
-                updateStats();
-                alert('✅ Dados limpos com sucesso! Sistema zerado.');
-            }
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createMatrixRain();
-            loadData();
-            
-            // Animações iniciais
-            document.querySelectorAll('.stat-card').forEach((card, index) => {
-                card.style.animation = `fade-in 0.5s ease ${index * 0.1}s forwards`;
-                card.style.opacity = '0';
-            });
-            
-            // Atualizar jackpot estimado
-            updateJackpotDisplay();
-            
-            // Adicionar click nos cards de sequência
-            document.querySelectorAll('.pattern-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const sequence = this.dataset.sequence;
-                    if (sequence) {
-                        selectedSequence = sequence;
-                        openModal();
-                        selectSequence(sequence);
-                    }
-                });
-            });
-        });
-        
-        // Atualizar display do jackpot
-        function updateJackpotDisplay() {
-            // Jackpot atual: R$ 25 milhões
-            const currentJackpot = 25000000;
-            
-            document.getElementById('currentJackpot').textContent = 
-                `R$ ${currentJackpot.toLocaleString('pt-BR')}`;
-        }
-        
-        // Fechar modal ao clicar fora
-        window.onclick = function(event) {
-            const modal = document.getElementById('sequenceModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-        
-        // CSS Animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fade-in {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes glow-in {
-                from { 
-                    background: rgba(32, 152, 105, 0.3);
-                    box-shadow: 0 0 30px rgba(32, 152, 105, 0.5);
-                }
-                to { 
-                    background: transparent;
-                    box-shadow: none;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💸</span>
+                        <span>Total Investido</span>
+                    </div>
