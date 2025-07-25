@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MATRIX LOTERIAS - Sistema de Manifestação Milhonária</title>
+    <title>MATRIX LOTTERY ULTIMATE - Sistema Completo de Manifestação</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
         
         * {
             margin: 0;
@@ -27,6 +27,7 @@
             --accent-warning: #ffaa00;
             --accent-info: #0095ff;
             --gold: #ffd700;
+            --matrix-green: #00ff41;
         }
         
         body {
@@ -37,11 +38,39 @@
             line-height: 1.6;
         }
         
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .matrix-column {
+            position: absolute;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: var(--matrix-green);
+            animation: matrix-fall linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
         /* Header */
@@ -53,17 +82,19 @@
         }
         
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 3rem;
+            font-weight: 900;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--green-mega) 0%, var(--purple-loto) 100%);
+            background: linear-gradient(135deg, var(--green-mega) 0%, var(--purple-loto) 50%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
         
         .header p {
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         /* Navigation */
@@ -74,10 +105,12 @@
             background: var(--bg-card);
             padding: 8px;
             border-radius: 12px;
+            flex-wrap: wrap;
         }
         
         .nav-tab {
             flex: 1;
+            min-width: 150px;
             padding: 12px 24px;
             background: transparent;
             border: none;
@@ -100,18 +133,7 @@
         .nav-tab.active {
             background: var(--bg-secondary);
             color: var(--text-primary);
-        }
-        
-        .nav-tab.mega.active {
-            background: rgba(0, 184, 148, 0.1);
-            color: var(--green-mega);
-            border: 1px solid rgba(0, 184, 148, 0.3);
-        }
-        
-        .nav-tab.loto.active {
-            background: rgba(162, 155, 254, 0.1);
-            color: var(--purple-loto);
-            border: 1px solid rgba(162, 155, 254, 0.3);
+            border: 1px solid var(--accent-info);
         }
         
         /* Content Sections */
@@ -129,99 +151,352 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Alert Box */
-        .alert {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        
-        .alert-icon {
-            font-size: 2rem;
-        }
-        
-        .alert-content h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-        }
-        
-        .alert-content p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-        
-        .alert.mega {
-            border-color: rgba(0, 184, 148, 0.3);
-            background: rgba(0, 184, 148, 0.05);
-        }
-        
-        .alert.loto {
-            border-color: rgba(162, 155, 254, 0.3);
-            background: rgba(162, 155, 254, 0.05);
-        }
-        
-        /* Jackpot Display */
-        .jackpot-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        /* Critical Alert */
+        .critical-alert {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 56, 56, 0.2));
+            border: 2px solid var(--gold);
             border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 30px;
+            padding: 30px;
+            margin-bottom: 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .jackpot-card.mega {
-            border-color: rgba(0, 184, 148, 0.3);
-            background: linear-gradient(135deg, var(--bg-card), rgba(0, 184, 148, 0.05));
+        .critical-alert:before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
         }
         
-        .jackpot-card.loto {
-            border-color: rgba(162, 155, 254, 0.3);
-            background: linear-gradient(135deg, var(--bg-card), rgba(162, 155, 254, 0.05));
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
         }
         
-        .jackpot-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+        .critical-content {
+            position: relative;
+            z-index: 1;
         }
         
-        .jackpot-value {
-            font-size: 3rem;
+        .critical-title {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 8px;
-            cursor: pointer;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        .critical-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .critical-date-card {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 20px;
             transition: all 0.3s ease;
         }
         
-        .jackpot-value:hover {
-            opacity: 0.8;
-            transform: scale(1.02);
+        .critical-date-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
         }
         
-        .jackpot-card.mega .jackpot-value {
-            color: var(--green-mega);
+        .date-big {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 10px;
         }
         
-        .jackpot-card.loto .jackpot-value {
-            color: var(--purple-loto);
+        .date-reason {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 10px;
         }
         
-        .jackpot-info {
+        .date-strategy {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
-        /* Stats Grid */
+        /* Budget Alert */
+        .budget-alert {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-danger);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .budget-icon {
+            font-size: 2.5rem;
+        }
+        
+        .budget-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--accent-danger);
+        }
+        
+        .budget-table {
+            margin-top: 15px;
+        }
+        
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Calendar Section */
+        .calendar-section {
+            margin-bottom: 40px;
+        }
+        
+        .month-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .month-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .month-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        
+        .month-july { color: var(--accent-warning); }
+        .month-august { color: var(--accent-success); }
+        .month-september { color: var(--gold); }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .weekday {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            padding: 5px;
+            font-weight: 600;
+        }
+        
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        
+        .day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+        }
+        
+        .day:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+        
+        .day.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+        }
+        
+        .day.empty:hover {
+            transform: none;
+        }
+        
+        .day.must-play {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 56, 56, 0.3) 100%);
+            border: 2px solid var(--gold);
+            animation: pulse 2s infinite;
+        }
+        
+        .day.high-priority {
+            background: rgba(0, 184, 148, 0.3);
+            border: 2px solid var(--green-mega);
+        }
+        
+        .day.medium-priority {
+            background: rgba(162, 155, 254, 0.3);
+            border: 2px solid var(--purple-loto);
+        }
+        
+        .day.low-priority {
+            opacity: 0.6;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(255, 215, 0, 0.3); }
+        }
+        
+        .day-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .day-info {
+            font-size: 0.6rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .day-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-card);
+            border: 2px solid var(--accent-info);
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .day:hover .day-tooltip {
+            display: block;
+        }
+        
+        /* Legend */
+        .legend-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .legend-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--gold);
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .legend-category {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .legend-category-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .legend-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        
+        .legend-must-play {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 56, 56, 0.3) 100%);
+            border-color: var(--gold);
+        }
+        
+        .legend-high {
+            background: rgba(0, 184, 148, 0.3);
+            border-color: var(--green-mega);
+        }
+        
+        .legend-medium {
+            background: rgba(162, 155, 254, 0.3);
+            border-color: var(--purple-loto);
+        }
+        
+        .legend-low {
+            background: var(--bg-secondary);
+            opacity: 0.6;
+        }
+        
+        .legend-text {
+            flex: 1;
+        }
+        
+        .legend-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .legend-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Stats Section */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -399,107 +674,63 @@
             background: rgba(255, 255, 255, 0.02);
         }
         
-        .table-numbers {
-            font-family: 'Courier New', monospace;
-            font-weight: 600;
-            font-size: 0.95rem;
+        /* Weekly Strategy */
+        .weekly-strategy {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
         }
         
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        .status-pending {
-            background: rgba(255, 170, 0, 0.1);
-            color: var(--accent-warning);
-        }
-        
-        .status-win {
-            background: rgba(0, 214, 143, 0.1);
-            color: var(--accent-success);
-        }
-        
-        .status-loss {
-            background: rgba(255, 56, 56, 0.1);
-            color: var(--accent-danger);
-        }
-        
-        /* Form Inputs */
-        input[type="text"],
-        input[type="number"],
-        input[type="date"],
-        select {
+        .week-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px 14px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            width: 100%;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--accent-info);
-            box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.1);
+        .week-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--accent-info);
         }
         
-        /* Buttons */
-        .button {
-            background: var(--accent-info);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+        .week-days {
+            display: grid;
+            gap: 10px;
         }
         
-        .button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 149, 255, 0.3);
-        }
-        
-        .button.mega {
-            background: var(--green-mega);
-        }
-        
-        .button.mega:hover {
-            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
-        }
-        
-        .button.loto {
-            background: var(--purple-loto);
-        }
-        
-        .button.loto:hover {
-            box-shadow: 0 4px 12px rgba(162, 155, 254, 0.3);
-        }
-        
-        .button.danger {
-            background: var(--accent-danger);
-        }
-        
-        .button.danger:hover {
-            box-shadow: 0 4px 12px rgba(255, 56, 56, 0.3);
-        }
-        
-        .button-group {
+        .week-day {
             display: flex;
-            gap: 12px;
-            margin-top: 30px;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .week-day.must {
+            border-color: var(--gold);
+            background: rgba(255, 215, 0, 0.05);
+        }
+        
+        .week-day-date {
+            font-weight: 600;
+            min-width: 100px;
+        }
+        
+        .week-day-info {
+            flex: 1;
+            color: var(--text-secondary);
+        }
+        
+        .week-day-value {
+            font-weight: 700;
+            color: var(--accent-success);
         }
         
         /* Modal */
@@ -545,144 +776,40 @@
             }
         }
         
-        .modal-header {
-            margin-bottom: 24px;
-        }
-        
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .modal-subtitle {
-            color: var(--text-secondary);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: none;
+        /* Buttons */
+        .button {
+            background: var(--accent-info);
+            color: white;
             border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            padding: 4px;
-            line-height: 1;
-            transition: color 0.3s ease;
-        }
-        
-        .modal-close:hover {
-            color: var(--text-primary);
-        }
-        
-        .ai-suggestion {
-            background: linear-gradient(135deg, rgba(0, 149, 255, 0.1), rgba(162, 155, 254, 0.1));
-            border: 1px solid rgba(0, 149, 255, 0.3);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-        
-        .ai-suggestion-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
+            transition: all 0.3s ease;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
         
-        .ai-suggestion-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 149, 255, 0.3);
         }
         
-        .sequence-options {
-            display: grid;
+        .button.mega {
+            background: var(--green-mega);
+        }
+        
+        .button.loto {
+            background: var(--purple-loto);
+        }
+        
+        .button-group {
+            display: flex;
             gap: 12px;
-            margin-bottom: 24px;
-        }
-        
-        .sequence-option {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .sequence-option:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .sequence-option.selected {
-            border-color: var(--accent-info);
-            background: rgba(0, 149, 255, 0.05);
-        }
-        
-        .sequence-option-header {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .sequence-option-numbers {
-            font-family: 'Courier New', monospace;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        
-        .sequence-option-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-        
-        .empty-state-icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-        
-        .empty-state-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        
-        .empty-state-text {
-            font-size: 0.95rem;
-            margin-bottom: 24px;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 80px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-        
-        .footer-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        
-        .footer-text {
-            font-size: 0.9rem;
-            line-height: 1.8;
-            font-family: 'Courier New', monospace;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
         
         /* Responsive */
@@ -695,8 +822,12 @@
                 font-size: 2rem;
             }
             
-            .jackpot-value {
-                font-size: 2.5rem;
+            .critical-dates {
+                grid-template-columns: 1fr;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
             }
             
             .stats-grid {
@@ -707,416 +838,1119 @@
                 grid-template-columns: 1fr;
             }
             
-            .button-group {
-                flex-direction: column;
+            .days-grid {
+                gap: 2px;
             }
             
-            .button {
-                width: 100%;
-                justify-content: center;
+            .day {
+                font-size: 0.8rem;
             }
             
-            table {
-                font-size: 0.85rem;
+            .day-info {
+                font-size: 0.5rem;
             }
-            
-            th, td {
-                padding: 12px 8px;
-            }
-            
-            .table-numbers {
-                font-size: 0.85rem;
-            }
-        }
-        
-        .week-separator {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            font-weight: 600;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        
-        .result-input {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        
-        .result-input input {
-            width: 40px;
-            padding: 6px;
-            text-align: center;
-        }
-        
-        .result-input button {
-            background: var(--accent-success);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-        
-        .result-input button:hover {
-            opacity: 0.9;
         }
     </style>
 </head>
 <body>
+    <div class="matrix-bg" id="matrix-bg"></div>
+    
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>MATRIX LOTERIAS</h1>
-            <p>Sistema Inteligente de Manifestação Milhonária</p>
+            <h1>MATRIX LOTTERY ULTIMATE</h1>
+            <p>Sistema Completo de Manifestação Milhonária</p>
         </div>
         
         <!-- Navigation -->
         <div class="nav-tabs">
-            <button class="nav-tab mega active" onclick="switchTab('mega')">
-                💰 MEGA-SENA
+            <button class="nav-tab active" onclick="switchTab('dashboard')">
+                🎯 Dashboard
             </button>
-            <button class="nav-tab loto" onclick="switchTab('loto')">
-                💎 LOTOFÁCIL
+            <button class="nav-tab" onclick="switchTab('calendar')">
+                📅 Calendário
+            </button>
+            <button class="nav-tab" onclick="switchTab('strategy')">
+                💡 Estratégia
+            </button>
+            <button class="nav-tab" onclick="switchTab('tracker')">
+                📊 Rastreador
             </button>
         </div>
         
-        <!-- MEGA-SENA Content -->
-        <div id="mega-content" class="content active">
-            <!-- Alert -->
-            <div class="alert mega">
-                <div class="alert-icon">⚠️</div>
-                <div class="alert-content">
-                    <h3>Estratégia Inteligente</h3>
-                    <p>Recomendamos jogar na Mega-Sena apenas quando o prêmio estiver acima de R$ 30 milhões para maximizar o ROI.</p>
+        <!-- Dashboard Content -->
+        <div id="dashboard-content" class="content active">
+            <!-- Critical Alert -->
+            <div class="critical-alert">
+                <div class="critical-content">
+                    <h2 class="critical-title">⚠️ ATENÇÃO: DIAS IMPERDÍVEIS ⚠️</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                        Como você tem budget limitado, foque APENAS nestes dias:
+                    </p>
+                    <div class="critical-dates">
+                        <div class="critical-date-card">
+                            <div class="date-big">23 AGO</div>
+                            <div class="date-reason">🎯 LOTOFÁCIL BREAKTHROUGH</div>
+                            <div class="date-strategy">
+                                Sexta-feira + Fibonacci = Máxima energia<br>
+                                Invista: R$ 30 (10 jogos)<br>
+                                Potencial: R$ 1.700.000
+                            </div>
+                        </div>
+                        <div class="critical-date-card">
+                            <div class="date-big">7 SET</div>
+                            <div class="date-reason">👑 LOTOFÁCIL INDEPENDÊNCIA</div>
+                            <div class="date-strategy">
+                                Prêmio especial R$ 150M+<br>
+                                Invista: R$ 100 (tudo que tiver)<br>
+                                Use sequência SUPREME
+                            </div>
+                        </div>
+                        <div class="critical-date-card">
+                            <div class="date-big">14 SET</div>
+                            <div class="date-reason">💰 MEGA-SENA JACKPOT</div>
+                            <div class="date-strategy">
+                                Se acumulada > R$ 100M<br>
+                                Invista: R$ 60 (10 jogos)<br>
+                                Sequência OMEGA liberada!
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Jackpot -->
-            <div class="jackpot-card mega">
-                <div class="jackpot-label">Prêmio Estimado</div>
-                <div class="jackpot-value" id="mega-jackpot" onclick="editJackpot('mega')">R$ 25.000.000</div>
-                <div class="jackpot-info">Concurso 2890 • Sábado, 19 de julho • 20:00h</div>
-                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
-                    🖊️ Clique no valor para editar
+            <!-- Budget Alert -->
+            <div class="budget-alert">
+                <div class="budget-icon">💸</div>
+                <div class="budget-content">
+                    <h3>Estratégia para Budget Limitado</h3>
+                    <p>Com pouco dinheiro, você precisa ser CIRÚRGICO. Aqui está o plano:</p>
+                    <div class="budget-table">
+                        <div class="budget-row">
+                            <span>✅ PRIORIDADE MÁXIMA:</span>
+                            <span>Dias dourados (23/8, 7/9, 14/9)</span>
+                        </div>
+                        <div class="budget-row">
+                            <span>⚠️ PRIORIDADE ALTA:</span>
+                            <span>Sextas (Lotofácil) + Sábados com Mega > R$ 50M</span>
+                        </div>
+                        <div class="budget-row">
+                            <span>💡 PRIORIDADE MÉDIA:</span>
+                            <span>Terças e Quintas se sobrar dinheiro</span>
+                        </div>
+                        <div class="budget-row">
+                            <span>❌ PULAR:</span>
+                            <span>Mega-Sena < R$ 30M, dias sem energia especial</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Stats -->
+            <!-- Current Stats -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">
                         <span>💸</span>
                         <span>Total Investido</span>
                     </div>
-                    <div class="stat-value" id="mega-invested">R$ 0,00</div>
+                    <div class="stat-value" id="total-invested">R$ 0,00</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">
                         <span>🏆</span>
                         <span>Total Ganho</span>
                     </div>
-                    <div class="stat-value" id="mega-won">R$ 0,00</div>
+                    <div class="stat-value" id="total-won">R$ 0,00</div>
                 </div>
-                <div class="stat-card" id="mega-roi-card">
+                <div class="stat-card" id="roi-card">
                     <div class="stat-label">
                         <span>📈</span>
                         <span>Retorno (ROI)</span>
                     </div>
-                    <div class="stat-value" id="mega-roi">0%</div>
+                    <div class="stat-value" id="roi">0%</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">
-                        <span>🎲</span>
-                        <span>Jogos Realizados</span>
+                        <span>🎯</span>
+                        <span>Próximo Jogo Crítico</span>
                     </div>
-                    <div class="stat-value" id="mega-games">0</div>
+                    <div class="stat-value" id="next-critical">23 AGO</div>
                 </div>
             </div>
             
-            <!-- Sequences -->
+            <!-- Jackpot Display -->
+            <div class="stats-grid" style="margin-top: 30px;">
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💰</span>
+                        <span>Mega-Sena Atual</span>
+                    </div>
+                    <div class="stat-value" style="color: var(--green-mega);" id="mega-jackpot" onclick="editJackpot('mega')">R$ 25.000.000</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 5px;">
+                        🖊️ Clique para editar
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💎</span>
+                        <span>Lotofácil Atual</span>
+                    </div>
+                    <div class="stat-value" style="color: var(--purple-loto);" id="loto-jackpot" onclick="editJackpot('loto')">R$ 1.700.000</div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 5px;">
+                        🖊️ Clique para editar
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calendar Content -->
+        <div id="calendar-content" class="content">
+            <!-- Legend First -->
+            <div class="legend-section">
+                <h2 class="legend-title">📖 ENTENDA AS PRIORIDADES</h2>
+                <div class="legend-grid">
+                    <div class="legend-category">
+                        <h3 class="legend-category-title">
+                            <span>🔥</span>
+                            <span>Níveis de Prioridade</span>
+                        </h3>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-color legend-must-play"></div>
+                                <div class="legend-text">
+                                    <span class="legend-label">IMPERDÍVEL (Dourado Pulsante)</span>
+                                    <span class="legend-desc">NÃO PODE FALTAR! Dias com máxima probabilidade. Guarde dinheiro para estes.</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-high"></div>
+                                <div class="legend-text">
+                                    <span class="legend-label">ALTA PRIORIDADE (Verde)</span>
+                                    <span class="legend-desc">Jogue se tiver dinheiro. Ótimas chances, especialmente sextas e sábados.</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-medium"></div>
+                                <div class="legend-text">
+                                    <span class="legend-label">MÉDIA PRIORIDADE (Roxo)</span>
+                                    <span class="legend-desc">Jogue se sobrar. Boas chances mas não essenciais.</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-low"></div>
+                                <div class="legend-text">
+                                    <span class="legend-label">BAIXA PRIORIDADE (Cinza)</span>
+                                    <span class="legend-desc">Pode pular. Jogue apenas se estiver sobrando dinheiro.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h3 class="legend-category-title">
+                            <span>🌙</span>
+                            <span>Fases da Lua</span>
+                        </h3>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">🌑 Lua Nova</span>
+                                    <span class="legend-desc">Novos começos. Ótima para iniciar ciclos e plantar intenções.</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">🌓 Lua Crescente</span>
+                                    <span class="legend-desc">Expansão. Energia multiplicadora, aumente apostas.</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">🌕 Lua Cheia</span>
+                                    <span class="legend-desc">Ápice energético. Máxima manifestação, dias poderosos!</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">🌗 Lua Minguante</span>
+                                    <span class="legend-desc">Limpeza. Libere o que não serve, prepare para novo ciclo.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-category">
+                        <h3 class="legend-category-title">
+                            <span>💡</span>
+                            <span>Dicas de Energia</span>
+                        </h3>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">SEXTAS = PODER LOTOFÁCIL</span>
+                                    <span class="legend-desc">Sextas têm energia especial para Lotofácil. Use sempre FIBONACCI!</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">SÁBADOS = MEGA-SENA FORTE</span>
+                                    <span class="legend-desc">Energia coletiva alta. Se Mega > R$ 50M, não perca!</span>
+                                </div>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-text">
+                                    <span class="legend-label">ACUMULADAS = OPORTUNIDADE</span>
+                                    <span class="legend-desc">Quanto mais acumula, mais próximo está seu prêmio.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- July Calendar -->
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name month-july">JULHO 2025</div>
+                    <div>Fase de Aquecimento - Comece devagar</div>
+                </div>
+                <div class="weekdays">
+                    <div class="weekday">DOM</div>
+                    <div class="weekday">SEG</div>
+                    <div class="weekday">TER</div>
+                    <div class="weekday">QUA</div>
+                    <div class="weekday">QUI</div>
+                    <div class="weekday">SEX</div>
+                    <div class="weekday">SÁB</div>
+                </div>
+                <div class="days-grid">
+                    <!-- Empty days -->
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <!-- July days start -->
+                    <div class="day low-priority">
+                        <div class="day-number">1</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">2</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">4</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">5</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">6</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">7</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">8</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">10</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">11</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">12</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">13</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">14</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">15</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">16</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">17</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">18</div>
+                        <div class="day-info">Hoje</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">19</div>
+                        <div class="day-info">Mega R$6</div>
+                        <div class="day-tooltip">
+                            <strong>Sábado - Mega-Sena</strong><br>
+                            Se tiver R$ 6, jogue 1 ALPHA<br>
+                            Senão, guarde para sexta 25
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">20</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">21</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">22</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">23</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">24</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">25</div>
+                        <div class="day-info">SEX LOTO!</div>
+                        <div class="day-tooltip">
+                            <strong>🔥 SEXTA FIBONACCI!</strong><br>
+                            Invista R$ 6-9 (2-3 jogos)<br>
+                            Energia máxima Lotofácil!
+                        </div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">26</div>
+                        <div class="day-info">Sáb M+L</div>
+                        <div class="day-tooltip">
+                            <strong>Sábado Duplo</strong><br>
+                            Se Mega > R$ 30M, jogue<br>
+                            Senão, só Lotofácil
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">27</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">28</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">29</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">30</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">31</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- August Calendar -->
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name month-august">AGOSTO 2025</div>
+                    <div>Fase de Alinhamento - Energia crescente!</div>
+                </div>
+                <div class="weekdays">
+                    <div class="weekday">DOM</div>
+                    <div class="weekday">SEG</div>
+                    <div class="weekday">TER</div>
+                    <div class="weekday">QUA</div>
+                    <div class="weekday">QUI</div>
+                    <div class="weekday">SEX</div>
+                    <div class="weekday">SÁB</div>
+                </div>
+                <div class="days-grid">
+                    <!-- Empty days -->
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <div class="day empty"></div>
+                    <!-- August days -->
+                    <div class="day high-priority">
+                        <div class="day-number">1</div>
+                        <div class="day-info">SEX LOTO!</div>
+                        <div class="day-tooltip">
+                            <strong>🔥 Sexta Power!</strong><br>
+                            Fibonacci R$ 9 (3 jogos)<br>
+                            Agosto começa forte!
+                        </div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">2</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">4</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">5</div>
+                        <div class="day-info">🌑 LUA NOVA</div>
+                        <div class="day-tooltip">
+                            <strong>🌑 LUA NOVA + TERÇA</strong><br>
+                            Plante intenções!<br>
+                            Mega + Loto = R$ 15<br>
+                            Novos começos!
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">6</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">7</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">8</div>
+                        <div class="day-info">SEX LOTO!</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">9</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">10</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">11</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">12</div>
+                        <div class="day-info">🌓 CRESCENTE</div>
+                        <div class="day-tooltip">
+                            <strong>🌓 Lua Crescente</strong><br>
+                            Energia multiplicadora!<br>
+                            Invista R$ 15-20
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">13</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">14</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">15</div>
+                        <div class="day-info">SEX LOTO!</div>
+                        <div class="day-tooltip">
+                            <strong>Sexta pré-23</strong><br>
+                            Aquecimento!<br>
+                            R$ 9 Fibonacci
+                        </div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">16</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">17</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">18</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">19</div>
+                        <div class="day-info">🌕 CHEIA!</div>
+                        <div class="day-tooltip">
+                            <strong>🌕 LUA CHEIA!</strong><br>
+                            Máxima energia!<br>
+                            Invista R$ 20+
+                        </div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">20</div>
+                        <div class="day-info">Loto R$6</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">21</div>
+                        <div class="day-info">M+L R$15</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">22</div>
+                        <div class="day-info">VÉSPERA!</div>
+                        <div class="day-tooltip">
+                            <strong>SEXTA VÉSPERA!</strong><br>
+                            Prepare-se!<br>
+                            R$ 15 Fibonacci
+                        </div>
+                    </div>
+                    <div class="day must-play">
+                        <div class="day-number">23</div>
+                        <div class="day-info">🎯 BREAKTHROUGH!</div>
+                        <div class="day-tooltip">
+                            <strong>🎯💎 DIA DO BREAKTHROUGH!</strong><br>
+                            LOTOFÁCIL POWER!<br>
+                            10 jogos FIBONACCI = R$ 30<br>
+                            NÃO PODE FALTAR!
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">24</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">25</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">26</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">27</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">28</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">29</div>
+                        <div class="day-info">SEX LOTO!</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">30</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">31</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- September Calendar -->
+            <div class="month-card">
+                <div class="month-header">
+                    <div class="month-name month-september">SETEMBRO 2025</div>
+                    <div>Fase de Manifestação - OS MILHÕES CHEGAM!</div>
+                </div>
+                <div class="weekdays">
+                    <div class="weekday">DOM</div>
+                    <div class="weekday">SEG</div>
+                    <div class="weekday">TER</div>
+                    <div class="weekday">QUA</div>
+                    <div class="weekday">QUI</div>
+                    <div class="weekday">SEX</div>
+                    <div class="weekday">SÁB</div>
+                </div>
+                <div class="days-grid">
+                    <div class="day low-priority">
+                        <div class="day-number">1</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">2</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">3</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">4</div>
+                        <div class="day-info">🌑 NOVA!</div>
+                        <div class="day-tooltip">
+                            <strong>🌑 Lua Nova + Quinta</strong><br>
+                            Plante para Independência!<br>
+                            R$ 15 total
+                        </div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">5</div>
+                        <div class="day-info">SEX PRÉ-7!</div>
+                        <div class="day-tooltip">
+                            <strong>Sexta pré-Independência</strong><br>
+                            Fibonacci R$ 15<br>
+                            Prepare a energia!
+                        </div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">6</div>
+                        <div class="day-info">VÉSPERA!</div>
+                        <div class="day-tooltip">
+                            <strong>Sábado Véspera!</strong><br>
+                            Se tiver, jogue R$ 20<br>
+                            Senão, guarde pro dia 7
+                        </div>
+                    </div>
+                    <div class="day must-play">
+                        <div class="day-number">7</div>
+                        <div class="day-info">👑 INDEPENDÊNCIA!</div>
+                        <div class="day-tooltip">
+                            <strong>👑🏆 LOTOFÁCIL DA INDEPENDÊNCIA!</strong><br>
+                            R$ 150 MILHÕES!!!<br>
+                            ALL-IN: R$ 100 (tudo que tiver)<br>
+                            SUPREME 33 jogos!<br>
+                            NÃO PODE FALTAR!!!
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">8</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">9</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">10</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">11</div>
+                        <div class="day-info">🌓 CRESCE!</div>
+                        <div class="day-tooltip">
+                            <strong>🌓 Crescente pré-14</strong><br>
+                            Multiplique energia!<br>
+                            R$ 15-20
+                        </div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">12</div>
+                        <div class="day-info">SEX PRÉ-14!</div>
+                        <div class="day-tooltip">
+                            <strong>Sexta pré-Mega Day</strong><br>
+                            Fibonacci R$ 15<br>
+                            Prepare!
+                        </div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">13</div>
+                        <div class="day-info">VÉSPERA MEGA!</div>
+                        <div class="day-tooltip">
+                            <strong>Sábado Véspera Mega!</strong><br>
+                            Se Mega > R$ 100M<br>
+                            Teste 1 jogo R$ 6
+                        </div>
+                    </div>
+                    <div class="day must-play">
+                        <div class="day-number">14</div>
+                        <div class="day-info">💰 MEGA DAY!</div>
+                        <div class="day-tooltip">
+                            <strong>💰🏆 MEGA-SENA JACKPOT DAY!</strong><br>
+                            Se > R$ 150M: USE OMEGA!<br>
+                            10 jogos = R$ 60<br>
+                            O GRANDE DIA!
+                        </div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">15</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">16</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">17</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">18</div>
+                        <div class="day-info">🌕 CHEIA!</div>
+                        <div class="day-tooltip">
+                            <strong>🌕 Lua Cheia Colheita</strong><br>
+                            Celebre ganhos!<br>
+                            R$ 15-20
+                        </div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">19</div>
+                        <div class="day-info">SEX LOTO!</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">20</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">21</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">22</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">23</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">24</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">25</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                    <div class="day high-priority">
+                        <div class="day-number">26</div>
+                        <div class="day-info">SEX LOTO!</div>
+                    </div>
+                    <div class="day medium-priority">
+                        <div class="day-number">27</div>
+                        <div class="day-info">Sáb M+L</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">28</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">29</div>
+                        <div class="day-info">Loto R$3</div>
+                    </div>
+                    <div class="day low-priority">
+                        <div class="day-number">30</div>
+                        <div class="day-info">M+L R$9</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Strategy Content -->
+        <div id="strategy-content" class="content">
+            <!-- Weekly Strategy -->
+            <div class="weekly-strategy">
+                <h2 class="section-title">
+                    <span>💰</span>
+                    <span>Estratégia Semanal para Budget Limitado</span>
+                </h2>
+                
+                <div class="week-card">
+                    <div class="week-header">SEMANA TIPO - BUDGET MÍNIMO (R$ 15-20/semana)</div>
+                    <div class="week-days">
+                        <div class="week-day">
+                            <span class="week-day-date">Segunda</span>
+                            <span class="week-day-info">❌ PULAR - Guarde dinheiro</span>
+                            <span class="week-day-value">R$ 0</span>
+                        </div>
+                        <div class="week-day">
+                            <span class="week-day-date">Terça</span>
+                            <span class="week-day-info">❌ PULAR - Só se Mega > R$ 80M</span>
+                            <span class="week-day-value">R$ 0</span>
+                        </div>
+                        <div class="week-day">
+                            <span class="week-day-date">Quarta</span>
+                            <span class="week-day-info">❌ PULAR - Guarde para sexta</span>
+                            <span class="week-day-value">R$ 0</span>
+                        </div>
+                        <div class="week-day">
+                            <span class="week-day-date">Quinta</span>
+                            <span class="week-day-info">❌ PULAR - Só se acumulada alta</span>
+                            <span class="week-day-value">R$ 0</span>
+                        </div>
+                        <div class="week-day must">
+                            <span class="week-day-date">SEXTA</span>
+                            <span class="week-day-info">✅ LOTOFÁCIL FIBONACCI - 3 jogos</span>
+                            <span class="week-day-value">R$ 9</span>
+                        </div>
+                        <div class="week-day">
+                            <span class="week-day-date">Sábado</span>
+                            <span class="week-day-info">⚠️ Só Mega se > R$ 50M (1 jogo)</span>
+                            <span class="week-day-value">R$ 0-6</span>
+                        </div>
+                        <div class="week-day">
+                            <span class="week-day-date">Domingo</span>
+                            <span class="week-day-info">❌ DESCANSO - Visualize ganhos</span>
+                            <span class="week-day-value">R$ 0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="week-card">
+                    <div class="week-header">ESTRATÉGIA ESPECIAL - DIAS CRÍTICOS</div>
+                    <div class="week-days">
+                        <div class="week-day must">
+                            <span class="week-day-date">23 AGOSTO</span>
+                            <span class="week-day-info">🎯 LOTOFÁCIL BREAKTHROUGH - 10 jogos FIBONACCI</span>
+                            <span class="week-day-value">R$ 30</span>
+                        </div>
+                        <div class="week-day must">
+                            <span class="week-day-date">7 SETEMBRO</span>
+                            <span class="week-day-info">👑 INDEPENDÊNCIA - ALL-IN SUPREME (33+ jogos)</span>
+                            <span class="week-day-value">R$ 100+</span>
+                        </div>
+                        <div class="week-day must">
+                            <span class="week-day-date">14 SETEMBRO</span>
+                            <span class="week-day-info">💰 MEGA JACKPOT - 10 jogos (OMEGA se >R$150M)</span>
+                            <span class="week-day-value">R$ 60</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sequences Section -->
             <div class="sequences-section">
                 <h2 class="section-title">
-                    <span>🎯</span>
-                    <span>Sequências Estratégicas</span>
+                    <span>🎲</span>
+                    <span>Sequências Numéricas</span>
                 </h2>
+                
+                <!-- Mega-Sena Sequences -->
+                <h3 style="color: var(--green-mega); margin-bottom: 20px;">💰 MEGA-SENA (Jogue só com prêmio > R$ 30M)</h3>
                 <div class="sequences-grid">
-                    <div class="sequence-card mega" data-game="mega" data-sequence="ALPHA" onclick="selectSequence('mega', 'ALPHA')">
+                    <div class="sequence-card mega" onclick="copyNumbers('mega', 'ALPHA')">
                         <div class="sequence-header">
                             <span class="sequence-name">⚡ ALPHA</span>
                         </div>
                         <div class="sequence-numbers">05 10 23 33 42 53</div>
-                        <div class="sequence-description">Números de alta frequência histórica</div>
+                        <div class="sequence-description">Números mais sorteados historicamente. Use em sábados comuns.</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="BETA" onclick="selectSequence('mega', 'BETA')">
+                    <div class="sequence-card mega" onclick="copyNumbers('mega', 'BETA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🔮 BETA</span>
                         </div>
                         <div class="sequence-numbers">04 17 27 38 41 54</div>
-                        <div class="sequence-description">Combinação equilibrada par/ímpar</div>
+                        <div class="sequence-description">Equilíbrio perfeito 3 pares + 3 ímpares. Use em terças.</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="GAMMA" onclick="selectSequence('mega', 'GAMMA')">
+                    <div class="sequence-card mega" onclick="copyNumbers('mega', 'GAMMA')">
                         <div class="sequence-header">
                             <span class="sequence-name">💎 GAMMA</span>
                         </div>
                         <div class="sequence-numbers">08 15 29 36 44 51</div>
-                        <div class="sequence-description">Padrão emergente 2025</div>
+                        <div class="sequence-description">Padrão emergente 2025. Use em quintas.</div>
                     </div>
-                    <div class="sequence-card mega" data-game="mega" data-sequence="DELTA" onclick="selectSequence('mega', 'DELTA')">
+                    <div class="sequence-card mega" onclick="copyNumbers('mega', 'DELTA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🌟 DELTA</span>
                         </div>
                         <div class="sequence-numbers">07 14 21 35 42 49</div>
-                        <div class="sequence-description">Múltiplos de 7 + complementos</div>
+                        <div class="sequence-description">Baseada em múltiplos de 7. Use em dias especiais.</div>
                     </div>
-                    <div class="sequence-card mega special" data-game="mega" data-sequence="OMEGA" onclick="selectSequence('mega', 'OMEGA')">
+                    <div class="sequence-card mega special" onclick="copyNumbers('mega', 'OMEGA')">
                         <div class="sequence-header">
                             <span class="sequence-name">🏆 OMEGA</span>
                             <span class="sequence-badge">ESPECIAL</span>
                         </div>
                         <div class="sequence-numbers">04 05 07 08 49 51</div>
-                        <div class="sequence-description">Usar apenas 1x/ano em prêmios acima de R$ 150M</div>
+                        <div class="sequence-description">⚠️ USE APENAS 1X/ANO com prêmios > R$ 150 MILHÕES!</div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Table -->
-            <div class="table-container">
-                <div class="table-header">
-                    <h3 class="table-title">📊 Histórico de Jogos</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Concurso</th>
-                            <th>Sequência</th>
-                            <th>Números</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                            <th>Resultado</th>
-                            <th>Prêmio</th>
-                        </tr>
-                    </thead>
-                    <tbody id="mega-tbody">
-                        <tr>
-                            <td colspan="8">
-                                <div class="empty-state">
-                                    <div class="empty-state-icon">📋</div>
-                                    <div class="empty-state-title">Nenhum jogo registrado</div>
-                                    <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Buttons -->
-            <div class="button-group">
-                <button class="button mega" onclick="openModal('mega')">
-                    <span>➕</span>
-                    <span>Adicionar Jogo</span>
-                </button>
-                <button class="button" onclick="exportData('mega')">
-                    <span>📥</span>
-                    <span>Exportar Dados</span>
-                </button>
-                <button class="button danger" onclick="clearData('mega')">
-                    <span>🗑️</span>
-                    <span>Limpar Dados</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- LOTOFÁCIL Content -->
-        <div id="loto-content" class="content">
-            <!-- Alert -->
-            <div class="alert loto">
-                <div class="alert-icon">💡</div>
-                <div class="alert-content">
-                    <h3>Jogue com Frequência</h3>
-                    <p>A Lotofácil tem odds melhores (1:3.268.760) e sorteios diários. Ideal para construir sua banca!</p>
-                </div>
-            </div>
-            
-            <!-- Jackpot -->
-            <div class="jackpot-card loto">
-                <div class="jackpot-label">Prêmio Estimado</div>
-                <div class="jackpot-value" id="loto-jackpot" onclick="editJackpot('loto')">R$ 1.700.000</div>
-                <div class="jackpot-info">Sorteios de Segunda a Sábado • 20:00h</div>
-                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 8px;">
-                    🖊️ Clique no valor para editar
-                </div>
-            </div>
-            
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">
-                        <span>💸</span>
-                        <span>Total Investido</span>
-                    </div>
-                    <div class="stat-value" id="loto-invested">R$ 0,00</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">
-                        <span>🏆</span>
-                        <span>Total Ganho</span>
-                    </div>
-                    <div class="stat-value" id="loto-won">R$ 0,00</div>
-                </div>
-                <div class="stat-card" id="loto-roi-card">
-                    <div class="stat-label">
-                        <span>📈</span>
-                        <span>Retorno (ROI)</span>
-                    </div>
-                    <div class="stat-value" id="loto-roi">0%</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">
-                        <span>🎲</span>
-                        <span>Jogos Realizados</span>
-                    </div>
-                    <div class="stat-value" id="loto-games">0</div>
-                </div>
-            </div>
-            
-            <!-- Sequences -->
-            <div class="sequences-section">
-                <h2 class="section-title">
-                    <span>🎯</span>
-                    <span>Sequências Estratégicas</span>
-                </h2>
+                
+                <!-- Lotofácil Sequences -->
+                <h3 style="color: var(--purple-loto); margin-top: 40px; margin-bottom: 20px;">💎 LOTOFÁCIL (Foco nas sextas!)</h3>
                 <div class="sequences-grid">
-                    <div class="sequence-card loto" data-game="loto" data-sequence="FIBONACCI" onclick="selectSequence('loto', 'FIBONACCI')">
+                    <div class="sequence-card loto" onclick="copyNumbers('loto', 'FIBONACCI')">
                         <div class="sequence-header">
                             <span class="sequence-name">🔢 FIBONACCI</span>
                         </div>
                         <div class="sequence-numbers">01 02 03 05 08 11 13 14 15 17 19 20 21 23 25</div>
-                        <div class="sequence-description">Sequência matemática natural</div>
+                        <div class="sequence-description">🔥 USE SEMPRE NAS SEXTAS! Sequência matemática poderosa.</div>
                     </div>
-                    <div class="sequence-card loto" data-game="loto" data-sequence="PRIMOS" onclick="selectSequence('loto', 'PRIMOS')">
+                    <div class="sequence-card loto" onclick="copyNumbers('loto', 'PRIMOS')">
                         <div class="sequence-header">
                             <span class="sequence-name">🎯 PRIMOS</span>
                         </div>
                         <div class="sequence-numbers">02 03 05 07 11 13 17 19 23 06 09 12 15 18 21</div>
-                        <div class="sequence-description">Números primos + múltiplos de 3</div>
+                        <div class="sequence-description">Números primos + múltiplos de 3. Use terças e quintas.</div>
                     </div>
-                    <div class="sequence-card loto" data-game="loto" data-sequence="ESTRELA" onclick="selectSequence('loto', 'ESTRELA')">
+                    <div class="sequence-card loto" onclick="copyNumbers('loto', 'ESTRELA')">
                         <div class="sequence-header">
                             <span class="sequence-name">⭐ ESTRELA</span>
                         </div>
                         <div class="sequence-numbers">01 04 07 10 13 16 19 22 25 03 08 12 17 21 24</div>
-                        <div class="sequence-description">Padrão diagonal no volante</div>
+                        <div class="sequence-description">Padrão diagonal no volante. Use em lua cheia.</div>
                     </div>
-                    <div class="sequence-card loto" data-game="loto" data-sequence="MATRIZ" onclick="selectSequence('loto', 'MATRIZ')">
+                    <div class="sequence-card loto" onclick="copyNumbers('loto', 'MATRIZ')">
                         <div class="sequence-header">
                             <span class="sequence-name">💎 MATRIZ</span>
                         </div>
                         <div class="sequence-numbers">01 02 03 04 05 06 10 11 12 13 14 15 17 18 20</div>
-                        <div class="sequence-description">Top 15 números mais sorteados</div>
+                        <div class="sequence-description">Top 15 mais sorteados. Use aos sábados.</div>
                     </div>
-                    <div class="sequence-card loto special" data-game="loto" data-sequence="SUPREME" onclick="selectSequence('loto', 'SUPREME')">
+                    <div class="sequence-card loto special" onclick="copyNumbers('loto', 'SUPREME')">
                         <div class="sequence-header">
                             <span class="sequence-name">👑 SUPREME</span>
                             <span class="sequence-badge">ESPECIAL</span>
                         </div>
                         <div class="sequence-numbers">01 02 03 05 07 10 11 13 15 17 19 20 21 23 25</div>
-                        <div class="sequence-description">Usar apenas em prêmios acima de R$ 5M</div>
+                        <div class="sequence-description">⚠️ USE APENAS em prêmios > R$ 5M (Independência!)</div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Table -->
-            <div class="table-container">
-                <div class="table-header">
-                    <h3 class="table-title">📊 Histórico de Jogos</h3>
+        </div>
+        
+        <!-- Tracker Content -->
+        <div id="tracker-content" class="content">
+            <!-- Tracker Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💸</span>
+                        <span>Mega-Sena Investido</span>
+                    </div>
+                    <div class="stat-value" id="mega-invested">R$ 0,00</div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Concurso</th>
-                            <th>Sequência</th>
-                            <th>Números</th>
-                            <th>Valor</th>
-                            <th>Status</th>
-                            <th>Resultado</th>
-                            <th>Prêmio</th>
-                        </tr>
-                    </thead>
-                    <tbody id="loto-tbody">
-                        <tr>
-                            <td colspan="8">
-                                <div class="empty-state">
-                                    <div class="empty-state-icon">📋</div>
-                                    <div class="empty-state-title">Nenhum jogo registrado</div>
-                                    <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="stat-card">
+                    <div class="stat-label">
+                        <span>💎</span>
+                        <span>Lotofácil Investido</span>
+                    </div>
+                    <div class="stat-value" id="loto-invested">R$ 0,00</div>
+                </div>
+                <div class="stat-card" id="mega-roi-card">
+                    <div class="stat-label">
+                        <span>📈</span>
+                        <span>ROI Mega-Sena</span>
+                    </div>
+                    <div class="stat-value" id="mega-roi">0%</div>
+                </div>
+                <div class="stat-card" id="loto-roi-card">
+                    <div class="stat-label">
+                        <span>📈</span>
+                        <span>ROI Lotofácil</span>
+                    </div>
+                    <div class="stat-value" id="loto-roi">0%</div>
+                </div>
             </div>
             
-            <!-- Buttons -->
+            <!-- Game Tables -->
+            <div style="display: grid; gap: 30px; margin-top: 30px;">
+                <!-- Mega-Sena Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title" style="color: var(--green-mega);">💰 Histórico Mega-Sena</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Concurso</th>
+                                <th>Sequência</th>
+                                <th>Números</th>
+                                <th>Valor</th>
+                                <th>Acertos</th>
+                                <th>Prêmio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mega-tbody">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                    Nenhum jogo registrado ainda
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Lotofácil Table -->
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3 class="table-title" style="color: var(--purple-loto);">💎 Histórico Lotofácil</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Concurso</th>
+                                <th>Sequência</th>
+                                <th>Números</th>
+                                <th>Valor</th>
+                                <th>Acertos</th>
+                                <th>Prêmio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="loto-tbody">
+                            <tr>
+                                <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                    Nenhum jogo registrado ainda
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
             <div class="button-group">
+                <button class="button mega" onclick="openModal('mega')">
+                    <span>➕</span>
+                    <span>Adicionar Mega-Sena</span>
+                </button>
                 <button class="button loto" onclick="openModal('loto')">
                     <span>➕</span>
-                    <span>Adicionar Jogo</span>
+                    <span>Adicionar Lotofácil</span>
                 </button>
-                <button class="button" onclick="exportData('loto')">
+                <button class="button" onclick="exportAllData()">
                     <span>📥</span>
                     <span>Exportar Dados</span>
                 </button>
-                <button class="button danger" onclick="clearData('loto')">
+                <button class="button" style="background: var(--accent-danger);" onclick="clearAllData()">
                     <span>🗑️</span>
-                    <span>Limpar Dados</span>
+                    <span>Limpar Tudo</span>
                 </button>
             </div>
         </div>
         
         <!-- Footer -->
-        <div class="footer">
-            <div class="footer-title">MATRIX PROTOCOL</div>
-            <div class="footer-text">
+        <div style="text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 1px solid var(--border-color); color: var(--text-secondary);">
+            <p style="font-weight: 600; margin-bottom: 10px;">MATRIX LOTTERY PROTOCOL</p>
+            <p style="font-family: 'Courier New', monospace; line-height: 1.8;">
+                &gt; realidade.hackear()<br>
                 &gt; milhoes.manifestar(true)<br>
                 &gt; sincronicidade.ativar(432Hz)<br>
                 &gt; abundancia.receber()<br>
                 &gt; // Os números já escolheram você
-            </div>
+            </p>
         </div>
     </div>
     
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div class="modal-header">
-                <h2 class="modal-title" id="modal-title">Adicionar Novo Jogo</h2>
-                <p class="modal-subtitle" id="modal-subtitle">Escolha sua sequência para manifestar</p>
-            </div>
+            <button class="modal-close" onclick="closeModal()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer;">&times;</button>
+            <h2 id="modal-title" style="margin-bottom: 20px;">Adicionar Jogo</h2>
             
-            <div class="ai-suggestion" id="ai-suggestion">
-                <div class="ai-suggestion-title">
-                    <span>🤖</span>
-                    <span>Sugestão da IA</span>
+            <div style="display: grid; gap: 20px;">
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Data</label>
+                    <input type="date" id="game-date" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
                 </div>
-                <div class="ai-suggestion-text" id="ai-text">
-                    Analisando padrões...
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Concurso</label>
+                    <input type="text" id="game-contest" placeholder="Ex: 2890" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
                 </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Sequência</label>
+                    <select id="game-sequence" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Quantidade de Jogos</label>
+                    <input type="number" id="game-quantity" value="1" min="1" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Acertos</label>
+                    <input type="number" id="game-hits" value="0" min="0" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
+                </div>
+                
+                <div>
+                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Prêmio (R$)</label>
+                    <input type="number" id="game-prize" value="0" min="0" step="0.01" style="width: 100%; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; color: var(--text-primary);">
+                </div>
+                
+                <button class="button" onclick="saveGame()" style="width: 100%; margin-top: 20px;">
+                    <span>💾</span>
+                    <span>Salvar Jogo</span>
+                </button>
             </div>
-            
-            <div class="sequence-options" id="sequence-options">
-                <!-- Populated by JavaScript -->
-            </div>
-            
-            <button class="button" id="confirm-button" onclick="confirmGame()">
-                <span>✅</span>
-                <span>Confirmar Jogo</span>
-            </button>
         </div>
     </div>
 
@@ -1124,59 +1958,120 @@
         // Data structures
         const sequences = {
             mega: {
-                ALPHA: { numbers: [5, 10, 23, 33, 42, 53], name: '⚡ ALPHA', desc: 'Alta frequência histórica' },
-                BETA: { numbers: [4, 17, 27, 38, 41, 54], name: '🔮 BETA', desc: 'Equilíbrio par/ímpar' },
-                GAMMA: { numbers: [8, 15, 29, 36, 44, 51], name: '💎 GAMMA', desc: 'Padrão emergente 2025' },
-                DELTA: { numbers: [7, 14, 21, 35, 42, 49], name: '🌟 DELTA', desc: 'Múltiplos de 7' },
-                OMEGA: { numbers: [4, 5, 7, 8, 49, 51], name: '🏆 OMEGA', desc: 'Especial para +R$150M', special: true }
+                ALPHA: [5, 10, 23, 33, 42, 53],
+                BETA: [4, 17, 27, 38, 41, 54],
+                GAMMA: [8, 15, 29, 36, 44, 51],
+                DELTA: [7, 14, 21, 35, 42, 49],
+                OMEGA: [4, 5, 7, 8, 49, 51]
             },
             loto: {
-                FIBONACCI: { numbers: [1, 2, 3, 5, 8, 11, 13, 14, 15, 17, 19, 20, 21, 23, 25], name: '🔢 FIBONACCI', desc: 'Sequência matemática' },
-                PRIMOS: { numbers: [2, 3, 5, 7, 11, 13, 17, 19, 23, 6, 9, 12, 15, 18, 21], name: '🎯 PRIMOS', desc: 'Números primos' },
-                ESTRELA: { numbers: [1, 4, 7, 10, 13, 16, 19, 22, 25, 3, 8, 12, 17, 21, 24], name: '⭐ ESTRELA', desc: 'Padrão diagonal' },
-                MATRIZ: { numbers: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 17, 18, 20], name: '💎 MATRIZ', desc: 'Mais sorteados' },
-                SUPREME: { numbers: [1, 2, 3, 5, 7, 10, 11, 13, 15, 17, 19, 20, 21, 23, 25], name: '👑 SUPREME', desc: 'Especial +R$5M', special: true }
+                FIBONACCI: [1, 2, 3, 5, 8, 11, 13, 14, 15, 17, 19, 20, 21, 23, 25],
+                PRIMOS: [2, 3, 5, 7, 11, 13, 17, 19, 23, 6, 9, 12, 15, 18, 21],
+                ESTRELA: [1, 4, 7, 10, 13, 16, 19, 22, 25, 3, 8, 12, 17, 21, 24],
+                MATRIZ: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 17, 18, 20],
+                SUPREME: [1, 2, 3, 5, 7, 10, 11, 13, 15, 17, 19, 20, 21, 23, 25]
             }
         };
 
         // Load data from localStorage
         let gameData = {
-            mega: JSON.parse(localStorage.getItem('megaGames') || '[]'),
-            loto: JSON.parse(localStorage.getItem('lotoGames') || '[]'),
-            megaJackpot: localStorage.getItem('megaJackpot') || 25000000,
-            lotoJackpot: localStorage.getItem('lotoJackpot') || 1700000
+            mega: JSON.parse(localStorage.getItem('megaGamesUltimate') || '[]'),
+            loto: JSON.parse(localStorage.getItem('lotoGamesUltimate') || '[]'),
+            megaJackpot: parseInt(localStorage.getItem('megaJackpotUltimate') || '25000000'),
+            lotoJackpot: parseInt(localStorage.getItem('lotoJackpotUltimate') || '1700000')
         };
 
         let currentGame = 'mega';
-        let selectedSequence = null;
+        let activeTab = 'dashboard';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
+            createMatrixRain();
+            updateAllStats();
             updateJackpots();
-            updateStats('mega');
-            updateStats('loto');
-            renderTable('mega');
-            renderTable('loto');
+            renderTables();
+            updateNextCritical();
         });
 
-        // Switch tabs
-        function switchTab(game) {
-            currentGame = game;
+        // Tab switching
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
             
-            // Update nav tabs
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
             event.target.classList.add('active');
-            
-            // Update content
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.getElementById(`${game}-content`).classList.add('active');
+            document.getElementById(`${tab}-content`).classList.add('active');
         }
 
-        // Update jackpots display
+        // Matrix rain effect
+        function createMatrixRain() {
+            const container = document.getElementById('matrix-bg');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            const columns = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < columns; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 20}px`;
+                column.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                column.style.animationDelay = `${Math.random() * 5}s`;
+                
+                let text = '';
+                for (let j = 0; j < 100; j++) {
+                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
+                }
+                column.innerHTML = text;
+                container.appendChild(column);
+            }
+        }
+
+        // Update all statistics
+        function updateAllStats() {
+            updateStats('mega');
+            updateStats('loto');
+            updateTotalStats();
+        }
+
+        // Update individual game stats
+        function updateStats(game) {
+            const games = gameData[game];
+            const invested = games.reduce((sum, g) => sum + (g.value * g.quantity), 0);
+            const won = games.reduce((sum, g) => sum + g.prize, 0);
+            const roi = invested > 0 ? ((won - invested) / invested * 100) : 0;
+            
+            document.getElementById(`${game}-invested`).textContent = formatCurrency(invested);
+            document.getElementById(`${game}-roi`).textContent = roi.toFixed(1) + '%';
+            
+            const roiCard = document.getElementById(`${game}-roi-card`);
+            if (roiCard) {
+                roiCard.classList.remove('positive', 'negative');
+                if (roi > 0) roiCard.classList.add('positive');
+                else if (roi < 0) roiCard.classList.add('negative');
+            }
+        }
+
+        // Update total stats
+        function updateTotalStats() {
+            const megaInvested = gameData.mega.reduce((sum, g) => sum + (g.value * g.quantity), 0);
+            const lotoInvested = gameData.loto.reduce((sum, g) => sum + (g.value * g.quantity), 0);
+            const megaWon = gameData.mega.reduce((sum, g) => sum + g.prize, 0);
+            const lotoWon = gameData.loto.reduce((sum, g) => sum + g.prize, 0);
+            
+            const totalInvested = megaInvested + lotoInvested;
+            const totalWon = megaWon + lotoWon;
+            const totalRoi = totalInvested > 0 ? ((totalWon - totalInvested) / totalInvested * 100) : 0;
+            
+            document.getElementById('total-invested').textContent = formatCurrency(totalInvested);
+            document.getElementById('total-won').textContent = formatCurrency(totalWon);
+            document.getElementById('roi').textContent = totalRoi.toFixed(1) + '%';
+            
+            const roiCard = document.getElementById('roi-card');
+            roiCard.classList.remove('positive', 'negative');
+            if (totalRoi > 0) roiCard.classList.add('positive');
+            else if (totalRoi < 0) roiCard.classList.add('negative');
+        }
+
+        // Update jackpots
         function updateJackpots() {
             document.getElementById('mega-jackpot').textContent = formatCurrency(gameData.megaJackpot);
             document.getElementById('loto-jackpot').textContent = formatCurrency(gameData.lotoJackpot);
@@ -1188,35 +2083,38 @@
             if (value && !isNaN(value)) {
                 if (game === 'mega') {
                     gameData.megaJackpot = parseInt(value);
-                    localStorage.setItem('megaJackpot', gameData.megaJackpot);
+                    localStorage.setItem('megaJackpotUltimate', gameData.megaJackpot);
                 } else {
                     gameData.lotoJackpot = parseInt(value);
-                    localStorage.setItem('lotoJackpot', gameData.lotoJackpot);
+                    localStorage.setItem('lotoJackpotUltimate', gameData.lotoJackpot);
                 }
                 updateJackpots();
             }
         }
 
-        // Update statistics
-        function updateStats(game) {
-            const games = gameData[game];
-            const invested = games.reduce((sum, g) => sum + g.value, 0);
-            const won = games.reduce((sum, g) => sum + (g.prize || 0), 0);
-            const roi = invested > 0 ? ((won - invested) / invested * 100) : 0;
+        // Update next critical date
+        function updateNextCritical() {
+            const today = new Date();
+            const critical = [
+                new Date('2025-08-23'),
+                new Date('2025-09-07'),
+                new Date('2025-09-14')
+            ];
             
-            document.getElementById(`${game}-invested`).textContent = formatCurrency(invested);
-            document.getElementById(`${game}-won`).textContent = formatCurrency(won);
-            document.getElementById(`${game}-roi`).textContent = roi.toFixed(1) + '%';
-            document.getElementById(`${game}-games`).textContent = games.length;
-            
-            // Update ROI card color
-            const roiCard = document.getElementById(`${game}-roi-card`);
-            roiCard.classList.remove('positive', 'negative');
-            if (roi > 0) roiCard.classList.add('positive');
-            else if (roi < 0) roiCard.classList.add('negative');
+            const next = critical.find(date => date > today);
+            if (next) {
+                const options = { day: 'numeric', month: 'short' };
+                document.getElementById('next-critical').textContent = next.toLocaleDateString('pt-BR', options).toUpperCase();
+            }
         }
 
-        // Render table
+        // Render tables
+        function renderTables() {
+            renderTable('mega');
+            renderTable('loto');
+        }
+
+        // Render individual table
         function renderTable(game) {
             const tbody = document.getElementById(`${game}-tbody`);
             const games = gameData[game];
@@ -1224,114 +2122,41 @@
             if (games.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="8">
-                            <div class="empty-state">
-                                <div class="empty-state-icon">📋</div>
-                                <div class="empty-state-title">Nenhum jogo registrado</div>
-                                <div class="empty-state-text">Clique em "Adicionar Jogo" para começar</div>
-                            </div>
+                        <td colspan="7" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                            Nenhum jogo registrado ainda
                         </td>
                     </tr>
                 `;
                 return;
             }
             
-            tbody.innerHTML = '';
-            let currentWeek = null;
-            
-            games.forEach((gameItem, index) => {
-                const week = getWeekNumber(new Date(gameItem.date));
-                
-                if (week !== currentWeek) {
-                    currentWeek = week;
-                    const weekRow = tbody.insertRow();
-                    weekRow.className = 'week-separator';
-                    const weekCell = weekRow.insertCell();
-                    weekCell.colSpan = 8;
-                    weekCell.textContent = `Semana ${week} - ${getWeekDateRange(gameItem.date)}`;
-                }
-                
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td>${formatDate(gameItem.date)}</td>
-                    <td>${gameItem.contest}</td>
-                    <td>${gameItem.sequence}</td>
-                    <td class="table-numbers">${gameItem.numbers.join(' ')}</td>
-                    <td>${formatCurrency(gameItem.value)}</td>
-                    <td><span class="status-badge status-${gameItem.status}">${getStatusText(gameItem.status)}</span></td>
-                    <td>
-                        <div class="result-input">
-                            <input type="number" id="hits-${game}-${index}" min="0" max="${game === 'mega' ? 6 : 15}" value="${gameItem.hits || 0}" onchange="updateHits('${game}', ${index})">
-                            <span>acertos</span>
-                        </div>
-                    </td>
-                    <td>
-                        <input type="number" id="prize-${game}-${index}" value="${gameItem.prize || 0}" onchange="updatePrize('${game}', ${index})" style="width: 100px;">
-                    </td>
-                `;
-            });
-        }
-
-        // Update hits
-        function updateHits(game, index) {
-            const hits = parseInt(document.getElementById(`hits-${game}-${index}`).value) || 0;
-            gameData[game][index].hits = hits;
-            
-            // Update status based on hits
-            if (game === 'mega') {
-                gameData[game][index].status = hits >= 4 ? 'win' : 'loss';
-                // Suggest prize based on hits
-                if (hits === 4) gameData[game][index].prize = 1000;
-                else if (hits === 5) gameData[game][index].prize = 50000;
-                else if (hits === 6) gameData[game][index].prize = gameData.megaJackpot;
-                else gameData[game][index].prize = 0;
-            } else {
-                gameData[game][index].status = hits >= 11 ? 'win' : 'loss';
-                // Suggest prize based on hits
-                if (hits === 11) gameData[game][index].prize = 6;
-                else if (hits === 12) gameData[game][index].prize = 12;
-                else if (hits === 13) gameData[game][index].prize = 30;
-                else if (hits === 14) gameData[game][index].prize = 1500;
-                else if (hits === 15) gameData[game][index].prize = gameData.lotoJackpot;
-                else gameData[game][index].prize = 0;
-            }
-            
-            document.getElementById(`prize-${game}-${index}`).value = gameData[game][index].prize;
-            
-            saveData(game);
-            updateStats(game);
-            renderTable(game);
-        }
-
-        // Update prize
-        function updatePrize(game, index) {
-            const prize = parseFloat(document.getElementById(`prize-${game}-${index}`).value) || 0;
-            gameData[game][index].prize = prize;
-            saveData(game);
-            updateStats(game);
+            tbody.innerHTML = games.map(g => `
+                <tr>
+                    <td>${formatDate(g.date)}</td>
+                    <td>${g.contest}</td>
+                    <td>${g.sequence}</td>
+                    <td style="font-family: 'Courier New', monospace; font-size: 0.85rem;">${sequences[game][g.sequence].join(' ')}</td>
+                    <td>${formatCurrency(g.prize || 0)}</td>
+                </tr>
+            `).join('');
         }
 
         // Open modal
         function openModal(game) {
             currentGame = game;
-            selectedSequence = null;
-            
             const modal = document.getElementById('modal');
             const title = document.getElementById('modal-title');
-            const subtitle = document.getElementById('modal-subtitle');
-            const aiText = document.getElementById('ai-text');
-            const button = document.getElementById('confirm-button');
+            const select = document.getElementById('game-sequence');
             
             title.textContent = `Adicionar ${game === 'mega' ? 'Mega-Sena' : 'Lotofácil'}`;
-            subtitle.textContent = `Escolha sua sequência para manifestar`;
-            button.className = `button ${game}`;
             
-            // AI suggestion
-            const suggestion = getAISuggestion(game);
-            aiText.innerHTML = suggestion;
+            // Populate sequences
+            select.innerHTML = Object.keys(sequences[game]).map(seq => 
+                `<option value="${seq}">${seq}</option>`
+            ).join('');
             
-            // Render sequence options
-            renderSequenceOptions(game);
+            // Set today's date
+            document.getElementById('game-date').value = new Date().toISOString().split('T')[0];
             
             modal.classList.add('active');
         }
@@ -1341,169 +2166,77 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        // Get AI suggestion
-        function getAISuggestion(game) {
-            const day = new Date().getDay();
-            const jackpot = game === 'mega' ? gameData.megaJackpot : gameData.lotoJackpot;
-            
-            if (game === 'mega') {
-                if (jackpot < 30000000) {
-                    return '⚠️ <strong>Atenção:</strong> Prêmio abaixo de R$ 30M. Considere aguardar acumular.';
-                } else if (jackpot > 150000000) {
-                    return '🏆 <strong>MOMENTO OMEGA!</strong> Prêmio acima de R$ 150M. Hora de usar a sequência especial!';
-                } else {
-                    const suggestions = {
-                        0: 'DELTA', // Sunday
-                        1: 'BETA',  // Monday
-                        2: 'BETA',  // Tuesday
-                        3: 'GAMMA', // Wednesday
-                        4: 'GAMMA', // Thursday
-                        5: 'ALPHA', // Friday
-                        6: 'ALPHA'  // Saturday
-                    };
-                    return `📊 Baseado no dia e padrões, recomendo: <strong>${suggestions[day]}</strong>`;
-                }
-            } else {
-                if (jackpot > 5000000) {
-                    return '👑 <strong>SUPREME TIME!</strong> Prêmio acima de R$ 5M. Use a sequência especial!';
-                } else {
-                    const suggestions = {
-                        0: 'MATRIZ',    // Sunday
-                        1: 'FIBONACCI', // Monday
-                        2: 'PRIMOS',    // Tuesday
-                        3: 'FIBONACCI', // Wednesday
-                        4: 'PRIMOS',    // Thursday
-                        5: 'FIBONACCI', // Friday
-                        6: 'MATRIZ'     // Saturday
-                    };
-                    return `📊 Para hoje, a IA sugere: <strong>${suggestions[day]}</strong>`;
-                }
-            }
-        }
-
-        // Render sequence options
-        function renderSequenceOptions(game) {
-            const container = document.getElementById('sequence-options');
-            container.innerHTML = '';
-            
-            Object.entries(sequences[game]).forEach(([key, seq]) => {
-                const isBlocked = seq.special && !canUseSpecial(game, key);
-                
-                const option = document.createElement('div');
-                option.className = 'sequence-option';
-                option.onclick = () => !isBlocked && selectSequenceOption(key);
-                
-                if (isBlocked) {
-                    option.style.opacity = '0.5';
-                    option.style.cursor = 'not-allowed';
-                }
-                
-                option.innerHTML = `
-                    <div class="sequence-option-header">${seq.name} ${isBlocked ? '🔒' : ''}</div>
-                    <div class="sequence-option-numbers">${seq.numbers.join(' ')}</div>
-                    <div class="sequence-option-description">${seq.desc}</div>
-                    ${isBlocked ? '<div style="color: var(--accent-danger); font-size: 0.85rem; margin-top: 8px;">Já usada este ano</div>' : ''}
-                `;
-                
-                container.appendChild(option);
-            });
-        }
-
-        // Check if can use special sequence
-        function canUseSpecial(game, sequence) {
-            const lastUse = gameData[game].find(g => g.sequence === sequence);
-            if (!lastUse) return true;
-            
-            const lastDate = new Date(lastUse.date);
-            const now = new Date();
-            const daysSince = (now - lastDate) / (1000 * 60 * 60 * 24);
-            
-            return daysSince > 365;
-        }
-
-        // Select sequence from card
-        function selectSequence(game, sequence) {
-            currentGame = game;
-            selectedSequence = sequence;
-            openModal(game);
-            selectSequenceOption(sequence);
-        }
-
-        // Select sequence option in modal
-        function selectSequenceOption(sequence) {
-            selectedSequence = sequence;
-            
-            document.querySelectorAll('.sequence-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            
-            event.currentTarget.classList.add('selected');
-        }
-
-        // Confirm game
-        function confirmGame() {
-            if (!selectedSequence) {
-                alert('Selecione uma sequência!');
-                return;
-            }
-            
-            const now = new Date();
+        // Save game
+        function saveGame() {
             const game = {
-                date: now.toISOString(),
-                contest: prompt('Número do concurso:') || getNextContest(currentGame),
-                sequence: selectedSequence,
-                numbers: sequences[currentGame][selectedSequence].numbers,
+                date: document.getElementById('game-date').value,
+                contest: document.getElementById('game-contest').value,
+                sequence: document.getElementById('game-sequence').value,
+                quantity: parseInt(document.getElementById('game-quantity').value) || 1,
                 value: currentGame === 'mega' ? 6 : 3,
-                status: 'pending',
-                hits: 0,
-                prize: 0
+                hits: parseInt(document.getElementById('game-hits').value) || 0,
+                prize: parseFloat(document.getElementById('game-prize').value) || 0
             };
             
             gameData[currentGame].push(game);
             saveData(currentGame);
-            updateStats(currentGame);
-            renderTable(currentGame);
+            updateAllStats();
+            renderTables();
             closeModal();
+            
+            // Reset form
+            document.getElementById('game-quantity').value = 1;
+            document.getElementById('game-hits').value = 0;
+            document.getElementById('game-prize').value = 0;
         }
 
-        // Export data
-        function exportData(game) {
-            const data = gameData[game];
-            const csv = [
-                ['Data', 'Concurso', 'Sequência', 'Números', 'Valor', 'Status', 'Acertos', 'Prêmio'],
-                ...data.map(g => [
-                    formatDate(g.date),
-                    g.contest,
-                    g.sequence,
-                    g.numbers.join(' '),
-                    g.value,
-                    getStatusText(g.status),
-                    g.hits || 0,
-                    g.prize || 0
-                ])
-            ].map(row => row.join(',')).join('\n');
+        // Save data to localStorage
+        function saveData(game) {
+            localStorage.setItem(`${game}GamesUltimate`, JSON.stringify(gameData[game]));
+        }
+
+        // Copy numbers to clipboard
+        function copyNumbers(game, sequence) {
+            const numbers = sequences[game][sequence].join(' ');
+            navigator.clipboard.writeText(numbers).then(() => {
+                // Show feedback
+                const card = event.currentTarget;
+                const original = card.style.border;
+                card.style.border = '2px solid var(--accent-success)';
+                setTimeout(() => {
+                    card.style.border = original;
+                }, 1000);
+            });
+        }
+
+        // Export all data
+        function exportAllData() {
+            const data = {
+                mega: gameData.mega,
+                loto: gameData.loto,
+                megaJackpot: gameData.megaJackpot,
+                lotoJackpot: gameData.lotoJackpot,
+                exportDate: new Date().toISOString()
+            };
             
-            const blob = new Blob([csv], { type: 'text/csv' });
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${game}-${formatDate(new Date().toISOString())}.csv`;
+            a.download = `matrix-lottery-${formatDate(new Date().toISOString())}.json`;
             a.click();
         }
 
-        // Clear data
-        function clearData(game) {
-            if (confirm(`Tem certeza que deseja limpar todos os dados da ${game === 'mega' ? 'Mega-Sena' : 'Lotofácil'}?`)) {
-                gameData[game] = [];
-                saveData(game);
-                updateStats(game);
-                renderTable(game);
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Tem certeza que deseja limpar TODOS os dados? Esta ação não pode ser desfeita!')) {
+                gameData.mega = [];
+                gameData.loto = [];
+                localStorage.removeItem('megaGamesUltimate');
+                localStorage.removeItem('lotoGamesUltimate');
+                updateAllStats();
+                renderTables();
             }
-        }
-
-        // Save data
-        function saveData(game) {
-            localStorage.setItem(`${game}Games`, JSON.stringify(gameData[game]));
         }
 
         // Utility functions
@@ -1519,40 +2252,14 @@
             return date.toLocaleDateString('pt-BR');
         }
 
-        function getWeekNumber(date) {
-            const firstDay = new Date(date.getFullYear(), 0, 1);
-            const days = Math.floor((date - firstDay) / (24 * 60 * 60 * 1000));
-            return Math.ceil((days + firstDay.getDay() + 1) / 7);
-        }
-
-        function getWeekDateRange(dateStr) {
-            const date = new Date(dateStr);
-            const start = new Date(date);
-            start.setDate(date.getDate() - date.getDay());
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6);
-            
-            return `${start.getDate()}/${start.getMonth() + 1} - ${end.getDate()}/${end.getMonth() + 1}`;
-        }
-
-        function getStatusText(status) {
-            const texts = {
-                pending: 'AGUARDANDO',
-                win: 'GANHOU',
-                loss: 'PERDEU'
-            };
-            return texts[status] || status;
-        }
-
-        function getNextContest(game) {
-            if (game === 'mega') {
-                return '2890'; // Update this based on current contest
-            } else {
-                return '3200'; // Update this based on current contest
+        // Handle calendar day clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('day') && !e.target.classList.contains('empty')) {
+                // Day click logic here if needed
             }
-        }
+        });
 
-        // Handle clicks outside modal
+        // Handle modal close on outside click
         window.onclick = function(event) {
             const modal = document.getElementById('modal');
             if (event.target === modal) {
@@ -1561,4 +2268,6 @@
         }
     </script>
 </body>
-</html>
+</html>(g.value * g.quantity)}</td>
+                    <td>${g.hits || 0}</td>
+                    <td>${formatCurrency
