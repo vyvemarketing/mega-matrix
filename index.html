@@ -1,4 +1,67 @@
-<!DOCTYPE html>
+<div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>💵 Valor do Jogo:</span>
+                                <strong style="color: var(--purple-loto);">R$ 3,50</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>📅 Sorteios:</span>
+                                <strong>Seg a Sáb 20:00h</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-panel">
+                        <h3 style="margin-bottom: 20px;">📊 Estatísticas</h3>
+                        <div class="stat-item">
+                            <span>💸 Total Investido</span>
+                            <span id="loto-invested">R$ 0,00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>🏆 Total Ganho</span>
+                            <span id="loto-won" style="color: var(--accent-success);">R$ 0,00</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>📈 ROI</span>
+                            <span id="loto-roi">0%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>🎲 Jogos</span>
+                            <span id="loto-games">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 12px; padding: 24px; height: 100%;">
+                        <h3 style="color: var(--cyan); margin-bottom: 16px;">🤖 Análise Inteligente</h3>
+                        <div id="loto-ai-analysis">
+                            <p>🔥 Você está próximo! Continue jogando diariamente.</p>
+                            <ul style="margin-top: 12px; margin-left: 20px;">
+                                <li>Use SUPREME na Lua Crescente</li>
+                                <li>R$ 35/semana (10 jogos)</li>
+                                <li>11 acertos = R$ 6 já lucra!</li>
+                            </ul>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 6px;">
+                                <strong>🎯 Melhor Estratégia:</strong>
+                                <p style="font-size: 0.9rem; margin-top: 4px;">Seg/Qua/Sex: FIBONACCI</p>
+                                <p style="font-size: 0.9rem;">Ter/Qui: SUPREME</p>
+                                <p style="font-size: 0.9rem;">Sáb: MATRIZ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="margin: 40px 0 20px;">🎯 Sequências Estratégicas</h2>
+            <div class="sequences-grid">
+                <div class="sequence-card" onclick="quickAddGame('loto', 'FIBONACCI')">
+                    <h3>🔢 FIBONACCI</h3>
+                    <div class="sequence-numbers">01 02 03 05 08 13 21 04 06 09 10 14 15 16 17</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Padrão matemático natural</p>
+                </div>
+                <div class="sequence-card" onclick="quickAddGame('loto', 'PRIMOS')">
+                    <h3>💫 PRIMOS</h3>
+                    <div class="sequence<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -372,12 +435,12 @@
             z-index: 1000;
             padding: 20px;
             overflow-y: auto;
+            align-items: center;
+            justify-content: center;
         }
         
         .modal.active {
             display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         .modal-content {
@@ -385,10 +448,25 @@
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 32px;
-            max-width: 800px;
+            max-width: 600px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         /* Form Elements */
@@ -415,6 +493,34 @@
             font-size: 1rem;
         }
         
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .number-btn {
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .number-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .number-btn.selected {
+            background: var(--accent-info);
+            border-color: var(--accent-info);
+            color: white;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -436,6 +542,10 @@
             .button {
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
         }
     </style>
@@ -475,57 +585,57 @@
         <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 30px;">
             <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
                 <span>🌙</span>
-                <span>Calendário Lunar & Dias de Poder</span>
+                <span>Calendário Lunar & Dias de Poder - AGOSTO 2025</span>
             </h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
                 <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--gold); margin-bottom: 12px;">🌑 Lua Nova (28/07 - 31/07)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Ideal para novos começos e plantio de intenções</p>
-                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> ALPHA ou BETA</p>
-                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> FIBONACCI</p>
-                </div>
-                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--cyan); margin-bottom: 12px;">🌒 Lua Crescente (01/08 - 07/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Energia de crescimento e expansão</p>
+                    <h4 style="color: var(--cyan); margin-bottom: 12px;">🌒 Lua Crescente (04/08 - 11/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">FASE ATUAL - Energia de expansão!</p>
                     <p style="font-size: 0.85rem;"><strong>Mega:</strong> GAMMA (melhor fase!)</p>
                     <p style="font-size: 0.85rem;"><strong>Loto:</strong> SUPREME</p>
                 </div>
                 <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--accent-warning); margin-bottom: 12px;">🌕 Lua Cheia (08/08 - 14/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Máxima energia - ideal para grandes prêmios</p>
+                    <h4 style="color: var(--accent-warning); margin-bottom: 12px;">🌕 Lua Cheia (12/08 - 18/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Máxima energia - grandes prêmios</p>
                     <p style="font-size: 0.85rem;"><strong>Mega:</strong> OMEGA (se > R$150M)</p>
                     <p style="font-size: 0.85rem;"><strong>Loto:</strong> MATRIZ</p>
                 </div>
                 <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--purple-loto); margin-bottom: 12px;">🌘 Lua Minguante (15/08 - 27/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Liberação e preparação</p>
+                    <h4 style="color: var(--purple-loto); margin-bottom: 12px;">🌘 Lua Minguante (19/08 - 26/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Liberação e reflexão</p>
                     <p style="font-size: 0.85rem;"><strong>Mega:</strong> DELTA</p>
                     <p style="font-size: 0.85rem;"><strong>Loto:</strong> PRIMOS</p>
+                </div>
+                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
+                    <h4 style="color: var(--gold); margin-bottom: 12px;">🌑 Lua Nova (27/08 - 03/09)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Novos ciclos começam</p>
+                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> ALPHA ou BETA</p>
+                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> FIBONACCI</p>
                 </div>
             </div>
             
             <div style="margin-top: 24px; padding: 16px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px;">
-                <h4 style="color: var(--gold); margin-bottom: 12px;">⚡ Dias de Poder Especiais</h4>
+                <h4 style="color: var(--gold); margin-bottom: 12px;">⚡ Dias de Poder - AGOSTO 2025</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
                     <div>
-                        <strong style="color: var(--accent-success);">✨ Portais 8/8</strong>
-                        <p style="font-size: 0.85rem;">08/08 - Portal do Leão</p>
-                        <p style="font-size: 0.85rem;">Máxima manifestação</p>
+                        <strong style="color: var(--accent-success);">✨ Portal 8/8</strong>
+                        <p style="font-size: 0.85rem;">08/08 (Sexta) - Portal do Leão</p>
+                        <p style="font-size: 0.85rem;">Máxima manifestação!</p>
                     </div>
                     <div>
                         <strong style="color: var(--accent-info);">🔢 Números Mestres</strong>
-                        <p style="font-size: 0.85rem;">11/08, 22/08</p>
-                        <p style="font-size: 0.85rem;">Dias 11 e 22 amplificam</p>
+                        <p style="font-size: 0.85rem;">11/08 (Segunda)</p>
+                        <p style="font-size: 0.85rem;">22/08 (Sexta)</p>
                     </div>
                     <div>
-                        <strong style="color: var(--purple-loto);">🌟 Sextas 13</strong>
-                        <p style="font-size: 0.85rem;">13/09 (setembro)</p>
-                        <p style="font-size: 0.85rem;">Sorte invertida</p>
+                        <strong style="color: var(--purple-loto);">💰 Lua Cheia</strong>
+                        <p style="font-size: 0.85rem;">12/08 (Terça)</p>
+                        <p style="font-size: 0.85rem;">Energia máxima</p>
                     </div>
                     <div>
-                        <strong style="color: var(--green-mega);">💰 Finais de Mês</strong>
-                        <p style="font-size: 0.85rem;">Dias 27-31</p>
-                        <p style="font-size: 0.85rem;">Energia de fechamento</p>
+                        <strong style="color: var(--green-mega);">🎯 Final do Mês</strong>
+                        <p style="font-size: 0.85rem;">27-31/08</p>
+                        <p style="font-size: 0.85rem;">Fechamento de ciclo</p>
                     </div>
                 </div>
             </div>
@@ -549,7 +659,7 @@
                 <div>
                     <div class="jackpot-card">
                         <div style="color: var(--text-secondary); font-size: 0.9rem;">PRÊMIO ESTIMADO</div>
-                        <div class="jackpot-value" style="color: var(--green-mega);" onclick="editJackpot('mega')">R$ 25.000.000</div>
+                        <div class="jackpot-value" id="mega-jackpot" style="color: var(--green-mega);">R$ 25.000.000</div>
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">🖊️ Clique para editar</div>
                         <div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
@@ -558,7 +668,7 @@
                             </div>
                             <div style="display: flex; justify-content: space-between;">
                                 <span>📅 Próximo Sorteio:</span>
-                                <strong>Sábado 20:00h</strong>
+                                <strong id="mega-next">Carregando...</strong>
                             </div>
                         </div>
                     </div>
@@ -640,11 +750,12 @@
                             <th>Sequência</th>
                             <th>Números</th>
                             <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody id="mega-tbody">
                         <tr>
-                            <td colspan="5" style="text-align: center; padding: 40px;">
+                            <td colspan="6" style="text-align: center; padding: 40px;">
                                 <div style="color: var(--text-secondary);">
                                     <div style="font-size: 3rem; opacity: 0.5;">📋</div>
                                     <div>Nenhum jogo registrado</div>
@@ -656,11 +767,14 @@
             </div>
             
             <div class="button-group">
-                <button class="button" onclick="alert('Adicionar jogo personalizado')">
+                <button class="button" onclick="openAddModal('mega')">
                     ➕ Adicionar Jogo
                 </button>
-                <button class="button" style="background: var(--bg-secondary);" onclick="alert('Exportar dados')">
+                <button class="button" style="background: var(--bg-secondary);" onclick="exportData()">
                     📤 Exportar
+                </button>
+                <button class="button" style="background: var(--accent-danger);" onclick="clearAllData()">
+                    🗑️ Limpar Tudo
                 </button>
             </div>
         </div>
@@ -671,162 +785,6 @@
                 <div>
                     <div class="jackpot-card">
                         <div style="color: var(--text-secondary); font-size: 0.9rem;">PRÊMIO ESTIMADO</div>
-                        <div class="jackpot-value" style="color: var(--purple-loto);" onclick="editJackpot('loto')">R$ 1.700.000</div>
+                        <div class="jackpot-value" id="loto-jackpot" style="color: var(--purple-loto);">R$ 1.700.000</div>
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">🖊️ Clique para editar</div>
-                        <div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span>💵 Valor do Jogo:</span>
-                                <strong style="color: var(--purple-loto);">R$ 3,50</strong>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>📅 Sorteios:</span>
-                                <strong>Seg a Sáb 20:00h</strong>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-panel">
-                        <h3 style="margin-bottom: 20px;">📊 Estatísticas</h3>
-                        <div class="stat-item">
-                            <span>💸 Total Investido</span>
-                            <span id="loto-invested">R$ 0,00</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>🏆 Total Ganho</span>
-                            <span id="loto-won" style="color: var(--accent-success);">R$ 0,00</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>📈 ROI</span>
-                            <span id="loto-roi">0%</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>🎲 Jogos</span>
-                            <span id="loto-games">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 12px; padding: 24px; height: 100%;">
-                        <h3 style="color: var(--cyan); margin-bottom: 16px;">🤖 Análise Inteligente</h3>
-                        <div id="loto-ai-analysis">
-                            <p>🔥 Você está próximo! Continue jogando diariamente.</p>
-                            <ul style="margin-top: 12px; margin-left: 20px;">
-                                <li>Use SUPREME na Lua Crescente</li>
-                                <li>R$ 35/semana (10 jogos)</li>
-                                <li>11 acertos = R$ 6 já lucra!</li>
-                            </ul>
-                            <div style="margin-top: 16px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 6px;">
-                                <strong>🎯 Melhor Estratégia:</strong>
-                                <p style="font-size: 0.9rem; margin-top: 4px;">Seg/Qua/Sex: FIBONACCI</p>
-                                <p style="font-size: 0.9rem;">Ter/Qui: SUPREME</p>
-                                <p style="font-size: 0.9rem;">Sáb: MATRIZ</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 style="margin: 40px 0 20px;">🎯 Sequências Estratégicas</h2>
-            <div class="sequences-grid">
-                <div class="sequence-card" onclick="quickAddGame('loto', 'FIBONACCI')">
-                    <h3>🔢 FIBONACCI</h3>
-                    <div class="sequence-numbers">01 02 03 05 08 13 21 04 06 09 10 14 15 16 17</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Padrão matemático natural</p>
-                </div>
-                <div class="sequence-card" onclick="quickAddGame('loto', 'PRIMOS')">
-                    <h3>💫 PRIMOS</h3>
-                    <div class="sequence-numbers">02 03 05 07 11 13 17 19 23 06 09 12 15 18 21</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Números primos + múltiplos</p>
-                </div>
-                <div class="sequence-card" onclick="quickAddGame('loto', 'SUPREME')">
-                    <h3>👑 SUPREME</h3>
-                    <div class="sequence-numbers">01 02 03 05 07 10 11 13 15 17 19 20 21 23 25</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Melhor performance</p>
-                </div>
-            </div>
-            
-            <div class="table-container">
-                <div class="table-header">
-                    <h3>📊 Histórico de Jogos</h3>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Concurso</th>
-                            <th>Sequência</th>
-                            <th>Números</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="loto-tbody">
-                        <tr>
-                            <td colspan="5" style="text-align: center; padding: 40px;">
-                                <div style="color: var(--text-secondary);">
-                                    <div style="font-size: 3rem; opacity: 0.5;">📋</div>
-                                    <div>Nenhum jogo registrado</div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="button-group">
-                <button class="button" onclick="alert('Adicionar jogo personalizado')">
-                    ➕ Adicionar Jogo
-                </button>
-                <button class="button" style="background: var(--bg-secondary);" onclick="alert('Exportar dados')">
-                    📤 Exportar
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // Initialize Matrix Rain
-        document.addEventListener('DOMContentLoaded', function() {
-            const matrixRain = document.getElementById('matrix-rain');
-            const characters = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
-            
-            for (let i = 0; i < 20; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = `${i * 5}%`;
-                column.style.animationDuration = `${Math.random() * 20 + 10}s`;
-                column.style.animationDelay = `${Math.random() * 5}s`;
-                
-                let text = '';
-                for (let j = 0; j < 100; j++) {
-                    text += characters.charAt(Math.floor(Math.random() * characters.length)) + '<br>';
-                }
-                column.innerHTML = text;
-                matrixRain.appendChild(column);
-            }
-        });
-        
-        // Switch tabs
-        function switchTab(game) {
-            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
-            
-            document.querySelector(`.nav-tab.${game}`).classList.add('active');
-            document.getElementById(`${game}-content`).classList.add('active');
-        }
-        
-        // Edit jackpot
-        function editJackpot(game) {
-            const newValue = prompt(`Digite o novo valor do prêmio:`);
-            if (newValue && !isNaN(newValue)) {
-                alert(`Prêmio atualizado para R$ ${parseFloat(newValue).toLocaleString('pt-BR')}`);
-            }
-        }
-        
-        // Quick add game
-        function quickAddGame(game, sequence) {
-            alert(`Adicionar jogo ${game.toUpperCase()} com sequência ${sequence}`);
-        }
-    </script>
-</body>
-</html>
+                        <div
