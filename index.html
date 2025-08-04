@@ -1,67 +1,4 @@
-<div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span>💵 Valor do Jogo:</span>
-                                <strong style="color: var(--purple-loto);">R$ 3,50</strong>
-                            </div>
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>📅 Sorteios:</span>
-                                <strong>Seg a Sáb 20:00h</strong>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="stats-panel">
-                        <h3 style="margin-bottom: 20px;">📊 Estatísticas</h3>
-                        <div class="stat-item">
-                            <span>💸 Total Investido</span>
-                            <span id="loto-invested">R$ 0,00</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>🏆 Total Ganho</span>
-                            <span id="loto-won" style="color: var(--accent-success);">R$ 0,00</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>📈 ROI</span>
-                            <span id="loto-roi">0%</span>
-                        </div>
-                        <div class="stat-item">
-                            <span>🎲 Jogos</span>
-                            <span id="loto-games">0</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 12px; padding: 24px; height: 100%;">
-                        <h3 style="color: var(--cyan); margin-bottom: 16px;">🤖 Análise Inteligente</h3>
-                        <div id="loto-ai-analysis">
-                            <p>🔥 Você está próximo! Continue jogando diariamente.</p>
-                            <ul style="margin-top: 12px; margin-left: 20px;">
-                                <li>Use SUPREME na Lua Crescente</li>
-                                <li>R$ 35/semana (10 jogos)</li>
-                                <li>11 acertos = R$ 6 já lucra!</li>
-                            </ul>
-                            <div style="margin-top: 16px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 6px;">
-                                <strong>🎯 Melhor Estratégia:</strong>
-                                <p style="font-size: 0.9rem; margin-top: 4px;">Seg/Qua/Sex: FIBONACCI</p>
-                                <p style="font-size: 0.9rem;">Ter/Qui: SUPREME</p>
-                                <p style="font-size: 0.9rem;">Sáb: MATRIZ</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 style="margin: 40px 0 20px;">🎯 Sequências Estratégicas</h2>
-            <div class="sequences-grid">
-                <div class="sequence-card" onclick="quickAddGame('loto', 'FIBONACCI')">
-                    <h3>🔢 FIBONACCI</h3>
-                    <div class="sequence-numbers">01 02 03 05 08 13 21 04 06 09 10 14 15 16 17</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Padrão matemático natural</p>
-                </div>
-                <div class="sequence-card" onclick="quickAddGame('loto', 'PRIMOS')">
-                    <h3>💫 PRIMOS</h3>
-                    <div class="sequence<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -99,44 +36,12 @@
             color: var(--text-primary);
             min-height: 100vh;
             line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
         }
         
-        /* Matrix Rain Effect */
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.03;
-            z-index: 1;
-        }
-        
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: var(--green-mega);
-            animation: matrix-fall linear infinite;
-        }
-        
-        @keyframes matrix-fall {
-            to {
-                transform: translateY(calc(100vh + 100%));
-            }
-        }
-        
-        /* Container */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
-            position: relative;
-            z-index: 2;
         }
         
         /* Header */
@@ -156,18 +61,6 @@
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             letter-spacing: 2px;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 10px rgba(0, 255, 65, 0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(176, 38, 255, 0.5)); }
-        }
-        
-        .header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            font-weight: 500;
         }
         
         /* Mission Status */
@@ -178,14 +71,13 @@
             padding: 20px;
             margin-bottom: 30px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: space-around;
             flex-wrap: wrap;
             gap: 20px;
         }
         
         .mission-info {
-            flex: 1;
+            text-align: center;
         }
         
         .mission-title {
@@ -193,13 +85,53 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 4px;
         }
         
         .mission-value {
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--green-mega);
+            margin-top: 4px;
+        }
+        
+        /* Lunar Calendar */
+        .lunar-calendar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .lunar-calendar h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lunar-phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .lunar-phase {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .lunar-phase h4 {
+            margin-bottom: 12px;
+        }
+        
+        .power-days {
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
         }
         
         /* Navigation */
@@ -210,7 +142,6 @@
             background: var(--bg-card);
             padding: 8px;
             border-radius: 12px;
-            border: 1px solid var(--border-color);
         }
         
         .nav-tab {
@@ -228,8 +159,6 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         
         .nav-tab:hover {
@@ -237,7 +166,6 @@
         }
         
         .nav-tab.active {
-            background: var(--bg-secondary);
             color: var(--text-primary);
         }
         
@@ -245,29 +173,21 @@
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.2), rgba(0, 255, 65, 0.1));
             color: var(--green-mega);
             border: 1px solid rgba(0, 255, 65, 0.3);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
         }
         
         .nav-tab.loto.active {
             background: linear-gradient(135deg, rgba(176, 38, 255, 0.2), rgba(176, 38, 255, 0.1));
             color: var(--purple-loto);
             border: 1px solid rgba(176, 38, 255, 0.3);
-            box-shadow: 0 0 20px rgba(176, 38, 255, 0.2);
         }
         
-        /* Content */
+        /* Content Areas */
         .content {
             display: none;
-            animation: fadeIn 0.3s ease;
         }
         
         .content.active {
             display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Two Column Layout */
@@ -278,27 +198,18 @@
             margin-bottom: 40px;
         }
         
-        @media (max-width: 1024px) {
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         /* Cards */
-        .jackpot-card {
+        .card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 32px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 24px;
         }
         
         .jackpot-value {
             font-size: 2.5rem;
             font-weight: 700;
-            margin: 10px 0;
+            margin: 16px 0;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -307,27 +218,7 @@
             transform: scale(1.05);
         }
         
-        .stats-panel {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 20px;
-        }
-        
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .stat-item:last-child {
-            border-bottom: none;
-        }
-        
-        /* Sequences */
+        /* Sequences Grid */
         .sequences-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -346,14 +237,14 @@
         
         .sequence-card:hover {
             transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         .sequence-numbers {
             font-family: 'Courier New', monospace;
             font-size: 1.1rem;
             font-weight: 600;
-            margin: 10px 0;
+            margin: 12px 0;
             color: var(--text-primary);
         }
         
@@ -362,16 +253,13 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            overflow: hidden;
+            overflow-x: auto;
             margin-bottom: 30px;
         }
         
         .table-header {
             padding: 20px;
             border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
         
         table {
@@ -418,7 +306,7 @@
         .button-group {
             display: flex;
             gap: 12px;
-            margin-top: 30px;
+            margin-top: 20px;
             flex-wrap: wrap;
         }
         
@@ -431,7 +319,6 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 20px;
             overflow-y: auto;
@@ -523,16 +410,20 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            
             .header h1 {
                 font-size: 2rem;
             }
             
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
             .sequences-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
             
             .button-group {
@@ -543,23 +434,16 @@
                 width: 100%;
                 justify-content: center;
             }
-            
-            .numbers-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Matrix Rain Effect -->
-    <div class="matrix-rain" id="matrix-rain"></div>
-    
     <div class="container">
         <!-- Header -->
-        <div class="header">
+        <header class="header">
             <h1>MATRIX LOTERIAS</h1>
             <p>Sistema Ultimate de Manifestação Inteligente</p>
-        </div>
+        </header>
         
         <!-- Mission Status -->
         <div class="mission-status">
@@ -582,132 +466,132 @@
         </div>
         
         <!-- Lunar Calendar -->
-        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; margin-bottom: 30px;">
-            <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
-                <span>🌙</span>
-                <span>Calendário Lunar & Dias de Poder - AGOSTO 2025</span>
-            </h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--cyan); margin-bottom: 12px;">🌒 Lua Crescente (04/08 - 11/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">FASE ATUAL - Energia de expansão!</p>
-                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> GAMMA (melhor fase!)</p>
-                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> SUPREME</p>
+        <div class="lunar-calendar">
+            <h3>🌙 Calendário Lunar & Dias de Poder - AGOSTO 2025</h3>
+            
+            <div class="lunar-phases">
+                <div class="lunar-phase">
+                    <h4 style="color: var(--cyan);">🌒 Lua Crescente (04-11/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">FASE ATUAL - Energia de expansão!</p>
+                    <p><strong>Mega:</strong> GAMMA (melhor fase!)</p>
+                    <p><strong>Loto:</strong> SUPREME</p>
                 </div>
-                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--accent-warning); margin-bottom: 12px;">🌕 Lua Cheia (12/08 - 18/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Máxima energia - grandes prêmios</p>
-                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> OMEGA (se > R$150M)</p>
-                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> MATRIZ</p>
+                
+                <div class="lunar-phase">
+                    <h4 style="color: var(--accent-warning);">🌕 Lua Cheia (12-18/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Máxima energia - grandes prêmios</p>
+                    <p><strong>Mega:</strong> OMEGA (se > R$150M)</p>
+                    <p><strong>Loto:</strong> MATRIZ</p>
                 </div>
-                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--purple-loto); margin-bottom: 12px;">🌘 Lua Minguante (19/08 - 26/08)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Liberação e reflexão</p>
-                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> DELTA</p>
-                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> PRIMOS</p>
+                
+                <div class="lunar-phase">
+                    <h4 style="color: var(--purple-loto);">🌘 Lua Minguante (19-26/08)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Liberação e reflexão</p>
+                    <p><strong>Mega:</strong> DELTA</p>
+                    <p><strong>Loto:</strong> PRIMOS</p>
                 </div>
-                <div style="background: var(--bg-secondary); border-radius: 8px; padding: 16px;">
-                    <h4 style="color: var(--gold); margin-bottom: 12px;">🌑 Lua Nova (27/08 - 03/09)</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px;">Novos ciclos começam</p>
-                    <p style="font-size: 0.85rem;"><strong>Mega:</strong> ALPHA ou BETA</p>
-                    <p style="font-size: 0.85rem;"><strong>Loto:</strong> FIBONACCI</p>
+                
+                <div class="lunar-phase">
+                    <h4 style="color: var(--gold);">🌑 Lua Nova (27/08-03/09)</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Novos ciclos começam</p>
+                    <p><strong>Mega:</strong> ALPHA ou BETA</p>
+                    <p><strong>Loto:</strong> FIBONACCI</p>
                 </div>
             </div>
             
-            <div style="margin-top: 24px; padding: 16px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px;">
+            <div class="power-days">
                 <h4 style="color: var(--gold); margin-bottom: 12px;">⚡ Dias de Poder - AGOSTO 2025</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
                     <div>
                         <strong style="color: var(--accent-success);">✨ Portal 8/8</strong>
-                        <p style="font-size: 0.85rem;">08/08 (Sexta) - Portal do Leão</p>
-                        <p style="font-size: 0.85rem;">Máxima manifestação!</p>
+                        <p>08/08 (Sexta) - Portal do Leão</p>
                     </div>
                     <div>
                         <strong style="color: var(--accent-info);">🔢 Números Mestres</strong>
-                        <p style="font-size: 0.85rem;">11/08 (Segunda)</p>
-                        <p style="font-size: 0.85rem;">22/08 (Sexta)</p>
+                        <p>11/08 (Segunda) e 22/08 (Sexta)</p>
                     </div>
                     <div>
                         <strong style="color: var(--purple-loto);">💰 Lua Cheia</strong>
-                        <p style="font-size: 0.85rem;">12/08 (Terça)</p>
-                        <p style="font-size: 0.85rem;">Energia máxima</p>
+                        <p>12/08 (Terça) - Energia máxima</p>
                     </div>
                     <div>
                         <strong style="color: var(--green-mega);">🎯 Final do Mês</strong>
-                        <p style="font-size: 0.85rem;">27-31/08</p>
-                        <p style="font-size: 0.85rem;">Fechamento de ciclo</p>
+                        <p>27-31/08 - Fechamento de ciclo</p>
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Navigation -->
+        <!-- Navigation Tabs -->
         <div class="nav-tabs">
             <button class="nav-tab mega active" onclick="switchTab('mega')">
-                <span>💰</span>
-                <span>MEGA-SENA</span>
+                💰 MEGA-SENA
             </button>
             <button class="nav-tab loto" onclick="switchTab('loto')">
-                <span>💎</span>
-                <span>LOTOFÁCIL</span>
+                💎 LOTOFÁCIL
             </button>
         </div>
         
         <!-- MEGA-SENA Content -->
         <div id="mega-content" class="content active">
             <div class="two-column">
+                <!-- Left Column -->
                 <div>
-                    <div class="jackpot-card">
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">PRÊMIO ESTIMADO</div>
-                        <div class="jackpot-value" id="mega-jackpot" style="color: var(--green-mega);">R$ 25.000.000</div>
+                    <div class="card" style="text-align: center;">
+                        <div style="color: var(--text-secondary);">PRÊMIO ESTIMADO</div>
+                        <div class="jackpot-value" id="mega-jackpot" style="color: var(--green-mega);" onclick="editJackpot('mega')">
+                            R$ 25.000.000
+                        </div>
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">🖊️ Clique para editar</div>
-                        <div style="margin-top: 16px; padding: 12px; background: var(--bg-secondary); border-radius: 8px;">
+                        
+                        <div style="margin-top: 20px; padding: 16px; background: var(--bg-secondary); border-radius: 8px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                                 <span>💵 Valor do Jogo:</span>
                                 <strong style="color: var(--green-mega);">R$ 6,00</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between;">
                                 <span>📅 Próximo Sorteio:</span>
-                                <strong id="mega-next">Carregando...</strong>
+                                <strong>Sábado 20:00h</strong>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="stats-panel">
+                    <div class="card" style="margin-top: 20px;">
                         <h3 style="margin-bottom: 20px;">📊 Estatísticas</h3>
-                        <div class="stat-item">
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
                             <span>💸 Total Investido</span>
                             <span id="mega-invested">R$ 0,00</span>
                         </div>
-                        <div class="stat-item">
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
                             <span>🏆 Total Ganho</span>
                             <span id="mega-won" style="color: var(--accent-success);">R$ 0,00</span>
                         </div>
-                        <div class="stat-item">
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
                             <span>📈 ROI</span>
                             <span id="mega-roi">0%</span>
                         </div>
-                        <div class="stat-item">
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0;">
                             <span>🎲 Jogos</span>
                             <span id="mega-games">0</span>
                         </div>
                     </div>
                 </div>
                 
+                <!-- Right Column -->
                 <div>
-                    <div style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 12px; padding: 24px; height: 100%;">
+                    <div class="card" style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border-color: rgba(0, 255, 255, 0.3);">
                         <h3 style="color: var(--cyan); margin-bottom: 16px;">🤖 Análise Inteligente</h3>
                         <div id="mega-ai-analysis">
                             <p>⚠️ Prêmio abaixo de R$ 30 milhões. Considere aguardar acumulação.</p>
-                            <ul style="margin-top: 12px; margin-left: 20px;">
+                            <ul style="margin: 12px 0 0 20px;">
                                 <li>Foque na Lotofácil (R$ 3,50/jogo)</li>
                                 <li>Aguarde Mega acumular > R$ 30M</li>
                                 <li>Use GAMMA na Lua Crescente</li>
                             </ul>
                             <div style="margin-top: 16px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 6px;">
-                                <strong>💰 Budget Semanal Sugerido:</strong>
-                                <p style="font-size: 0.9rem; margin-top: 4px;">Mega: R$ 72 (12 jogos)</p>
-                                <p style="font-size: 0.9rem;">Loto: R$ 35 (10 jogos)</p>
+                                <strong>💰 Budget Semanal:</strong>
+                                <p>Mega: R$ 72 (12 jogos)</p>
+                                <p>Loto: R$ 35 (10 jogos)</p>
                             </div>
                         </div>
                     </div>
@@ -715,26 +599,30 @@
             </div>
             
             <h2 style="margin: 40px 0 20px;">🎯 Sequências Estratégicas</h2>
+            
             <div class="sequences-grid">
                 <div class="sequence-card" onclick="quickAddGame('mega', 'ALPHA')">
                     <h3>⚡ ALPHA</h3>
                     <div class="sequence-numbers">05 10 23 33 42 53</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Alta frequência histórica</p>
+                    <p style="color: var(--text-secondary);">Alta frequência histórica</p>
                 </div>
+                
                 <div class="sequence-card" onclick="quickAddGame('mega', 'BETA')">
                     <h3>🔮 BETA</h3>
                     <div class="sequence-numbers">04 17 27 38 41 54</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Equilíbrio par/ímpar</p>
+                    <p style="color: var(--text-secondary);">Equilíbrio par/ímpar</p>
                 </div>
+                
                 <div class="sequence-card" onclick="quickAddGame('mega', 'GAMMA')">
                     <h3>💎 GAMMA</h3>
                     <div class="sequence-numbers">08 15 29 36 44 51</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Padrão emergente 2025</p>
+                    <p style="color: var(--text-secondary);">Padrão emergente 2025</p>
                 </div>
+                
                 <div class="sequence-card" onclick="quickAddGame('mega', 'DELTA')">
                     <h3>🌟 DELTA</h3>
                     <div class="sequence-numbers">07 14 21 35 42 49</div>
-                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Múltiplos de 7</p>
+                    <p style="color: var(--text-secondary);">Múltiplos de 7</p>
                 </div>
             </div>
             
@@ -749,17 +637,18 @@
                             <th>Concurso</th>
                             <th>Sequência</th>
                             <th>Números</th>
+                            <th>Sorteados</th>
+                            <th>Acertos</th>
+                            <th>Prêmio</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody id="mega-tbody">
                         <tr>
-                            <td colspan="6" style="text-align: center; padding: 40px;">
-                                <div style="color: var(--text-secondary);">
-                                    <div style="font-size: 3rem; opacity: 0.5;">📋</div>
-                                    <div>Nenhum jogo registrado</div>
-                                </div>
+                            <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                <div style="font-size: 3rem; opacity: 0.5;">📋</div>
+                                <div>Nenhum jogo registrado</div>
                             </td>
                         </tr>
                     </tbody>
@@ -782,9 +671,659 @@
         <!-- LOTOFÁCIL Content -->
         <div id="loto-content" class="content">
             <div class="two-column">
+                <!-- Left Column -->
                 <div>
-                    <div class="jackpot-card">
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">PRÊMIO ESTIMADO</div>
-                        <div class="jackpot-value" id="loto-jackpot" style="color: var(--purple-loto);">R$ 1.700.000</div>
+                    <div class="card" style="text-align: center;">
+                        <div style="color: var(--text-secondary);">PRÊMIO ESTIMADO</div>
+                        <div class="jackpot-value" id="loto-jackpot" style="color: var(--purple-loto);" onclick="editJackpot('loto')">
+                            R$ 1.700.000
+                        </div>
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">🖊️ Clique para editar</div>
-                        <div
+                        
+                        <div style="margin-top: 20px; padding: 16px; background: var(--bg-secondary); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>💵 Valor do Jogo:</span>
+                                <strong style="color: var(--purple-loto);">R$ 3,50</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>📅 Sorteios:</span>
+                                <strong>Seg a Sáb 20:00h</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3 style="margin-bottom: 20px;">📊 Estatísticas</h3>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>💸 Total Investido</span>
+                            <span id="loto-invested">R$ 0,00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>🏆 Total Ganho</span>
+                            <span id="loto-won" style="color: var(--accent-success);">R$ 0,00</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <span>📈 ROI</span>
+                            <span id="loto-roi">0%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+                            <span>🎲 Jogos</span>
+                            <span id="loto-games">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div>
+                    <div class="card" style="background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(176, 38, 255, 0.1)); border-color: rgba(0, 255, 255, 0.3);">
+                        <h3 style="color: var(--cyan); margin-bottom: 16px;">🤖 Análise Inteligente</h3>
+                        <div id="loto-ai-analysis">
+                            <p>🔥 Você está próximo! Continue jogando diariamente.</p>
+                            <ul style="margin: 12px 0 0 20px;">
+                                <li>Use SUPREME na Lua Crescente</li>
+                                <li>R$ 35/semana (10 jogos)</li>
+                                <li>11 acertos = R$ 6 já lucra!</li>
+                            </ul>
+                            <div style="margin-top: 16px; padding: 12px; background: rgba(0, 0, 0, 0.3); border-radius: 6px;">
+                                <strong>🎯 Melhor Estratégia:</strong>
+                                <p>Seg/Qua/Sex: FIBONACCI</p>
+                                <p>Ter/Qui: SUPREME</p>
+                                <p>Sáb: MATRIZ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="margin: 40px 0 20px;">🎯 Sequências Estratégicas</h2>
+            
+            <div class="sequences-grid">
+                <div class="sequence-card" onclick="quickAddGame('loto', 'FIBONACCI')">
+                    <h3>🔢 FIBONACCI</h3>
+                    <div class="sequence-numbers">01 02 03 05 08 13 21 04 06 09 10 14 15 16 17</div>
+                    <p style="color: var(--text-secondary);">Padrão matemático natural</p>
+                </div>
+                
+                <div class="sequence-card" onclick="quickAddGame('loto', 'PRIMOS')">
+                    <h3>💫 PRIMOS</h3>
+                    <div class="sequence-numbers">02 03 05 07 11 13 17 19 23 06 09 12 15 18 21</div>
+                    <p style="color: var(--text-secondary);">Números primos + múltiplos</p>
+                </div>
+                
+                <div class="sequence-card" onclick="quickAddGame('loto', 'ESTRELA')">
+                    <h3>⭐ ESTRELA</h3>
+                    <div class="sequence-numbers">01 04 07 10 13 16 19 22 25 03 08 12 17 21 24</div>
+                    <p style="color: var(--text-secondary);">Padrão diagonal do volante</p>
+                </div>
+                
+                <div class="sequence-card" onclick="quickAddGame('loto', 'MATRIZ')">
+                    <h3>🎰 MATRIZ</h3>
+                    <div class="sequence-numbers">01 02 03 04 05 06 10 11 12 13 14 15 17 18 20</div>
+                    <p style="color: var(--text-secondary);">Top 15 mais sorteados</p>
+                </div>
+                
+                <div class="sequence-card" onclick="quickAddGame('loto', 'SUPREME')">
+                    <h3>👑 SUPREME</h3>
+                    <div class="sequence-numbers">01 02 03 05 07 10 11 13 15 17 19 20 21 23 25</div>
+                    <p style="color: var(--text-secondary);">Melhor performance (9 acertos!)</p>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>📊 Histórico de Jogos</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Concurso</th>
+                            <th>Sequência</th>
+                            <th>Números</th>
+                            <th>Sorteados</th>
+                            <th>Acertos</th>
+                            <th>Prêmio</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="loto-tbody">
+                        <tr>
+                            <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                <div style="font-size: 3rem; opacity: 0.5;">📋</div>
+                                <div>Nenhum jogo registrado</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="button-group">
+                <button class="button" onclick="openAddModal('loto')">
+                    ➕ Adicionar Jogo
+                </button>
+                <button class="button" style="background: var(--bg-secondary);" onclick="exportData()">
+                    📤 Exportar
+                </button>
+                <button class="button" style="background: var(--accent-danger);" onclick="clearAllData()">
+                    🗑️ Limpar Tudo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Adicionar Jogo</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <form id="game-form" onsubmit="saveGame(event)">
+                <div class="form-group">
+                    <label class="form-label">Data do Jogo</label>
+                    <input type="date" class="form-input" id="game-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Número do Concurso</label>
+                    <input type="number" class="form-input" id="game-contest" placeholder="Ex: 2745" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Sequência Escolhida</label>
+                    <input type="text" class="form-input" id="game-sequence" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Números do Jogo</label>
+                    <div id="selected-numbers" style="font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 700; color: var(--accent-info); padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px; text-align: center;">
+                        -
+                    </div>
+                    <div class="numbers-grid" id="numbers-grid"></div>
+                </div>
+                
+                <div style="margin-top: 32px; padding: 20px; background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border: 1px solid rgba(255, 215, 0, 0.3); border-radius: 8px;">
+                    <h3 style="color: var(--gold); margin-bottom: 16px;">🎯 Resultado do Sorteio</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Números Sorteados</label>
+                        <input type="text" class="form-input" id="game-result" placeholder="Ex: 05 10 23 33 42 53">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Números que Acertei</label>
+                        <div id="hit-numbers" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 8px; margin-top: 8px;">
+                            <div style="grid-column: 1/-1; color: var(--text-secondary); font-size: 0.9rem;">
+                                Preencha os números sorteados primeiro
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Total de Acertos</label>
+                        <input type="number" class="form-input" id="game-hits" value="0" readonly style="background: var(--bg-card); font-weight: 700; color: var(--accent-warning);">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Prêmio Ganho (R$)</label>
+                        <input type="number" class="form-input" id="game-prize" step="0.01" placeholder="0,00">
+                    </div>
+                </div>
+                
+                <div class="button-group" style="margin-top: 24px;">
+                    <button type="submit" class="button" style="background: var(--accent-success);">
+                        ✅ Salvar Jogo
+                    </button>
+                    <button type="button" class="button" style="background: var(--bg-secondary);" onclick="closeModal()">
+                        ❌ Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Dados do sistema
+        let games = {
+            mega: [],
+            loto: []
+        };
+        
+        let currentGame = 'mega';
+        let selectedNumbers = [];
+        let selectedSequence = '';
+        let editingGameId = null;
+        
+        // Sequências
+        const sequences = {
+            mega: {
+                ALPHA: [5, 10, 23, 33, 42, 53],
+                BETA: [4, 17, 27, 38, 41, 54],
+                GAMMA: [8, 15, 29, 36, 44, 51],
+                DELTA: [7, 14, 21, 35, 42, 49]
+            },
+            loto: {
+                FIBONACCI: [1, 2, 3, 5, 8, 13, 21, 4, 6, 9, 10, 14, 15, 16, 17],
+                PRIMOS: [2, 3, 5, 7, 11, 13, 17, 19, 23, 6, 9, 12, 15, 18, 21],
+                ESTRELA: [1, 4, 7, 10, 13, 16, 19, 22, 25, 3, 8, 12, 17, 21, 24],
+                MATRIZ: [1, 2, 3, 4, 5, 6, 10, 11, 12, 13, 14, 15, 17, 18, 20],
+                SUPREME: [1, 2, 3, 5, 7, 10, 11, 13, 15, 17, 19, 20, 21, 23, 25]
+            }
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            updateMoonPhase();
+            updateStats();
+            document.getElementById('game-date').value = new Date().toISOString().split('T')[0];
+            
+            // Add event listener for result input
+            document.getElementById('game-result').addEventListener('input', updateHitNumbers);
+        });
+        
+        // Update moon phase
+        function updateMoonPhase() {
+            const today = new Date();
+            const day = today.getDate();
+            const moonElement = document.getElementById('current-moon');
+            
+            if (day >= 4 && day <= 11) {
+                moonElement.innerHTML = '🌒 Crescente';
+                moonElement.style.color = 'var(--cyan)';
+            } else if (day >= 12 && day <= 18) {
+                moonElement.innerHTML = '🌕 Cheia';
+                moonElement.style.color = 'var(--accent-warning)';
+            } else if (day >= 19 && day <= 26) {
+                moonElement.innerHTML = '🌘 Minguante';
+                moonElement.style.color = 'var(--purple-loto)';
+            } else {
+                moonElement.innerHTML = '🌑 Nova';
+                moonElement.style.color = 'var(--gold)';
+            }
+        }
+        
+        // Switch tabs
+        function switchTab(game) {
+            document.querySelectorAll('.nav-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`.nav-tab.${game}`).classList.add('active');
+            document.getElementById(`${game}-content`).classList.add('active');
+            
+            currentGame = game;
+        }
+        
+        // Edit jackpot
+        function editJackpot(game) {
+            const element = document.getElementById(`${game}-jackpot`);
+            const currentValue = element.textContent.replace(/[^\d]/g, '');
+            const newValue = prompt(`Digite o novo valor do prêmio da ${game === 'mega' ? 'Mega-Sena' : 'Lotofácil'}:`, currentValue);
+            
+            if (newValue && !isNaN(newValue)) {
+                element.textContent = `R$ ${parseInt(newValue).toLocaleString('pt-BR')}`;
+                saveData();
+            }
+        }
+        
+        // Quick add game
+        function quickAddGame(game, sequence) {
+            currentGame = game;
+            selectedSequence = sequence;
+            selectedNumbers = [...sequences[game][sequence]];
+            openAddModal(game);
+        }
+        
+        // Open modal
+        function openAddModal(game) {
+            currentGame = game;
+            editingGameId = null;
+            document.getElementById('add-modal').classList.add('active');
+            document.getElementById('modal-title').textContent = `Adicionar Jogo - ${game === 'mega' ? 'MEGA-SENA' : 'LOTOFÁCIL'}`;
+            
+            // Reset form
+            document.getElementById('game-form').reset();
+            document.getElementById('game-date').value = new Date().toISOString().split('T')[0];
+            document.getElementById('game-sequence').value = selectedSequence || 'Personalizado';
+            
+            // Create number grid
+            createNumberGrid(game);
+            updateSelectedNumbersDisplay();
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('add-modal').classList.remove('active');
+            document.getElementById('game-form').reset();
+            selectedNumbers = [];
+            selectedSequence = '';
+            editingGameId = null;
+        }
+        
+        // Create number grid
+        function createNumberGrid(game) {
+            const grid = document.getElementById('numbers-grid');
+            grid.innerHTML = '';
+            
+            const maxNumber = game === 'mega' ? 60 : 25;
+            
+            for (let i = 1; i <= maxNumber; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'number-btn';
+                btn.textContent = i.toString().padStart(2, '0');
+                btn.onclick = () => toggleNumber(i);
+                
+                if (selectedNumbers.includes(i)) {
+                    btn.classList.add('selected');
+                }
+                
+                grid.appendChild(btn);
+            }
+        }
+        
+        // Toggle number
+        function toggleNumber(num) {
+            const maxNumbers = currentGame === 'mega' ? 6 : 15;
+            const index = selectedNumbers.indexOf(num);
+            
+            if (index > -1) {
+                selectedNumbers.splice(index, 1);
+            } else if (selectedNumbers.length < maxNumbers) {
+                selectedNumbers.push(num);
+            } else {
+                alert(`Máximo de ${maxNumbers} números!`);
+                return;
+            }
+            
+            // Update UI
+            const btns = document.querySelectorAll('.number-btn');
+            btns[num - 1].classList.toggle('selected');
+            
+            // Clear sequence if custom
+            if (selectedSequence && selectedNumbers.length !== sequences[currentGame][selectedSequence].length) {
+                selectedSequence = '';
+                document.getElementById('game-sequence').value = 'Personalizado';
+            }
+            
+            updateSelectedNumbersDisplay();
+        }
+        
+        // Update selected numbers display
+        function updateSelectedNumbersDisplay() {
+            const display = document.getElementById('selected-numbers');
+            if (selectedNumbers.length > 0) {
+                selectedNumbers.sort((a, b) => a - b);
+                display.textContent = selectedNumbers.map(n => n.toString().padStart(2, '0')).join(' - ');
+            } else {
+                display.textContent = '-';
+            }
+        }
+        
+        // Update hit numbers
+        function updateHitNumbers() {
+            const resultNumbers = this.value
+                .split(/\s+/)
+                .filter(n => n)
+                .map(Number);
+            
+            if (resultNumbers.length > 0 && selectedNumbers.length > 0) {
+                const hitNumbers = selectedNumbers.filter(n => resultNumbers.includes(n));
+                const hitCount = hitNumbers.length;
+                
+                // Update hit display
+                const hitContainer = document.getElementById('hit-numbers');
+                hitContainer.innerHTML = selectedNumbers.map(num => {
+                    const isHit = hitNumbers.includes(num);
+                    return `
+                        <button type="button" class="number-btn ${isHit ? 'selected' : ''}" 
+                                style="cursor: default; ${isHit ? 'background: var(--accent-success); border-color: var(--accent-success);' : ''}">
+                            ${num.toString().padStart(2, '0')}
+                        </button>
+                    `;
+                }).join('');
+                
+                // Update hit count
+                document.getElementById('game-hits').value = hitCount;
+                
+                // Suggest prize
+                let suggestedPrize = 0;
+                if (currentGame === 'mega') {
+                    switch(hitCount) {
+                        case 4: suggestedPrize = 1000; break;
+                        case 5: suggestedPrize = 50000; break;
+                        case 6: suggestedPrize = parseInt(document.getElementById('mega-jackpot').textContent.replace(/[^\d]/g, '')); break;
+                    }
+                } else {
+                    switch(hitCount) {
+                        case 11: suggestedPrize = 6; break;
+                        case 12: suggestedPrize = 12; break;
+                        case 13: suggestedPrize = 30; break;
+                        case 14: suggestedPrize = 1500; break;
+                        case 15: suggestedPrize = parseInt(document.getElementById('loto-jackpot').textContent.replace(/[^\d]/g, '')); break;
+                    }
+                }
+                
+                if (suggestedPrize > 0 && !document.getElementById('game-prize').value) {
+                    document.getElementById('game-prize').value = suggestedPrize;
+                }
+            }
+        }
+        
+        // Save game
+        function saveGame(event) {
+            event.preventDefault();
+            
+            const requiredNumbers = currentGame === 'mega' ? 6 : 15;
+            if (selectedNumbers.length !== requiredNumbers) {
+                alert(`Selecione exatamente ${requiredNumbers} números!`);
+                return;
+            }
+            
+            const resultNumbers = document.getElementById('game-result').value
+                .split(/\s+/)
+                .filter(n => n)
+                .map(Number);
+            
+            let hits = 0;
+            if (resultNumbers.length > 0) {
+                hits = selectedNumbers.filter(n => resultNumbers.includes(n)).length;
+            }
+            
+            const gameData = {
+                id: editingGameId || Date.now(),
+                date: document.getElementById('game-date').value,
+                contest: document.getElementById('game-contest').value,
+                sequence: document.getElementById('game-sequence').value,
+                numbers: [...selectedNumbers].sort((a, b) => a - b),
+                result: resultNumbers,
+                hits: hits,
+                prize: parseFloat(document.getElementById('game-prize').value || 0),
+                value: currentGame === 'mega' ? 6.00 : 3.50,
+                status: hits > 0 ? (currentGame === 'mega' ? (hits >= 4 ? 'Ganhou' : 'Perdeu') : (hits >= 11 ? 'Ganhou' : 'Perdeu')) : 'Aguardando'
+            };
+            
+            if (editingGameId) {
+                const index = games[currentGame].findIndex(g => g.id === editingGameId);
+                if (index !== -1) {
+                    games[currentGame][index] = gameData;
+                }
+            } else {
+                games[currentGame].push(gameData);
+            }
+            
+            saveData();
+            updateTable();
+            updateStats();
+            closeModal();
+        }
+        
+        // Edit game
+        function editGame(type, id) {
+            const game = games[type].find(g => g.id === id);
+            if (!game) return;
+            
+            currentGame = type;
+            selectedNumbers = [...game.numbers];
+            selectedSequence = game.sequence === 'Personalizado' ? '' : game.sequence;
+            editingGameId = id;
+            
+            openAddModal(type);
+            
+            // Fill form
+            document.getElementById('modal-title').textContent = `Editar Jogo - ${type === 'mega' ? 'MEGA-SENA' : 'LOTOFÁCIL'}`;
+            document.getElementById('game-date').value = game.date;
+            document.getElementById('game-contest').value = game.contest;
+            document.getElementById('game-sequence').value = game.sequence;
+            document.getElementById('game-result').value = game.result.join(' ');
+            document.getElementById('game-prize').value = game.prize || '';
+            
+            // Trigger update
+            updateHitNumbers.call(document.getElementById('game-result'));
+        }
+        
+        // Delete game
+        function deleteGame(type, id) {
+            if (confirm('Excluir este jogo?')) {
+                games[type] = games[type].filter(g => g.id !== id);
+                saveData();
+                updateTable();
+                updateStats();
+            }
+        }
+        
+        // Update table
+        function updateTable() {
+            ['mega', 'loto'].forEach(gameType => {
+                const tbody = document.getElementById(`${gameType}-tbody`);
+                const gameList = games[gameType];
+                
+                if (gameList.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="9" style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                                <div style="font-size: 3rem; opacity: 0.5;">📋</div>
+                                <div>Nenhum jogo registrado</div>
+                            </td>
+                        </tr>
+                    `;
+                } else {
+                    tbody.innerHTML = gameList.map(game => {
+                        const statusColor = game.status === 'Ganhou' ? 'var(--accent-success)' : 
+                                          game.status === 'Perdeu' ? 'var(--accent-danger)' : 
+                                          'var(--accent-warning)';
+                        const statusBg = game.status === 'Ganhou' ? 'rgba(0, 214, 143, 0.2)' : 
+                                       game.status === 'Perdeu' ? 'rgba(255, 56, 56, 0.2)' : 
+                                       'rgba(255, 170, 0, 0.2)';
+                        
+                        return `
+                            <tr>
+                                <td>${new Date(game.date).toLocaleDateString('pt-BR')}</td>
+                                <td>${game.contest}</td>
+                                <td>${game.sequence}</td>
+                                <td style="font-family: 'Courier New', monospace; font-weight: 600;">
+                                    ${game.numbers.map(n => n.toString().padStart(2, '0')).join(' ')}
+                                </td>
+                                <td style="font-family: 'Courier New', monospace;">
+                                    ${game.result.length > 0 ? game.result.map(n => n.toString().padStart(2, '0')).join(' ') : '-'}
+                                </td>
+                                <td style="text-align: center; font-weight: 700; color: ${game.hits > 0 ? statusColor : 'var(--text-secondary)'};">
+                                    ${game.hits || '-'}
+                                </td>
+                                <td style="font-weight: 600; color: ${game.prize > 0 ? 'var(--accent-success)' : 'var(--text-secondary)'};">
+                                    ${game.prize > 0 ? `R$ ${game.prize.toFixed(2).replace('.', ',')}` : '-'}
+                                </td>
+                                <td>
+                                    <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; background: ${statusBg}; color: ${statusColor};">
+                                        ${game.status}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button onclick="editGame('${gameType}', ${game.id})" style="background: none; border: none; color: var(--accent-info); cursor: pointer; font-size: 1.2rem; margin-right: 8px;">
+                                        ✏️
+                                    </button>
+                                    <button onclick="deleteGame('${gameType}', ${game.id})" style="background: none; border: none; color: var(--accent-danger); cursor: pointer; font-size: 1.2rem;">
+                                        🗑️
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }).reverse().join('');
+                }
+            });
+        }
+        
+        // Update stats
+        function updateStats() {
+            ['mega', 'loto'].forEach(type => {
+                const gameList = games[type];
+                const invested = gameList.length * (type === 'mega' ? 6 : 3.50);
+                const won = gameList.reduce((sum, game) => sum + (game.prize || 0), 0);
+                const roi = invested > 0 ? ((won - invested) / invested * 100) : 0;
+                
+                document.getElementById(`${type}-invested`).textContent = `R$ ${invested.toFixed(2).replace('.', ',')}`;
+                document.getElementById(`${type}-won`).textContent = `R$ ${won.toFixed(2).replace('.', ',')}`;
+                document.getElementById(`${type}-roi`).textContent = `${roi.toFixed(1)}%`;
+                document.getElementById(`${type}-games`).textContent = gameList.length;
+                
+                // Update ROI color
+                const roiElement = document.getElementById(`${type}-roi`);
+                roiElement.style.color = roi >= 0 ? 'var(--accent-success)' : 'var(--accent-danger)';
+            });
+        }
+        
+        // Save data
+        function saveData() {
+            localStorage.setItem('matrixGames', JSON.stringify(games));
+            
+            // Save jackpots
+            const jackpots = {
+                mega: document.getElementById('mega-jackpot').textContent,
+                loto: document.getElementById('loto-jackpot').textContent
+            };
+            localStorage.setItem('matrixJackpots', JSON.stringify(jackpots));
+        }
+        
+        // Load data
+        function loadData() {
+            const savedGames = localStorage.getItem('matrixGames');
+            if (savedGames) {
+                games = JSON.parse(savedGames);
+                updateTable();
+            }
+            
+            const savedJackpots = localStorage.getItem('matrixJackpots');
+            if (savedJackpots) {
+                const jackpots = JSON.parse(savedJackpots);
+                if (jackpots.mega) document.getElementById('mega-jackpot').textContent = jackpots.mega;
+                if (jackpots.loto) document.getElementById('loto-jackpot').textContent = jackpots.loto;
+            }
+        }
+        
+        // Export data
+        function exportData() {
+            const dataStr = JSON.stringify(games, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportName = `matrix-loterias-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportName);
+            linkElement.click();
+        }
+        
+        // Clear all data
+        function clearAllData() {
+            if (confirm('Limpar TODOS os dados? Esta ação não pode ser desfeita!')) {
+                games = { mega: [], loto: [] };
+                saveData();
+                updateTable();
+                updateStats();
+            }
+        }
+    </script>
+</body>
+</html>
